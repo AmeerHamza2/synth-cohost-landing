@@ -2,11 +2,16 @@
 
 import { motion } from 'framer-motion';
 import { Play } from 'lucide-react';
-import Image from 'next/image';
 
 export default function Hero() {
   return (
     <section className="relative min-h-screen bg-[#FAFAFC] overflow-hidden pt-20">
+      {/* Left Navigation Rail for Section 01 */}
+      <div className="hidden lg:flex fixed left-0 top-0 bottom-0 w-[80px] flex-col items-center pt-32 z-30 pointer-events-none">
+        <span className="text-[11px] font-medium tracking-[0.2em] text-[#080812]/40">01</span>
+        <div className="w-px flex-1 bg-[#080812]/10 mt-4" />
+      </div>
+
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#FAFAFC] to-[#F0F0F5]" />
       
@@ -18,7 +23,7 @@ export default function Hero() {
         }}
       />
 
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
+      <div className="relative max-w-7xl mx-auto px-6 lg:px-8 lg:pl-[100px] py-16 lg:py-24">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
           {/* Left Content */}
           <motion.div
@@ -239,6 +244,41 @@ export default function Hero() {
           </motion.div>
         </div>
       </div>
+
+      {/* Right Side Labels */}
+      <motion.div
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8, delay: 0.8 }}
+        className="hidden lg:flex flex-col items-end gap-4 fixed right-8 top-1/2 -translate-y-1/2 z-20"
+      >
+        {['ENGAGE', 'SUPPORT', 'COLLABORATE'].map((label, i) => (
+          <span
+            key={label}
+            className="text-[10px] font-medium tracking-[0.3em] text-[#080812]/30 hover:text-[#8B5CF6] transition-colors cursor-default"
+            style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
+          >
+            {label}
+          </span>
+        ))}
+      </motion.div>
+
+      {/* Scroll Indicator */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 1 }}
+        className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-10"
+      >
+        <span className="text-[10px] font-medium tracking-[0.3em] text-[#080812]/40">
+          SCROLL TO EXPLORE
+        </span>
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+          className="w-px h-8 bg-gradient-to-b from-[#080812]/20 to-transparent"
+        />
+      </motion.div>
 
       {/* Bottom gradient transition */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-[#080812]" />
