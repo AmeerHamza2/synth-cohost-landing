@@ -50,7 +50,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-5xl lg:text-7xl font-bold text-[#080812] leading-[1.1] mb-6"
+              className="text-4xl sm:text-5xl lg:text-7xl font-bold text-[#080812] leading-[1.1] mb-6"
             >
               Your stream.
               <br />
@@ -62,18 +62,17 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-lg lg:text-xl text-[#080812]/60 max-w-lg mb-10 leading-relaxed"
+              className="text-base sm:text-lg lg:text-xl text-[#080812]/60 max-w-lg mb-8 sm:mb-10 leading-relaxed"
             >
               Synth Cohost is an AI cohost that talks with you, engages your audience, 
               and helps your stream run smoother—so you can focus on what you love.
             </motion.p>
 
-            {/* Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="flex flex-wrap gap-4"
+              className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4"
             >
               <motion.button
                 whileHover={{ scale: 1.05 }}
@@ -175,7 +174,7 @@ export default function Hero() {
               transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
               className="relative z-10"
             >
-              <div className="relative w-[350px] h-[450px] lg:w-[400px] lg:h-[520px]">
+              <div className="relative w-[280px] h-[360px] sm:w-[350px] sm:h-[450px] lg:w-[400px] lg:h-[520px]">
                 {/* Character silhouette with gradient */}
                 <div className="absolute inset-0 rounded-3xl overflow-hidden bg-gradient-to-b from-[#1a1a2e] to-[#080812] border border-[#8B5CF6]/30 glow-purple">
                   <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#8B5CF6]/20" />

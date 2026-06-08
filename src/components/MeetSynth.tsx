@@ -29,7 +29,7 @@ export default function MeetSynth() {
 
   return (
     <SectionWrapper sectionNumber="03" isDark={true}>
-      <div ref={ref} className="py-32 pr-6 lg:pr-8 overflow-hidden" id="features">
+      <div ref={ref} className="py-16 lg:py-32 px-6 lg:px-8 overflow-hidden" id="features">
         <div className="relative max-w-6xl">
           {/* Header */}
           <motion.div
@@ -47,11 +47,11 @@ export default function MeetSynth() {
               INTRODUCING
             </motion.span>
 
-            <h2 className="text-4xl lg:text-6xl font-bold text-white mb-6">
+            <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-white mb-6">
               Meet <span className="text-gradient-purple">Synth</span>
             </h2>
 
-            <h3 className="text-3xl lg:text-5xl font-bold text-white/80 mb-8">
+            <h3 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-white/80 mb-8">
               Your AI cohost.
               <br />
               <span className="text-[#B0B0C0]">Designed for live.</span>

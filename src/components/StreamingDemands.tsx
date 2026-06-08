@@ -29,7 +29,7 @@ export default function StreamingDemands() {
 
   return (
     <SectionWrapper sectionNumber="02" isDark={true}>
-      <div ref={ref} className="py-32 pr-6 lg:pr-8 overflow-hidden">
+      <div ref={ref} className="py-16 lg:py-32 px-6 lg:px-8 overflow-hidden">
         {/* Grid pattern overlay */}
         <div 
           className="absolute inset-0 opacity-[0.02]"
@@ -49,7 +49,7 @@ export default function StreamingDemands() {
           <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             {/* Left Column */}
             <motion.div variants={itemVariants}>
-              <h2 className="text-4xl lg:text-6xl font-bold text-white leading-tight mb-12">
+              <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-white leading-tight mb-8 sm:mb-12">
                 Streaming is
                 <br />
                 <span className="text-[#B0B0C0]">more demanding than ever.</span>
@@ -78,9 +78,8 @@ export default function StreamingDemands() {
               </div>
             </motion.div>
 
-            {/* Right Column */}
             <motion.div variants={itemVariants}>
-              <h2 className="text-4xl lg:text-6xl font-bold leading-tight">
+              <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold leading-tight">
                 <span className="text-[#B0B0C0]">What if</span>
                 <br />
                 <span className="text-white">you didn&apos;t have to</span>

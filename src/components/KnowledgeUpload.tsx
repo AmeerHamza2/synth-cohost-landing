@@ -20,7 +20,7 @@ export default function KnowledgeUpload() {
 
   return (
     <SectionWrapper sectionNumber="06" isDark={true}>
-      <div ref={ref} className="py-32 pr-6 lg:pr-8 overflow-hidden">
+      <div ref={ref} className="py-16 lg:py-32 px-6 lg:px-8 overflow-hidden">
         <div className="relative max-w-6xl">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             {/* Left Content */}
@@ -38,7 +38,7 @@ export default function KnowledgeUpload() {
                 KNOWLEDGE BASE
               </motion.span>
 
-              <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
                 Teach Synth
                 <br />
                 <span className="text-gradient-purple">what matters.</span>

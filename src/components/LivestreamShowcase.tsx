@@ -27,7 +27,7 @@ export default function LivestreamShowcase() {
 
   return (
     <SectionWrapper sectionNumber="05" isDark={true}>
-      <div ref={ref} className="py-32 pr-6 lg:pr-8 overflow-hidden" id="product">
+      <div ref={ref} className="py-16 lg:py-32 px-6 lg:px-8 overflow-hidden" id="product">
         <div className="relative max-w-6xl">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Left Content */}
@@ -36,7 +36,7 @@ export default function LivestreamShowcase() {
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -40 }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
                 See Synth in action
                 <br />
                 <span className="text-gradient-purple">where it matters.</span>

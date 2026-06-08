@@ -50,7 +50,7 @@ export default function RolesCarousel() {
 
   return (
     <SectionWrapper sectionNumber="04" isDark={true}>
-      <div ref={ref} className="py-32 pr-6 lg:pr-8 overflow-hidden" id="streamers">
+      <div ref={ref} className="py-16 lg:py-32 px-6 lg:px-8 overflow-hidden" id="streamers">
         <div className="relative max-w-6xl">
           {/* Header */}
           <motion.div
@@ -59,7 +59,7 @@ export default function RolesCarousel() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl lg:text-6xl font-bold text-white mb-4">
+            <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-white mb-4">
               Synth adapts to
               <br />
               <span className="text-gradient-purple">your stream.</span>
