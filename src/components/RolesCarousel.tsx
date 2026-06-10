@@ -74,8 +74,8 @@ export default function RolesCarousel() {
       className="relative bg-[#0d0b14] overflow-hidden"
       id="streamers"
     >
-      {/* Section Number - Left Side */}
-      <div className="absolute left-6 lg:left-10 top-1/3 -translate-y-1/2 flex flex-col items-center gap-2">
+      {/* Section Number - Left Side - Hidden on mobile */}
+      <div className="hidden md:flex absolute left-6 lg:left-10 top-1/3 -translate-y-1/2 flex-col items-center gap-2">
         <span className="text-[11px] font-bold text-white">04</span>
         <span className="w-4 h-[2px] bg-white" />
       </div>
@@ -88,16 +88,16 @@ export default function RolesCarousel() {
           className="flex flex-col lg:flex-row items-center gap-12 max-w-[1100px] mx-auto"
         >
           {/* Left Content */}
-          <div className="min-w-[200px] max-w-[220px] flex-shrink-0">
+          <div className="w-full lg:min-w-[200px] lg:max-w-[220px] flex-shrink-0 text-center lg:text-left">
             <div className="text-[10px] tracking-[0.13em] text-[#a09bbf] uppercase mb-2.5">
               One personality. Many roles.
             </div>
-            <h2 className="text-[26px] font-medium text-[#f5f3ff] leading-[1.3] mb-6">
+            <h2 className="text-[22px] lg:text-[26px] font-medium text-[#f5f3ff] leading-[1.3] mb-4 lg:mb-6">
               Synth adapts to your stream.
             </h2>
             <a 
               href="#" 
-              className="inline-flex items-center gap-1.5 text-[13px] text-[#a09bbf] border-b border-[rgba(255,255,255,0.2)] pb-0.5 hover:text-white transition-colors"
+              className="hidden lg:inline-flex items-center gap-1.5 text-[13px] text-[#a09bbf] border-b border-[rgba(255,255,255,0.2)] pb-0.5 hover:text-white transition-colors"
             >
               Learn more ▷
             </a>
@@ -117,8 +117,8 @@ export default function RolesCarousel() {
             </button>
 
             {/* Slider Track */}
-            <div className="overflow-hidden mx-10">
-              <div className="flex gap-3 justify-center">
+            <div className="overflow-hidden mx-8 lg:mx-10">
+              <div className="flex gap-2 lg:gap-3 justify-center">
                 {visibleCards.slice(1, 4).map((role, idx) => (
                   <motion.div
                     key={`${role.id}-${role.offset}`}
@@ -130,9 +130,9 @@ export default function RolesCarousel() {
                     }}
                     transition={{ duration: 0.4, ease: 'easeOut' }}
                     onClick={() => setCurrentIndex(role.originalIndex)}
-                    className={`w-[200px] min-w-[200px] rounded-[10px] overflow-hidden cursor-pointer flex-shrink-0 border-[1.5px] transition-colors duration-300 ${idx === 1 ? 'border-[#7c6edc]' : 'border-transparent'}`}
+                    className={`w-[100px] sm:w-[140px] lg:w-[200px] min-w-[100px] sm:min-w-[140px] lg:min-w-[200px] rounded-[10px] overflow-hidden cursor-pointer flex-shrink-0 border-[1.5px] transition-colors duration-300 ${idx === 1 ? 'border-[#7c6edc]' : 'border-transparent'}`}
                   >
-                    <div className="relative w-full h-[300px]">
+                    <div className="relative w-full h-[150px] sm:h-[200px] lg:h-[300px]">
                       <Image
                         src="/Mods_lossless(1) (1).webp"
                         alt={role.title}

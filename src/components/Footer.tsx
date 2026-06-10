@@ -36,22 +36,22 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer className="relative bg-[#0d0b14] pt-16 pb-8 overflow-hidden border-t border-[rgba(255,255,255,0.05)]">
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-20">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-10 mb-14">
+    <footer className="relative bg-[#0d0b14] pt-12 lg:pt-16 pb-8 overflow-hidden border-t border-[rgba(255,255,255,0.05)]">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-20">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 lg:gap-10 mb-10 lg:mb-14">
           {/* Logo Column */}
           <div className="col-span-2 md:col-span-1">
-            <Link href="/" className="flex items-center gap-2 mb-5">
-              <svg className="w-7 h-7" viewBox="0 0 28 28" fill="none">
+            <Link href="/" className="flex items-center gap-2 mb-4 lg:mb-5">
+              <svg className="w-6 h-6 lg:w-7 lg:h-7" viewBox="0 0 28 28" fill="none">
                 <path d="M14 2L26 8.5V19.5L14 26L2 19.5V8.5L14 2Z" fill="#7c3aed" opacity="0.15"/>
                 <path d="M14 6l8 4.5v9L14 24l-8-4.5v-9L14 6z" fill="#7c3aed" opacity="0.35"/>
                 <path d="M14 10l4 2.25v4.5L14 19l-4-2.25v-4.5L14 10z" fill="#7c3aed"/>
               </svg>
-              <span className="text-[13px] font-extrabold tracking-[-0.3px] text-[#f5f3ff] leading-[1.1]">
+              <span className="text-[12px] lg:text-[13px] font-extrabold tracking-[-0.3px] text-[#f5f3ff] leading-[1.1]">
                 SYNTH<span className="block font-normal">COHOST</span>
               </span>
             </Link>
-            <p className="text-[#a09bbf] text-[12.5px] leading-relaxed max-w-xs">
+            <p className="text-[#a09bbf] text-[11px] lg:text-[12.5px] leading-relaxed max-w-xs">
               The AI cohost that makes streaming better.
             </p>
           </div>
@@ -59,13 +59,13 @@ export default function Footer() {
           {/* Link Columns */}
           {Object.entries(footerLinks).map(([category, links]) => (
             <div key={category}>
-              <h4 className="text-[#f5f3ff] font-semibold mb-4 text-[12px]">{category}</h4>
-              <ul className="space-y-2.5">
+              <h4 className="text-[#f5f3ff] font-semibold mb-3 lg:mb-4 text-[11px] lg:text-[12px]">{category}</h4>
+              <ul className="space-y-2 lg:space-y-2.5">
                 {links.map((link) => (
                   <li key={link.name}>
                     <Link
                       href={link.href}
-                      className="text-[#a09bbf] text-[12px] hover:text-[#7c3aed] transition-colors"
+                      className="text-[#a09bbf] text-[11px] lg:text-[12px] hover:text-[#7c3aed] transition-colors"
                     >
                       {link.name}
                     </Link>

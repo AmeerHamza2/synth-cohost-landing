@@ -36,8 +36,8 @@ export default function StreamingDemands() {
     >
       {/* Text Section with 02 */}
       <div className="relative">
-        {/* Section Number - Left Side */}
-        <div className="absolute left-6 lg:left-10 top-1/3 -translate-y-1/2 flex flex-col items-center gap-2 z-10">
+        {/* Section Number - Left Side - Hidden on mobile */}
+        <div className="hidden md:flex absolute left-6 lg:left-10 top-1/3 -translate-y-1/2 flex-col items-center gap-2 z-10">
           <span className="text-[11px] font-bold text-white">02</span>
           <span className="w-4 h-[2px] bg-white" />
         </div>
@@ -47,7 +47,7 @@ export default function StreamingDemands() {
             variants={containerVariants}
             initial="hidden"
             animate={isInView ? 'visible' : 'hidden'}
-            className="grid lg:grid-cols-2 gap-20 items-start"
+            className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-start"
           >
             {/* Left Column */}
             <motion.div variants={itemVariants}>
@@ -86,8 +86,8 @@ export default function StreamingDemands() {
 
       {/* Image Section with 03 */}
       <div className="relative">
-        {/* Section Number - Left Side */}
-        <div className="absolute left-6 lg:left-10 top-1/3 -translate-y-1/2 flex flex-col items-center gap-2 z-10">
+        {/* Section Number - Left Side - Hidden on mobile */}
+        <div className="hidden md:flex absolute left-6 lg:left-10 top-1/3 -translate-y-1/2 flex-col items-center gap-2 z-10">
           <span className="text-[11px] font-bold text-white">03</span>
           <span className="w-4 h-[2px] bg-white" />
         </div>

@@ -26,8 +26,8 @@ export default function Hero() {
 
       {/* Left Content Overlay */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-20 pt-32 pb-16 min-h-screen flex items-center">
-        {/* Section Number - Left Side */}
-        <div className="absolute left-6 lg:left-10 top-1/2 -translate-y-1/2 flex flex-col items-center gap-2">
+        {/* Section Number - Left Side - Hidden on mobile */}
+        <div className="hidden md:flex absolute left-6 lg:left-10 top-1/2 -translate-y-1/2 flex-col items-center gap-2">
           <span className="text-[11px] font-bold text-[#7c3aed]">01</span>
           <span className="w-4 h-[2px] bg-[#7c3aed]" />
         </div>
@@ -78,7 +78,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
-            className="flex items-center gap-4"
+            className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4"
           >
             <motion.button
               whileHover={{ scale: 1.02, backgroundColor: '#7c3aed' }}
@@ -105,12 +105,12 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Side Labels */}
+      {/* Side Labels - Hidden on mobile */}
       <motion.div
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8, delay: 0.5 }}
-        className="absolute right-8 top-1/2 -translate-y-1/2 flex flex-col gap-3 z-10"
+        className="hidden lg:flex absolute right-8 top-1/2 -translate-y-1/2 flex-col gap-3 z-10"
       >
         {['ENGAGE', 'SUPPORT', 'COLLABORATE'].map((label, index) => (
           <motion.span

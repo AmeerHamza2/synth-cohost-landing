@@ -12,21 +12,21 @@ export default function FinalCTA() {
       data-section="07" 
       className="relative bg-[#0d0b14] overflow-hidden"
     >
-      {/* Section Number - Left Side */}
-      <div className="absolute left-6 lg:left-10 top-1/3 -translate-y-1/2 flex flex-col items-center gap-2">
+      {/* Section Number - Left Side - Hidden on mobile */}
+      <div className="hidden md:flex absolute left-6 lg:left-10 top-1/3 -translate-y-1/2 flex-col items-center gap-2">
         <span className="text-[11px] font-bold text-white">07</span>
         <span className="w-4 h-[2px] bg-white" />
       </div>
 
-      <div ref={ref} className="py-24 lg:py-28 px-6 lg:px-20 max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+      <div ref={ref} className="py-16 lg:py-28 px-4 sm:px-6 lg:px-20 max-w-7xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           {/* Left Content */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -40 }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-[clamp(28px,3.5vw,52px)] font-extrabold leading-[1.1] tracking-[-1px] mb-8">
+            <h2 className="text-[clamp(24px,3.5vw,52px)] font-extrabold leading-[1.1] tracking-[-1px] mb-6 lg:mb-8">
               <span className="text-[#f5f3ff]">The next generation</span>
               <br />
               <span className="text-[#f5f3ff]">of creators won&apos;t</span>

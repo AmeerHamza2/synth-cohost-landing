@@ -21,21 +21,21 @@ export default function KnowledgeUpload() {
       data-section="06" 
       className="relative bg-[#0d0b14] overflow-hidden"
     >
-      {/* Section Number - Left Side */}
-      <div className="absolute left-6 lg:left-10 top-1/3 -translate-y-1/2 flex flex-col items-center gap-2">
+      {/* Section Number - Left Side - Hidden on mobile */}
+      <div className="hidden md:flex absolute left-6 lg:left-10 top-1/3 -translate-y-1/2 flex-col items-center gap-2">
         <span className="text-[11px] font-bold text-white">06</span>
         <span className="w-4 h-[2px] bg-white" />
       </div>
 
-      <div ref={ref} className="py-24 lg:py-28 px-6 lg:px-20 max-w-7xl mx-auto">
+      <div ref={ref} className="py-16 lg:py-28 px-4 sm:px-6 lg:px-20 max-w-7xl mx-auto">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-10 lg:mb-16"
         >
-          <h2 className="text-[clamp(28px,3vw,42px)] font-extrabold leading-[1.1] tracking-[-1px]">
+          <h2 className="text-[clamp(24px,3vw,42px)] font-extrabold leading-[1.1] tracking-[-1px]">
             <span className="text-[#f5f3ff]">Teach Synth</span>
             <br />
             <span className="text-[#b58af7]">what matters.</span>
@@ -43,7 +43,7 @@ export default function KnowledgeUpload() {
         </motion.div>
 
         {/* Floating Document Cards */}
-        <div className="flex flex-wrap justify-center gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:flex lg:flex-wrap justify-center gap-3 lg:gap-4">
           {documents.map((doc, index) => (
             <motion.div
               key={doc.name}
@@ -54,8 +54,8 @@ export default function KnowledgeUpload() {
               onMouseLeave={() => setHoveredDoc(null)}
               whileHover={{ y: -6 }}
               className={`
-                relative p-4 rounded-xl transition-all duration-300 cursor-pointer
-                bg-[#13111e] border min-w-[140px]
+                relative p-3 lg:p-4 rounded-xl transition-all duration-300 cursor-pointer
+                bg-[#13111e] border min-w-0 lg:min-w-[140px]
                 ${hoveredDoc === doc.name 
                   ? 'border-[rgba(124,58,237,0.3)] shadow-[0_0_25px_rgba(124,58,237,0.15)]' 
                   : 'border-[rgba(255,255,255,0.05)]'
@@ -63,8 +63,8 @@ export default function KnowledgeUpload() {
               `}
             >
               {/* File Icon */}
-              <div className="w-9 h-9 rounded-lg mb-3 flex items-center justify-center bg-[rgba(124,58,237,0.15)]">
-                <svg className="w-4 h-4 text-[#b58af7]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <div className="w-8 h-8 lg:w-9 lg:h-9 rounded-lg mb-2 lg:mb-3 flex items-center justify-center bg-[rgba(124,58,237,0.15)]">
+                <svg className="w-3.5 h-3.5 lg:w-4 lg:h-4 text-[#b58af7]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
                   <polyline points="14,2 14,8 20,8"/>
                   <line x1="16" y1="13" x2="8" y2="13"/>
@@ -74,7 +74,7 @@ export default function KnowledgeUpload() {
               </div>
 
               {/* Document Name */}
-              <h4 className="text-[12.5px] font-medium text-[#f5f3ff]">{doc.name}</h4>
+              <h4 className="text-[11px] lg:text-[12.5px] font-medium text-[#f5f3ff]">{doc.name}</h4>
             </motion.div>
           ))}
 
@@ -84,19 +84,19 @@ export default function KnowledgeUpload() {
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ delay: 0.2 + documents.length * 0.1 }}
             whileHover={{ y: -6 }}
-            className="relative p-4 rounded-xl border-2 border-dashed border-[rgba(124,58,237,0.3)] hover:border-[rgba(124,58,237,0.5)] transition-all duration-300 cursor-pointer flex flex-col items-center justify-center min-w-[140px] hover:bg-[rgba(124,58,237,0.05)]"
+            className="relative p-3 lg:p-4 rounded-xl border-2 border-dashed border-[rgba(124,58,237,0.3)] hover:border-[rgba(124,58,237,0.5)] transition-all duration-300 cursor-pointer flex flex-col items-center justify-center min-w-0 lg:min-w-[140px] hover:bg-[rgba(124,58,237,0.05)]"
           >
             <motion.div
               whileHover={{ rotate: 90 }}
               transition={{ duration: 0.3 }}
-              className="w-9 h-9 rounded-lg bg-[rgba(124,58,237,0.1)] flex items-center justify-center mb-3"
+              className="w-8 h-8 lg:w-9 lg:h-9 rounded-lg bg-[rgba(124,58,237,0.1)] flex items-center justify-center mb-2 lg:mb-3"
             >
-              <svg className="w-4 h-4 text-[#7c3aed]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <svg className="w-3.5 h-3.5 lg:w-4 lg:h-4 text-[#7c3aed]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <line x1="12" y1="5" x2="12" y2="19"/>
                 <line x1="5" y1="12" x2="19" y2="12"/>
               </svg>
             </motion.div>
-            <span className="text-[12.5px] font-medium text-[#7c3aed]">Add Your Doc</span>
+            <span className="text-[11px] lg:text-[12.5px] font-medium text-[#7c3aed]">Add Your Doc</span>
           </motion.div>
         </div>
       </div>
