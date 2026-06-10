@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { Sparkles } from 'lucide-react';
 
 const footerLinks = {
   Product: [
@@ -22,6 +21,10 @@ const footerLinks = {
     { name: 'Contact', href: '#' },
     { name: 'Press Kit', href: '#' },
   ],
+  Legal: [
+    { name: 'Privacy Policy', href: '#' },
+    { name: 'Terms of Service', href: '#' },
+  ],
 };
 
 const socialLinks = [
@@ -33,41 +36,36 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer className="relative bg-[#080812] pt-20 pb-10 overflow-hidden">
-      {/* Top border glow */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#8B5CF6]/50 to-transparent" />
-
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-16">
+    <footer className="relative bg-[#0d0b14] pt-16 pb-8 overflow-hidden border-t border-[rgba(255,255,255,0.05)]">
+      <div className="relative max-w-7xl mx-auto px-6 lg:px-20">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-10 mb-14">
           {/* Logo Column */}
           <div className="col-span-2 md:col-span-1">
-            <Link href="/" className="flex items-center gap-2 mb-6">
-              <motion.div
-                whileHover={{ rotate: 180 }}
-                transition={{ duration: 0.5 }}
-                className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#8B5CF6] to-[#C4B5FD] flex items-center justify-center"
-              >
-                <Sparkles className="w-5 h-5 text-white" />
-              </motion.div>
-              <span className="font-bold text-lg text-white tracking-tight">
-                SYNTH COHOST
+            <Link href="/" className="flex items-center gap-2 mb-5">
+              <svg className="w-7 h-7" viewBox="0 0 28 28" fill="none">
+                <path d="M14 2L26 8.5V19.5L14 26L2 19.5V8.5L14 2Z" fill="#7c3aed" opacity="0.15"/>
+                <path d="M14 6l8 4.5v9L14 24l-8-4.5v-9L14 6z" fill="#7c3aed" opacity="0.35"/>
+                <path d="M14 10l4 2.25v4.5L14 19l-4-2.25v-4.5L14 10z" fill="#7c3aed"/>
+              </svg>
+              <span className="text-[13px] font-extrabold tracking-[-0.3px] text-[#f5f3ff] leading-[1.1]">
+                SYNTH<span className="block font-normal">COHOST</span>
               </span>
             </Link>
-            <p className="text-[#B0B0C0] text-sm leading-relaxed max-w-xs">
-              The AI cohost that makes streaming better for creators and their communities.
+            <p className="text-[#a09bbf] text-[12.5px] leading-relaxed max-w-xs">
+              The AI cohost that makes streaming better.
             </p>
           </div>
 
           {/* Link Columns */}
           {Object.entries(footerLinks).map(([category, links]) => (
             <div key={category}>
-              <h4 className="text-white font-semibold mb-4">{category}</h4>
-              <ul className="space-y-3">
+              <h4 className="text-[#f5f3ff] font-semibold mb-4 text-[12px]">{category}</h4>
+              <ul className="space-y-2.5">
                 {links.map((link) => (
                   <li key={link.name}>
                     <Link
                       href={link.href}
-                      className="text-[#B0B0C0] text-sm hover:text-[#8B5CF6] transition-colors"
+                      className="text-[#a09bbf] text-[12px] hover:text-[#7c3aed] transition-colors"
                     >
                       {link.name}
                     </Link>
@@ -79,38 +77,31 @@ export default function Footer() {
         </div>
 
         {/* Divider */}
-        <div className="h-px bg-gradient-to-r from-transparent via-[#8B5CF6]/20 to-transparent mb-8" />
+        <div className="h-px bg-[rgba(255,255,255,0.05)] mb-6" />
 
         {/* Bottom Row */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-5">
           {/* Copyright */}
-          <p className="text-[#B0B0C0]/60 text-sm">
-            © 2025 Synth Cohost. All rights reserved.
+          <p className="text-[#5e5a72] text-[11px]">
+            © 2026 Synth Cohost. All rights reserved.
           </p>
 
           {/* Social Links */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
             {socialLinks.map((social) => (
               <motion.a
                 key={social.name}
                 href={social.href}
-                whileHover={{ scale: 1.1, y: -2 }}
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-10 h-10 rounded-xl bg-[#11111B] border border-[#8B5CF6]/10 hover:border-[#8B5CF6]/50 flex items-center justify-center text-[#B0B0C0] hover:text-[#8B5CF6] transition-all"
+                className="w-8 h-8 rounded-lg bg-[rgba(255,255,255,0.03)] hover:bg-[rgba(124,58,237,0.15)] flex items-center justify-center text-[#a09bbf] hover:text-[#7c3aed] transition-all"
               >
-                <span className="text-xs font-bold">{social.icon}</span>
+                <span className="text-[10px] font-bold">{social.icon}</span>
               </motion.a>
             ))}
           </div>
         </div>
       </div>
-
-      {/* Background glow */}
-      <motion.div
-        animate={{ opacity: [0.05, 0.1, 0.05] }}
-        transition={{ duration: 6, repeat: Infinity }}
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] rounded-full bg-[#8B5CF6]/20 blur-[100px] pointer-events-none"
-      />
     </footer>
   );
 }

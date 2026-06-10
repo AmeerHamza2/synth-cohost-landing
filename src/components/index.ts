@@ -1,5 +1,6 @@
 export { default as Navbar } from './Navbar';
 export { default as Hero } from './Hero';
+export { default as SectionIndicator } from './SectionIndicator';
 export { default as StreamingDemands } from './StreamingDemands';
 export { default as MeetSynth } from './MeetSynth';
 export { default as RolesCarousel } from './RolesCarousel';

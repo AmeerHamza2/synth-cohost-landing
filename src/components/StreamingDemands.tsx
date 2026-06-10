@@ -2,7 +2,7 @@
 
 import { motion, useInView, Variants } from 'framer-motion';
 import { useRef } from 'react';
-import SectionWrapper from './SectionWrapper';
+import Image from 'next/image';
 
 export default function StreamingDemands() {
   const ref = useRef(null);
@@ -13,7 +13,7 @@ export default function StreamingDemands() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.15,
       },
     },
   };
@@ -27,89 +27,88 @@ export default function StreamingDemands() {
     },
   };
 
-  return (
-    <SectionWrapper sectionNumber="02" isDark={true}>
-      <div ref={ref} className="py-16 lg:py-32 px-6 lg:px-8 overflow-hidden">
-        {/* Grid pattern overlay */}
-        <div 
-          className="absolute inset-0 opacity-[0.02]"
-          style={{
-            backgroundImage: `linear-gradient(rgba(139, 92, 246, 0.3) 1px, transparent 1px),
-                             linear-gradient(90deg, rgba(139, 92, 246, 0.3) 1px, transparent 1px)`,
-            backgroundSize: '50px 50px',
-          }}
-        />
+  const demands = ['More chat.', 'More content.', 'More pressure.', 'Always on.'];
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-          className="relative max-w-6xl"
-        >
-          <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+  return (
+    <section 
+      data-section="02" 
+      className="relative bg-[#0d0b14] overflow-hidden"
+    >
+      {/* Text Section with 02 */}
+      <div className="relative">
+        {/* Section Number - Left Side */}
+        <div className="absolute left-6 lg:left-10 top-1/3 -translate-y-1/2 flex flex-col items-center gap-2 z-10">
+          <span className="text-[11px] font-bold text-white">02</span>
+          <span className="w-4 h-[2px] bg-white" />
+        </div>
+
+        <div ref={ref} className="py-20 lg:py-24 px-6 lg:px-20 max-w-7xl mx-auto">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate={isInView ? 'visible' : 'hidden'}
+            className="grid lg:grid-cols-2 gap-20 items-start"
+          >
             {/* Left Column */}
             <motion.div variants={itemVariants}>
-              <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-white leading-tight mb-8 sm:mb-12">
+              <h2 className="text-[clamp(24px,2.5vw,36px)] font-extrabold text-[#f5f3ff] leading-[1.2] mb-7">
                 Streaming is
                 <br />
-                <span className="text-[#B0B0C0]">more demanding than ever.</span>
+                more demanding than ever.
               </h2>
 
-              <div className="space-y-6">
-                {['More chat.', 'More content.', 'More pressure.', 'Always on.'].map(
-                  (text, index) => (
-                    <motion.div
-                      key={text}
-                      variants={itemVariants}
-                      className="flex items-center gap-4 group"
-                    >
-                      <motion.div
-                        initial={{ scale: 0 }}
-                        animate={isInView ? { scale: 1 } : { scale: 0 }}
-                        transition={{ delay: 0.5 + index * 0.1, duration: 0.3 }}
-                        className="w-3 h-3 rounded-full bg-[#8B5CF6] group-hover:glow-purple-sm transition-all"
-                      />
-                      <span className="text-2xl lg:text-3xl font-medium text-[#B0B0C0] group-hover:text-white transition-colors">
-                        {text}
-                      </span>
-                    </motion.div>
-                  )
-                )}
+              {/* Tags */}
+              <div className="flex flex-wrap gap-3">
+                {demands.map((text) => (
+                  <span
+                    key={text}
+                    className="text-[13px] text-[#a09bbf] px-3.5 py-1.5 border border-[rgba(255,255,255,0.07)] rounded-full"
+                  >
+                    {text}
+                  </span>
+                ))}
               </div>
             </motion.div>
 
+            {/* Right Column */}
             <motion.div variants={itemVariants}>
-              <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold leading-tight">
-                <span className="text-[#B0B0C0]">What if</span>
+              <h2 className="text-[clamp(28px,3vw,44px)] font-extrabold leading-[1.2]">
+                <span className="text-[#f5f3ff]">What if</span>
                 <br />
-                <span className="text-white">you didn&apos;t have to</span>
+                <span className="text-[#f5f3ff]">you didn&apos;t have to</span>
                 <br />
-                <span className="text-gradient-purple">stream alone?</span>
+                <span className="text-[#b58af7]">stream alone?</span>
               </h2>
-
-              {/* Decorative element */}
-              <motion.div
-                initial={{ scaleX: 0 }}
-                animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
-                transition={{ delay: 0.8, duration: 0.8, ease: 'easeOut' }}
-                className="mt-12 h-1 w-32 bg-gradient-to-r from-[#8B5CF6] to-[#C4B5FD] rounded-full origin-left"
-              />
             </motion.div>
-          </div>
-        </motion.div>
-
-        {/* Ambient glow effects */}
-        <motion.div
-          animate={{ opacity: [0.1, 0.2, 0.1] }}
-          transition={{ duration: 8, repeat: Infinity }}
-          className="absolute top-1/2 left-1/4 w-96 h-96 rounded-full bg-[#8B5CF6]/20 blur-[100px] pointer-events-none"
-        />
-        <motion.div
-          animate={{ opacity: [0.05, 0.15, 0.05] }}
-          transition={{ duration: 6, repeat: Infinity, delay: 2 }}
-          className="absolute bottom-1/4 right-1/4 w-64 h-64 rounded-full bg-[#C4B5FD]/20 blur-[80px] pointer-events-none"
-        />
+          </motion.div>
+        </div>
       </div>
-    </SectionWrapper>
+
+      {/* Image Section with 03 */}
+      <div className="relative">
+        {/* Section Number - Left Side */}
+        <div className="absolute left-6 lg:left-10 top-1/3 -translate-y-1/2 flex flex-col items-center gap-2 z-10">
+          <span className="text-[11px] font-bold text-white">03</span>
+          <span className="w-4 h-[2px] bg-white" />
+        </div>
+
+        {/* Full Width Character Image */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="w-full"
+        >
+          <Image
+            src="/change_lossless.webp"
+            alt="Synth AI Character"
+            width={1920}
+            height={800}
+            className="w-full h-auto object-cover"
+            unoptimized
+          />
+        </motion.div>
+      </div>
+    </section>
   );
 }

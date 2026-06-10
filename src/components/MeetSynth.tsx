@@ -2,24 +2,39 @@
 
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { MessageCircle, Brain, Settings } from 'lucide-react';
-import SectionWrapper from './SectionWrapper';
+import Image from 'next/image';
 
 const features = [
   {
-    icon: MessageCircle,
     title: 'Responds to chat',
-    description: 'Synth reads and responds to chat messages in real-time, keeping your community engaged even when you\'re focused.',
+    description: 'Engages your audience in real time.',
+    icon: (
+      <svg className="w-8 h-8 text-[#b58af7]" viewBox="0 0 32 32" fill="none">
+        <rect x="4" y="8" width="24" height="18" rx="3" stroke="currentColor" strokeWidth="1.5"/>
+        <path d="M4 13h24" stroke="currentColor" strokeWidth="1.5"/>
+        <circle cx="16" cy="21" r="2" fill="currentColor"/>
+      </svg>
+    ),
   },
   {
-    icon: Brain,
     title: 'Understands context',
-    description: 'Advanced AI comprehension allows Synth to follow conversations, understand jokes, and maintain topic awareness.',
+    description: 'Follows the flow and remembers key details.',
+    icon: (
+      <svg className="w-8 h-8 text-[#b58af7]" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="11" stroke="currentColor" strokeWidth="1.5"/>
+        <path d="M16 10v6l4 2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      </svg>
+    ),
   },
   {
-    icon: Settings,
     title: 'Supports your workflow',
-    description: 'From reading donations to managing viewer requests, Synth handles the routine so you can focus on content.',
+    description: 'Helps keep your stream on track.',
+    icon: (
+      <svg className="w-8 h-8 text-[#b58af7]" viewBox="0 0 32 32" fill="none">
+        <path d="M8 24V14a8 8 0 1116 0v10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+        <path d="M4 24h24" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      </svg>
+    ),
   },
 ];
 
@@ -28,91 +43,83 @@ export default function MeetSynth() {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <SectionWrapper sectionNumber="03" isDark={true}>
-      <div ref={ref} className="py-16 lg:py-32 px-6 lg:px-8 overflow-hidden" id="features">
-        <div className="relative max-w-6xl">
-          {/* Header */}
+    <section 
+      data-section="04" 
+      className="relative bg-[#0d0b14] border-t border-[rgba(255,255,255,0.07)] overflow-hidden"
+      id="features"
+    >
+      {/* Section Number - Left Side */}
+      <div className="absolute left-6 lg:left-10 top-1/2 -translate-y-1/2 flex flex-col items-center gap-2">
+        <span className="text-[11px] font-bold text-white">04</span>
+        <span className="w-4 h-[2px] bg-white" />
+      </div>
+
+      <div ref={ref} className="py-24 lg:py-28 px-6 lg:px-20 max-w-7xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-20 items-center">
+          {/* Left - Character Portrait */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-20"
+            initial={{ opacity: 0, x: -40 }}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -40 }}
+            transition={{ duration: 0.8 }}
+            className="relative"
           >
-            <motion.span
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ delay: 0.2 }}
-              className="inline-block text-[#8B5CF6] font-medium tracking-wide mb-4"
-            >
-              INTRODUCING
-            </motion.span>
-
-            <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-white mb-6">
-              Meet <span className="text-gradient-purple">Synth</span>
-            </h2>
-
-            <h3 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-white/80 mb-8">
-              Your AI cohost.
-              <br />
-              <span className="text-[#B0B0C0]">Designed for live.</span>
-            </h3>
-
-            <p className="max-w-2xl mx-auto text-lg text-[#B0B0C0] leading-relaxed">
-              Synth is an intelligent AI companion purpose-built for live streaming. 
-              It learns your style, understands your audience, and becomes a natural 
-              extension of your broadcast.
-            </p>
+            <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden bg-gradient-to-b from-[#1a1628] to-[#0d0b14]">
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-[80%] aspect-[3/4] rounded-xl bg-gradient-to-br from-[#2a2040] to-[#1a1628] flex items-end justify-center overflow-hidden">
+                  <Image
+                    src="/synth_character_lossless.webp"
+                    alt="Synth AI Character"
+                    fill
+                    className="object-cover object-top"
+                    unoptimized
+                  />
+                </div>
+              </div>
+            </div>
           </motion.div>
 
-          {/* Feature Cards */}
-          <div className="grid md:grid-cols-3 gap-8">
-            {features.map((feature, index) => (
-              <motion.div
-                key={feature.title}
-                initial={{ opacity: 0, y: 40 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-                transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-                whileHover={{ y: -4, transition: { duration: 0.3 } }}
-                className="group relative"
-              >
-                <div className="editorial-card relative h-full p-8 rounded-[20px] bg-[rgba(17,17,27,0.8)] backdrop-blur-[12px] border border-[rgba(139,92,246,0.25)] transition-all duration-300 overflow-hidden hover:shadow-[0_0_40px_rgba(139,92,246,0.3)]">
-                  {/* Glow effect on hover */}
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-b from-[#8B5CF6]/0 to-[#8B5CF6]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  />
+          {/* Right - Content */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 40 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <span className="text-[10.5px] font-bold tracking-[2px] uppercase text-[#7c3aed] mb-4 block">
+              Meet Synth
+            </span>
 
-                  {/* Icon */}
-                  <motion.div
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    className="relative w-16 h-16 rounded-2xl bg-gradient-to-br from-[#8B5CF6] to-[#C4B5FD] flex items-center justify-center mb-6 glow-purple-sm"
-                  >
-                    <feature.icon className="w-8 h-8 text-white" />
-                  </motion.div>
+            <h2 className="text-[clamp(28px,3vw,42px)] font-extrabold text-[#f5f3ff] leading-[1.1] tracking-[-1px] mb-4">
+              Your AI cohost.
+              <br />
+              Designed for live.
+            </h2>
 
-                  {/* Content */}
-                  <h4 className="relative text-xl font-bold text-white mb-4 group-hover:text-[#C4B5FD] transition-colors">
+            <p className="text-[14.5px] text-[#a09bbf] leading-[1.7] mb-9 max-w-md">
+              Synth listens, understands context, and participates naturally across your entire stream.
+            </p>
+
+            {/* Features Grid */}
+            <div className="grid grid-cols-3 gap-5">
+              {features.map((feature, index) => (
+                <motion.div
+                  key={feature.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                  transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
+                >
+                  <div className="mb-2.5">{feature.icon}</div>
+                  <h4 className="text-[13px] font-bold text-[#f5f3ff] mb-1.5">
                     {feature.title}
                   </h4>
-
-                  <p className="relative text-[#B0B0C0] leading-relaxed">
+                  <p className="text-[12.5px] text-[#a09bbf] leading-[1.5]">
                     {feature.description}
                   </p>
-
-                  {/* Corner accent */}
-                  <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-[#8B5CF6]/10 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity" />
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
         </div>
-
-        {/* Ambient glow */}
-        <motion.div
-          animate={{ opacity: [0.05, 0.15, 0.05], scale: [1, 1.1, 1] }}
-          transition={{ duration: 10, repeat: Infinity }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] rounded-full bg-[#8B5CF6]/10 blur-[120px] pointer-events-none"
-        />
       </div>
-    </SectionWrapper>
+    </section>
   );
 }

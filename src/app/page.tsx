@@ -2,7 +2,6 @@ import {
   Navbar,
   Hero,
   StreamingDemands,
-  MeetSynth,
   RolesCarousel,
   LivestreamShowcase,
   KnowledgeUpload,
@@ -16,7 +15,6 @@ export default function Home() {
       <Navbar />
       <Hero />
       <StreamingDemands />
-      <MeetSynth />
       <RolesCarousel />
       <LivestreamShowcase />
       <KnowledgeUpload />

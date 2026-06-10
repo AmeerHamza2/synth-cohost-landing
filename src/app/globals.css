@@ -1,21 +1,28 @@
 @import "tailwindcss";
 
 :root {
-  --primary-purple: #8B5CF6;
-  --light-purple: #C4B5FD;
-  --dark-bg: #080812;
-  --card-bg: #11111B;
-  --text-primary: #FFFFFF;
-  --text-secondary: #B0B0C0;
-  --hero-bg: #FAFAFC;
+  --bg-light: #f0eef8;
+  --bg-dark: #0d0b14;
+  --bg-card: #13111e;
+  --bg-section: #0a0812;
+  --purple: #7c3aed;
+  --purple-mid: #9d5cf6;
+  --purple-soft: #b58af7;
+  --purple-glow: rgba(124,58,237,0.25);
+  --text-primary: #f5f3ff;
+  --text-secondary: #a09bbf;
+  --text-muted: #5e5a72;
+  --border: rgba(255,255,255,0.07);
 }
 
 @theme inline {
-  --color-primary: var(--primary-purple);
-  --color-primary-light: var(--light-purple);
-  --color-dark: var(--dark-bg);
-  --color-card: var(--card-bg);
-  --color-hero: var(--hero-bg);
+  --color-primary: var(--purple);
+  --color-primary-mid: var(--purple-mid);
+  --color-primary-soft: var(--purple-soft);
+  --color-dark: var(--bg-dark);
+  --color-card: var(--bg-card);
+  --color-section: var(--bg-section);
+  --color-hero: var(--bg-light);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -70,25 +77,25 @@ body {
 
 /* Purple glow effects */
 .glow-purple {
-  box-shadow: 0 0 20px rgba(139, 92, 246, 0.3),
-              0 0 40px rgba(139, 92, 246, 0.2),
-              0 0 60px rgba(139, 92, 246, 0.1);
+  box-shadow: 0 0 20px rgba(124, 58, 237, 0.3),
+              0 0 40px rgba(124, 58, 237, 0.2),
+              0 0 60px rgba(124, 58, 237, 0.1);
 }
 
 .glow-purple-sm {
-  box-shadow: 0 0 10px rgba(139, 92, 246, 0.3),
-              0 0 20px rgba(139, 92, 246, 0.2);
+  box-shadow: 0 0 10px rgba(124, 58, 237, 0.3),
+              0 0 20px rgba(124, 58, 237, 0.2);
 }
 
 .glow-purple-lg {
-  box-shadow: 0 0 40px rgba(139, 92, 246, 0.4),
-              0 0 80px rgba(139, 92, 246, 0.3),
-              0 0 120px rgba(139, 92, 246, 0.2);
+  box-shadow: 0 0 40px rgba(124, 58, 237, 0.4),
+              0 0 80px rgba(124, 58, 237, 0.3),
+              0 0 120px rgba(124, 58, 237, 0.2);
 }
 
 /* Text gradient */
 .text-gradient-purple {
-  background: linear-gradient(135deg, #8B5CF6 0%, #C4B5FD 100%);
+  background: linear-gradient(135deg, #7c3aed 0%, #9d5cf6 50%, #b58af7 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
