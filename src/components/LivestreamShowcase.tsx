@@ -44,20 +44,15 @@ export default function LivestreamShowcase() {
             </h2>
 
             <p className="text-[14.5px] text-[#a09bbf] leading-[1.7] mb-8 max-w-md">
-              Watch how Synth seamlessly integrates into a live stream, handling chat, 
-              reading donations, and keeping your audience engaged.
+          From chat to communications to content-synth is part of every moment
             </p>
 
-            <motion.button
-              whileHover={{ scale: 1.02, backgroundColor: '#9d5cf6' }}
-              whileTap={{ scale: 0.98 }}
-              className="px-6 py-3 bg-[#7c3aed] text-white text-[13.5px] font-semibold rounded-lg transition-colors flex items-center gap-2"
-            >
-              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-                <polygon points="5,3 19,12 5,21" />
-              </svg>
-              Watch Full Demo
-            </motion.button>
+             <a 
+                href="#" 
+                className="inline-flex items-center gap-2.5 text-[13px] font-semibold text-[#a09bbf] border-b border-[rgba(255,255,255,0.2)] pb-0.5 hover:text-white transition-colors w-fit"
+              >
+                Watch  Demo <span>▷</span>
+              </a>
           </motion.div>
 
           {/* Right Content - Livestream Dashboard Preview */}

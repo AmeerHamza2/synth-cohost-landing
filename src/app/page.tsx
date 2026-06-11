@@ -4,7 +4,7 @@ import {
   StreamingDemands,
   RolesCarousel,
   LivestreamShowcase,
-  KnowledgeUpload,
+  KnowledgeHero,
   FinalCTA,
   Footer,
 } from '@/components';
@@ -17,7 +17,7 @@ export default function Home() {
       <StreamingDemands />
       <RolesCarousel />
       <LivestreamShowcase />
-      <KnowledgeUpload />
+      <KnowledgeHero />
       <FinalCTA />
       <Footer />
     </main>

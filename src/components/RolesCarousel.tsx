@@ -88,23 +88,29 @@ export default function RolesCarousel() {
           className="flex flex-col lg:flex-row items-center gap-12 max-w-[1100px] mx-auto"
         >
           {/* Left Content */}
-          <div className="w-full lg:min-w-[200px] lg:max-w-[220px] flex-shrink-0 text-center lg:text-left">
-            <div className="text-[10px] tracking-[0.13em] text-[#a09bbf] uppercase mb-2.5">
+          <div className="w-full lg:w-auto lg:max-w-[280px] flex-shrink-0 text-center lg:text-left">
+            <div className="text-[10px] tracking-[0.13em] text-[#a09bbf] uppercase mb-3">
               One personality. Many roles.
             </div>
-            <h2 className="text-[22px] lg:text-[26px] font-medium text-[#f5f3ff] leading-[1.3] mb-4 lg:mb-6">
+            <h2 className="text-[26px] lg:text-[32px] font-extrabold text-[#f5f3ff] leading-[1.2] mb-4 tracking-[-0.5px]">
               Synth adapts to your stream.
             </h2>
-            <a 
-              href="#" 
-              className="hidden lg:inline-flex items-center gap-1.5 text-[13px] text-[#a09bbf] border-b border-[rgba(255,255,255,0.2)] pb-0.5 hover:text-white transition-colors"
-            >
-              Learn more ▷
-            </a>
+            <p className="text-[14px] text-[#a09bbf] leading-[1.6] mb-6 hidden lg:block">
+              Watch how Synth transforms across different roles—educator, moderator, interviewer—seamlessly adapting to match your stream's needs.
+            </p>
+            <div className="flex flex-col gap-3">
+              <a 
+                href="#" 
+                className="inline-flex items-center gap-2.5 text-[13px] font-semibold text-[#a09bbf] border-b border-[rgba(255,255,255,0.2)] pb-0.5 hover:text-white transition-colors w-fit"
+              >
+                Learn more <span>▷</span>
+              </a>
+            
+            </div>
           </div>
 
           {/* Right Slider */}
-          <div className="flex-1 relative overflow-hidden min-w-0">
+          <div className="flex-1 relative overflow-hidden min-w-0 w-full lg:w-auto">
             {/* Prev Button */}
             <button
               onClick={() => move(-1)}
@@ -146,17 +152,12 @@ export default function RolesCarousel() {
                         style={{ objectPosition: role.objectPosition }}
                         unoptimized
                       />
-                      {/* Overlay for better text visibility on hover */}
-                      <motion.div
-                        initial={{ opacity: 0 }}
-                        whileHover={{ opacity: 1 }}
-                        transition={{ duration: 0.2 }}
-                        className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end justify-center pb-3"
-                      >
+                      {/* Text overlay always visible */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex items-end justify-center pb-4">
                         <span className="text-white text-[11px] sm:text-[12px] lg:text-[13px] font-semibold text-center px-2">
                           {role.title}
                         </span>
-                      </motion.div>
+                      </div>
                     </div>
                   </motion.div>
                 ))}
