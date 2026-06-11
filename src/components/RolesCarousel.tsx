@@ -28,7 +28,7 @@ const roles = [
   {
     id: 'companion',
     title: 'Companion',
-    objectPosition: '50% center',
+    objectPosition: '25% center',
   },
 ];
 
@@ -71,7 +71,7 @@ export default function RolesCarousel() {
   return (
     <section 
       data-section="04" 
-      className="relative bg-[#0d0b14] overflow-hidden"
+      className="relative bg-black overflow-hidden"
       id="streamers"
     >
       {/* Section Number - Left Side - Hidden on mobile */}
@@ -128,19 +128,35 @@ export default function RolesCarousel() {
                       scale: idx === 1 ? 1.02 : 0.95,
                       opacity: idx === 1 ? 1 : 0.6
                     }}
+                    whileHover={{
+                      scale: idx === 1 ? 1.08 : 1.0,
+                      opacity: 1,
+                      boxShadow: '0 0 30px rgba(124, 58, 237, 0.6), 0 0 60px rgba(124, 58, 237, 0.4)'
+                    }}
                     transition={{ duration: 0.4, ease: 'easeOut' }}
                     onClick={() => setCurrentIndex(role.originalIndex)}
-                    className={`w-[100px] sm:w-[140px] lg:w-[200px] min-w-[100px] sm:min-w-[140px] lg:min-w-[200px] rounded-[10px] overflow-hidden cursor-pointer flex-shrink-0 border-[1.5px] transition-colors duration-300 ${idx === 1 ? 'border-[#7c6edc]' : 'border-transparent'}`}
+                    className={`w-[100px] sm:w-[140px] lg:w-[200px] min-w-[100px] sm:min-w-[140px] lg:min-w-[200px] rounded-[10px] overflow-hidden cursor-pointer flex-shrink-0 border-[1.5px] transition-all duration-300 ${idx === 1 ? 'border-[#7c6edc]' : 'border-[rgba(124,58,237,0.2)] hover:border-[#7c6edc]'}`}
                   >
                     <div className="relative w-full h-[150px] sm:h-[200px] lg:h-[300px]">
                       <Image
                         src="/Mods_lossless(1) (1).webp"
                         alt={role.title}
                         fill
-                        className="object-cover"
+                        className="object-cover hover:brightness-110 transition-all duration-300"
                         style={{ objectPosition: role.objectPosition }}
                         unoptimized
                       />
+                      {/* Overlay for better text visibility on hover */}
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        whileHover={{ opacity: 1 }}
+                        transition={{ duration: 0.2 }}
+                        className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end justify-center pb-3"
+                      >
+                        <span className="text-white text-[11px] sm:text-[12px] lg:text-[13px] font-semibold text-center px-2">
+                          {role.title}
+                        </span>
+                      </motion.div>
                     </div>
                   </motion.div>
                 ))}
