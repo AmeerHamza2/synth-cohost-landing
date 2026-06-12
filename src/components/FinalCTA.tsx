@@ -1,13 +1,8 @@
 'use client';
 
-import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
 import Image from 'next/image';
 
 export default function FinalCTA() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
-
   return (
     <section 
       data-section="07" 
@@ -19,20 +14,25 @@ export default function FinalCTA() {
         <span className="w-4 h-[2px] bg-white" />
       </div>
 
-      <div ref={ref} className="py-16 lg:py-28 px-4 sm:px-6 lg:px-20 max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-          {/* Left Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -40 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-[clamp(24px,3.5vw,52px)] font-extrabold leading-[1.1] tracking-[-1px] mb-6 lg:mb-8">
-              <span className="text-[#f5f3ff]">The next generation</span>
+      <div className="py-16 lg:py-28 px-4 sm:px-6 lg:px-20">
+        <div className="relative inline-block w-full">
+          <Image
+            src="/background_lossless.webp"
+            alt="Meet Your Cohost"
+            width={1200}
+            height={600}
+            className="w-full h-auto"
+            unoptimized
+          />
+          
+          {/* Text Overlay */}
+          <div className="absolute inset-0 flex flex-col items-start justify-end p-6 lg:p-12">
+            <h2 className="text-[clamp(24px,3.5vw,52px)] font-extrabold leading-[1.1] tracking-[-1px] mb-6 lg:mb-8 text-[#f5f3ff]">
+              <span>The next generation</span>
               <br />
-              <span className="text-[#f5f3ff]">of creators won&apos;t</span>
+              <span>of creators won&apos;t</span>
               <br />
-              <span className="text-[#f5f3ff]">stream </span>
+              <span>stream </span>
               <span className="text-[#b58af7]">alone.</span>
             </h2>
 
@@ -50,23 +50,7 @@ export default function FinalCTA() {
                 Start Free <span>▷</span>
               </a>
             </div>
-          </motion.div>
-
-          {/* Right Content - Background Image */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 40 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="relative rounded-xl overflow-hidden aspect-[4/3]"
-          >
-            <Image
-              src="/background_lossless.webp"
-              alt="Meet Your Cohost"
-              fill
-              className="object-cover"
-              unoptimized
-            />
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
