@@ -85,9 +85,10 @@ export default function StreamingDemands() {
       </div>
 
       {/* Image Section with 03 */}
-      <div className="relative">
+      <div className="relative" data-section="03">
         {/* Section Number - Left Side */}
-      <div className="absolute left-6 lg:left-10 top-1/3 -translate-y-1/2 flex flex-col items-center gap-2">
+        <div className="hidden md:flex absolute left-6 lg:left-10 top-1/3 -translate-y-1/2 flex-col items-center gap-2 z-10">
+          <span className="text-[11px] font-bold text-white">03</span>
           <span className="w-4 h-[2px] bg-white" />
         </div>
 
