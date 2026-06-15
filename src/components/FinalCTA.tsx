@@ -14,8 +14,8 @@ export default function FinalCTA() {
         <span className="w-4 h-[2px] bg-white" />
       </div>
 
-      <div className="py-16 lg:py-28 px-4 sm:px-6 lg:px-20">
-        <div className="relative inline-block w-full">
+      <div className="py-8 lg:py-12 px-0">
+        <div className="relative w-full">
           <Image
             src="/background_lossless.webp"
             alt="Meet Your Cohost"
@@ -26,8 +26,8 @@ export default function FinalCTA() {
           />
           
           {/* Text Overlay */}
-          <div className="absolute inset-0 flex flex-col items-start justify-end p-6 lg:p-12">
-            <h2 className="text-[clamp(24px,3.5vw,52px)] font-extrabold leading-[1.1] tracking-[-1px] mb-6 lg:mb-8 text-[#f5f3ff]">
+          <div className="absolute inset-0 flex flex-col lg:flex-row items-start justify-start p-6 lg:p-20 gap-8 lg:gap-12">
+            <h2 className="text-[clamp(24px,3.5vw,52px)] font-extrabold leading-[1.1] tracking-[-1px] text-[#f5f3ff] -mt-8 lg:-mt-12">
               <span>The next generation</span>
               <br />
               <span>of creators won&apos;t</span>
@@ -36,18 +36,16 @@ export default function FinalCTA() {
               <span className="text-[#b58af7]">alone.</span>
             </h2>
 
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col items-start gap-4 mt-6 lg:mt-0">
+              <p className="text-[16px] lg:text-[18px] font-medium text-[#f5f3ff]">
+                They will stream<br />
+                alongside intelligence.
+              </p>
               <a 
                 href="#" 
-                className="inline-flex items-center gap-2.5 text-[13px] font-semibold text-[#a09bbf] border-b border-[rgba(255,255,255,0.2)] pb-0.5 hover:text-white transition-colors w-fit"
+                className="inline-flex items-center gap-2.5 text-[13px] font-semibold text-white bg-[#7c3aed] px-5 py-2.5 rounded-full hover:bg-[#6d28d9] transition-colors w-fit"
               >
-                Meet Your Cohost <span>▷</span>
-              </a>
-              <a 
-                href="#" 
-                className="inline-flex items-center gap-2.5 text-[13px] font-semibold text-[#a09bbf] border-b border-[rgba(255,255,255,0.2)] pb-0.5 hover:text-white transition-colors w-fit"
-              >
-                Start Free <span>▷</span>
+                Meet Your Cohost <span>→</span>
               </a>
             </div>
           </div>

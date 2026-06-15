@@ -8,32 +8,27 @@ const roles = [
   {
     id: 'educator',
     title: 'Educator',
-    image: '/complete 5.png',
-    objectPosition: '5% center',
+    image: '/tight_card_1.png',
   },
   {
     id: 'moderator',
     title: 'Moderator',
-    image: '/complete 5.png',
-    objectPosition: '25% center',
+    image: '/tight_card_2.png',
   },
   {
     id: 'interviewer',
     title: 'Interviewer',
-    image: '/complete 5.png',
-    objectPosition: '50% center',
+    image: '/tight_card_3.png',
   },
   {
     id: 'researcher',
     title: 'Research Assistant',
-    image: '/complete 5.png',
-    objectPosition: '75% center',
+    image: '/tight_card_4.png',
   },
   {
     id: 'companion',
     title: 'Companion',
-    image: '/complete 5.png',
-    objectPosition: '95% center',
+    image: '/tight_card_5.png',
   },
 ];
 
@@ -105,25 +100,8 @@ export default function RolesCarousel() {
                     alt={role.title}
                     fill
                     className="object-cover transition-all duration-300"
-                    style={{
-                      filter: hoveredIndex === index ? 'brightness(1.2)' : 'brightness(0.8)',
-                      objectPosition: role.objectPosition
-                    }}
                     unoptimized
                   />
-                  {/* Purple overlay when hovered */}
-                  <div 
-                    className="absolute inset-0 transition-all duration-300"
-                    style={{
-                      backgroundColor: hoveredIndex === index ? 'rgba(124, 58, 237, 0.4)' : 'rgba(0, 0, 0, 0.5)'
-                    }}
-                  />
-                  {/* Text overlay */}
-                  <div className="absolute inset-0 flex items-end justify-center pb-3">
-                    <span className="text-white text-[11px] sm:text-[12px] lg:text-[13px] font-semibold text-center px-2">
-                      {role.title}
-                    </span>
-                  </div>
                 </motion.div>
               ))}
             </div>

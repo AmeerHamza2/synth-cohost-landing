@@ -11,7 +11,7 @@ export default function KnowledgeHero() {
   return (
     <section
       data-section="06"
-      className="relative bg-[#07070f] overflow-hidden py-8 lg:py-12"
+      className="relative bg-black overflow-hidden py-4 lg:py-6"
       ref={ref}
     >
       {/* Section Number - Left Side - Hidden on mobile */}
@@ -25,10 +25,10 @@ export default function KnowledgeHero() {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.6 }}
-          className="flex flex-col lg:flex-row items-start lg:items-center gap-12 lg:gap-16"
+          className="flex flex-col lg:flex-row items-start lg:items-center gap-8 lg:gap-8"
         >
           {/* Left Content */}
-          <div className="w-full lg:min-w-[200px] lg:max-w-[220px] flex-shrink-0 text-center lg:text-left">
+          <div className="w-full lg:w-auto flex-shrink-0 text-center lg:text-left">
             <div className="text-[10px] tracking-[0.13em] text-[#a09bbf] uppercase mb-2.5">
               Your knowledge. Her knowledge.
             </div>
@@ -47,13 +47,21 @@ export default function KnowledgeHero() {
           </div>
 
           {/* Right Image */}
-          <div className="w-full lg:flex-1 min-w-0">
+          <div className="w-full lg:flex-1 min-w-0 bg-[#1a0b2e] relative">
             <Image
-              src="/Background fot icons.png"
+              src="/tujrtu9.jpg"
               alt="Documents and files"
               width={1200}
               height={500}
-              className="w-full h-auto rounded-lg"
+              className="w-full h-auto"
+              priority
+            />
+            <Image
+              src="/mines.png"
+              alt="Overlay"
+              width={1200}
+              height={500}
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[96%] h-auto object-contain"
               priority
             />
           </div>
