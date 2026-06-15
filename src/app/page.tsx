@@ -5,6 +5,7 @@ import {
   RolesCarousel,
   LivestreamShowcase,
   KnowledgeHero,
+  MeetSynth,
   FinalCTA,
   Footer,
 } from '@/components';
@@ -18,6 +19,7 @@ export default function Home() {
       <RolesCarousel />
       <LivestreamShowcase />
       <KnowledgeHero />
+      <MeetSynth />
       <FinalCTA />
       <Footer />
     </main>

@@ -30,7 +30,7 @@ export default function LivestreamShowcase() {
       </div>
 
       <div ref={ref} className="py-16 lg:py-28 px-4 sm:px-6 lg:px-20 max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+        <div className="grid lg:grid-cols-[280px_1fr] gap-8 lg:gap-12 items-center">
           {/* Left Content */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
@@ -44,7 +44,7 @@ export default function LivestreamShowcase() {
             </h2>
 
             <p className="text-[14.5px] text-[#a09bbf] leading-[1.7] mb-8 max-w-md">
-          From chat to communications to content-synth is part of every moment
+          From chat to conversation to content—Synth is part of every moment.
             </p>
 
              <a 
@@ -56,23 +56,25 @@ export default function LivestreamShowcase() {
           </motion.div>
 
           {/* Right Content - Livestream Dashboard Preview */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 40 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="relative"
-          >
-            <div className="relative rounded-xl overflow-hidden bg-[#13111e] border border-[rgba(255,255,255,0.05)] group/player">
-              {/* Video Player Area */}
-              <div className="relative aspect-video bg-gradient-to-br from-[#1a1628] to-[#0d0b14] cursor-pointer overflow-hidden">
+          <div className="flex flex-col lg:flex-row gap-6">
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 40 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="relative max-w-[500px]"
+            >
+              <div className="relative rounded-xl overflow-hidden bg-[#13111e] border border-[rgba(255,255,255,0.05)] group/player">
+                {/* Video Player Area */}
+                <div className="relative aspect-video bg-gradient-to-br from-[#1a1628] to-[#0d0b14] cursor-pointer overflow-hidden max-h-[350px]">
                 {/* Stream image content */}
                 <div className="absolute inset-0 overflow-hidden">
-                  <Image
-                    src="/stream_lossless.webp"
-                    alt="Live stream preview"
-                    fill
-                    className="object-cover group-hover/player:scale-105 transition-transform duration-300"
-                    priority
+                  <video
+                    src="/WhatsApp3.mp4"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-cover group-hover/player:scale-105 transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0d0b14]/80 via-transparent to-transparent" />
                 </div>
@@ -162,7 +164,7 @@ export default function LivestreamShowcase() {
                   </svg>
                   Synth AI Active
                 </motion.div>
-              </div>
+                </div>
 
               {/* Bottom Panel - Chat */}
               <div className="p-4 border-t border-[rgba(255,255,255,0.05)] bg-[rgba(13,11,20,0.6)]">
@@ -204,7 +206,52 @@ export default function LivestreamShowcase() {
                 </div>
               </div>
             </div>
-          </motion.div>
+            </motion.div>
+            
+            {/* Activity Panel */}
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 40 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="w-fit p-6 bg-[#13111e] rounded-xl border border-[rgba(255,255,255,0.05)]"
+            >
+              <h3 className="text-[13px] font-semibold text-[#f5f3ff] mb-4 tracking-[0.13em] uppercase">Synth Activity</h3>
+              <ul className="space-y-3 mb-6">
+                <li className="flex items-start gap-3">
+                  <span className="font-mono text-[11px] text-[#7c3aed] mt-0.5">01:23</span>
+                  <span className="text-[13px] text-[#a09bbf]">Answered a viewer question</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="font-mono text-[11px] text-[#7c3aed] mt-0.5">01:39</span>
+                  <span className="text-[13px] text-[#a09bbf]">Referenced Creator Guide.pdf</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="font-mono text-[11px] text-[#7c3aed] mt-0.5">01:18</span>
+                  <span className="text-[13px] text-[#a09bbf]">Highlighted key point</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="font-mono text-[11px] text-[#7c3aed] mt-0.5">01:12</span>
+                  <span className="text-[13px] text-[#a09bbf]">Scheduled next segment</span>
+                </li>
+              </ul>
+              <h3 className="text-[13px] font-semibold text-[#f5f3ff] mb-1 mt-20 tracking-[0.13em] uppercase">Coming Up</h3>
+              <ul className="space-y-3">
+                <li className="flex items-start gap-3">
+                  <svg className="w-4 h-4 text-[#a09bbf] mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                  </svg>
+                  <span className="text-[13px] text-[#a09bbf]">Q&A with Chat</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <svg className="w-4 h-4 text-[#a09bbf] mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 6v6l4 2"/>
+                  </svg>
+                  <span className="font-mono text-[11px] text-[#a09bbf]">Starting in 07:45</span>
+                </li>
+              </ul>
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>

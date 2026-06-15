@@ -49,7 +49,7 @@ export default function KnowledgeHero() {
           {/* Right Image */}
           <div className="w-full lg:flex-1 min-w-0">
             <Image
-              src="/files_lossless (1).webp"
+              src="/Background fot icons.png"
               alt="Documents and files"
               width={1200}
               height={500}

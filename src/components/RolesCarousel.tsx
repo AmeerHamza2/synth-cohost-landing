@@ -1,72 +1,46 @@
 'use client';
 
 import { motion, useInView } from 'framer-motion';
-import { useRef, useState, useEffect, useCallback } from 'react';
+import { useRef, useState } from 'react';
 import Image from 'next/image';
 
 const roles = [
   {
     id: 'educator',
     title: 'Educator',
+    image: '/complete 5.png',
     objectPosition: '5% center',
   },
   {
     id: 'moderator',
     title: 'Moderator',
-    objectPosition: '36% center',
+    image: '/complete 5.png',
+    objectPosition: '25% center',
   },
   {
     id: 'interviewer',
     title: 'Interviewer',
-    objectPosition: '65% center',
+    image: '/complete 5.png',
+    objectPosition: '50% center',
   },
   {
     id: 'researcher',
     title: 'Research Assistant',
-    objectPosition: '96% center',
+    image: '/complete 5.png',
+    objectPosition: '75% center',
   },
   {
     id: 'companion',
     title: 'Companion',
-    objectPosition: '25% center',
+    image: '/complete 5.png',
+    objectPosition: '95% center',
   },
 ];
 
 export default function RolesCarousel() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const totalCards = roles.length;
-
-  const move = useCallback((dir: number) => {
-    setCurrentIndex((prev) => {
-      let next = prev + dir;
-      if (next < 0) next = totalCards - 1;
-      if (next >= totalCards) next = 0;
-      return next;
-    });
-  }, [totalCards]);
-
-  // Auto-play
-  useEffect(() => {
-    const interval = setInterval(() => {
-      move(1);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, [move]);
-
-  // Get visible cards with wrapping
-  const getVisibleCards = () => {
-    const cards = [];
-    for (let i = -1; i <= 3; i++) {
-      const index = ((currentIndex + i) % totalCards + totalCards) % totalCards;
-      cards.push({ ...roles[index], originalIndex: index, offset: i });
-    }
-    return cards;
-  };
-
-  const visibleCards = getVisibleCards();
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
     <section 
@@ -109,82 +83,61 @@ export default function RolesCarousel() {
             </div>
           </div>
 
-          {/* Right Slider */}
+          {/* Right Boxes */}
           <div className="flex-1 relative overflow-hidden min-w-0 w-full lg:w-auto">
-            {/* Prev Button */}
-            <button
-              onClick={() => move(-1)}
-              className="absolute left-0 top-[45%] -translate-y-1/2 w-8 h-8 rounded-full bg-[rgba(20,20,40,0.85)] border border-[rgba(255,255,255,0.1)] text-[#9090b8] flex items-center justify-center z-10 hover:bg-[rgba(80,70,160,0.7)] hover:text-white transition-all"
-              aria-label="Previous"
-            >
-              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M15 18l-6-6 6-6" />
-              </svg>
-            </button>
-
-            {/* Slider Track */}
-            <div className="overflow-hidden mx-8 lg:mx-10">
-              <div className="flex gap-2 lg:gap-3 justify-center">
-                {visibleCards.slice(1, 4).map((role, idx) => (
-                  <motion.div
-                    key={`${role.id}-${role.offset}`}
-                    layout
-                    initial={false}
-                    animate={{ 
-                      scale: idx === 1 ? 1.02 : 0.95,
-                      opacity: idx === 1 ? 1 : 0.6
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+              {roles.map((role, index) => (
+                <motion.div
+                  key={role.id}
+                  onHoverStart={() => setHoveredIndex(index)}
+                  onHoverEnd={() => setHoveredIndex(null)}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="relative w-full h-[120px] sm:h-[150px] lg:h-[200px] rounded-[10px] overflow-hidden cursor-pointer"
+                  style={{
+                    boxShadow: hoveredIndex === index 
+                      ? '0 0 30px rgba(124, 58, 237, 0.8), 0 0 60px rgba(124, 58, 237, 0.5)' 
+                      : 'none'
+                  }}
+                >
+                  <Image
+                    src={role.image}
+                    alt={role.title}
+                    fill
+                    className="object-cover transition-all duration-300"
+                    style={{
+                      filter: hoveredIndex === index ? 'brightness(1.2)' : 'brightness(0.8)',
+                      objectPosition: role.objectPosition
                     }}
-                    whileHover={{
-                      scale: idx === 1 ? 1.08 : 1.0,
-                      opacity: 1,
-                      boxShadow: '0 0 30px rgba(124, 58, 237, 0.6), 0 0 60px rgba(124, 58, 237, 0.4)'
+                    unoptimized
+                  />
+                  {/* Purple overlay when hovered */}
+                  <div 
+                    className="absolute inset-0 transition-all duration-300"
+                    style={{
+                      backgroundColor: hoveredIndex === index ? 'rgba(124, 58, 237, 0.4)' : 'rgba(0, 0, 0, 0.5)'
                     }}
-                    transition={{ duration: 0.4, ease: 'easeOut' }}
-                    onClick={() => setCurrentIndex(role.originalIndex)}
-                    className={`w-[100px] sm:w-[140px] lg:w-[200px] min-w-[100px] sm:min-w-[140px] lg:min-w-[200px] rounded-[10px] overflow-hidden cursor-pointer flex-shrink-0 border-[1.5px] transition-all duration-300 ${idx === 1 ? 'border-[#7c6edc]' : 'border-[rgba(124,58,237,0.2)] hover:border-[#7c6edc]'}`}
-                  >
-                    <div className="relative w-full h-[150px] sm:h-[200px] lg:h-[300px]">
-                      <Image
-                        src="/Mods_lossless(1) (1).webp"
-                        alt={role.title}
-                        fill
-                        className="object-cover hover:brightness-110 transition-all duration-300"
-                        style={{ objectPosition: role.objectPosition }}
-                        unoptimized
-                      />
-                      {/* Text overlay always visible */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex items-end justify-center pb-4">
-                        <span className="text-white text-[11px] sm:text-[12px] lg:text-[13px] font-semibold text-center px-2">
-                          {role.title}
-                        </span>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-
-            {/* Next Button */}
-            <button
-              onClick={() => move(1)}
-              className="absolute right-0 top-[45%] -translate-y-1/2 w-8 h-8 rounded-full bg-[rgba(20,20,40,0.85)] border border-[rgba(255,255,255,0.1)] text-[#9090b8] flex items-center justify-center z-10 hover:bg-[rgba(80,70,160,0.7)] hover:text-white transition-all"
-              aria-label="Next"
-            >
-              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M9 18l6-6-6-6" />
-              </svg>
-            </button>
-
-            {/* Dots */}
-            <div className="flex justify-center gap-2 mt-4">
-              {roles.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentIndex(index)}
-                  className={`w-2 h-2 rounded-full transition-all duration-200 ${currentIndex === index ? 'bg-[#7c6edc] scale-125' : 'bg-[#2a2a4a] hover:bg-[#4a4a6a]'}`}
-                  aria-label={`Go to slide ${index + 1}`}
-                />
+                  />
+                  {/* Text overlay */}
+                  <div className="absolute inset-0 flex items-end justify-center pb-3">
+                    <span className="text-white text-[11px] sm:text-[12px] lg:text-[13px] font-semibold text-center px-2">
+                      {role.title}
+                    </span>
+                  </div>
+                </motion.div>
               ))}
+            </div>
+            {/* Dots */}
+            <div className="flex justify-center gap-1 mt-4">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#7c6edc]" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#7c6edc]" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#7c6edc]" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#7c6edc]" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#7c6edc]" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#7c6edc]" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#7c6edc]" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#7c6edc]" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#7c6edc]" />
             </div>
           </div>
         </motion.div>
