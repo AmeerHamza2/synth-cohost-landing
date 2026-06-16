@@ -4,18 +4,19 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const navLinks = [
-  { name: 'Product', href: '#product' },
-  { name: 'Features', href: '#features' },
+  { name: 'What Are Syns', href: '#', isPopup: true },
   { name: 'For Streamers', href: '#streamers' },
-  { name: 'About', href: '#about' },
-  { name: 'Pricing', href: '#pricing' },
 ];
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isHovering, setIsHovering] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,6 +25,22 @@ export default function Navbar() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    setMousePosition({ x, y });
+  };
+
+  // Calculate which character is being hovered (6 characters total)
+  const getCharacterIndex = () => {
+    if (!isHovering) return -1;
+    const characterWidth = 100 / 6; // Each character takes up ~16.67% of width
+    return Math.floor(mousePosition.x / characterWidth);
+  };
+
+  const characterIndex = getCharacterIndex();
 
   return (
     <>
@@ -49,12 +66,21 @@ export default function Navbar() {
         <ul className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <li key={link.name}>
-              <Link
-                href={link.href}
-                className="text-[13.5px] font-medium text-[#3d3654] hover:text-[#7c3aed] transition-colors"
-              >
-                {link.name}
-              </Link>
+              {link.isPopup ? (
+                <button
+                  onClick={() => setIsPopupOpen(true)}
+                  className="text-[13.5px] font-medium text-[#3d3654] hover:text-[#7c3aed] transition-colors cursor-pointer"
+                >
+                  {link.name}
+                </button>
+              ) : (
+                <Link
+                  href={link.href}
+                  className="text-[13.5px] font-medium text-[#3d3654] hover:text-[#7c3aed] transition-colors"
+                >
+                  {link.name}
+                </Link>
+              )}
             </li>
           ))}
         </ul>
@@ -94,14 +120,27 @@ export default function Navbar() {
           >
             <div className="px-6 py-8 space-y-4">
               {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="block text-lg font-medium text-[#3d3654] hover:text-[#7c3aed] transition-colors"
-                >
-                  {link.name}
-                </Link>
+                link.isPopup ? (
+                  <button
+                    key={link.name}
+                    onClick={() => {
+                      setIsPopupOpen(true);
+                      setIsMobileMenuOpen(false);
+                    }}
+                    className="block text-lg font-medium text-[#3d3654] hover:text-[#7c3aed] transition-colors w-full text-left cursor-pointer"
+                  >
+                    {link.name}
+                  </button>
+                ) : (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="block text-lg font-medium text-[#3d3654] hover:text-[#7c3aed] transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                )
               ))}
               <a
                 href="#"
@@ -110,6 +149,60 @@ export default function Navbar() {
                 Get Started
               </a>
             </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Popup Modal */}
+      <AnimatePresence>
+        {isPopupOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
+            onClick={() => setIsPopupOpen(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="relative rounded-2xl p-8 max-w-2xl w-full mx-4"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={() => setIsPopupOpen(false)}
+                className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+              >
+           
+              </button>
+             
+              <div 
+                className="flex items-center justify-center relative cursor-crosshair"
+                onMouseMove={handleMouseMove}
+                onMouseEnter={() => setIsHovering(true)}
+                onMouseLeave={() => setIsHovering(false)}
+              >
+                <Image
+                  src="/deded.png"
+                  alt="What Are Syns"
+                  width={800}
+                  height={600}
+                  className="w-full h-auto border-0"
+                  unoptimized
+                />
+                {/* Focused spotlight on character area */}
+                {isHovering && (
+                  <div
+                    className="absolute inset-0 pointer-events-none"
+                    style={{
+                      background: `radial-gradient(circle 60px at ${mousePosition.x}% ${mousePosition.y}%, rgba(255, 255, 255, 0.8) 0%, rgba(124, 58, 237, 0.6) 30%, transparent 60%)`,
+                      mixBlendMode: 'screen',
+                    }}
+                  />
+                )}
+              </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
