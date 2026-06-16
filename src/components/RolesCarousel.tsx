@@ -99,7 +99,7 @@ export default function RolesCarousel() {
                     src={role.image}
                     alt={role.title}
                     fill
-                    className="object-cover transition-all duration-300"
+                    className="object-contain transition-all duration-300"
                     unoptimized
                   />
                 </motion.div>
