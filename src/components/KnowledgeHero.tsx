@@ -49,7 +49,7 @@ export default function KnowledgeHero() {
           {/* Right Image */}
           <div className="w-full lg:flex-1 min-w-0 bg-[#1a0b2e] relative">
             <Image
-              src="/tujrtu9.jpg"
+              src="/BK3.png"
               alt="Documents and files"
               width={1200}
               height={500}
