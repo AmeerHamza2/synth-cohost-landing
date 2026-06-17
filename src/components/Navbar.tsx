@@ -167,7 +167,7 @@ export default function Navbar() {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="relative rounded-2xl p-8 max-w-2xl w-full mx-4"
+              className="relative rounded-2xl p-8 max-w-4xl w-full mx-4"
               onClick={(e) => e.stopPropagation()}
             >
               <button
@@ -184,10 +184,10 @@ export default function Navbar() {
                 onMouseLeave={() => setIsHovering(false)}
               >
                 <Image
-                  src="/deded.png"
+                  src="/cdc.png"
                   alt="What Are Syns"
                   width={800}
-                  height={600}
+                  height={900}
                   className="w-full h-auto border-0"
                   unoptimized
                 />
