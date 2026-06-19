@@ -49,7 +49,7 @@ export default function RolesCarousel() {
         <span className="w-4 h-[2px] bg-white" />
       </div>
 
-      <div ref={ref} className="py-12 px-6 lg:px-12">
+      <div ref={ref} className="py-4 px-6 lg:px-12">
         <motion.div
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
@@ -86,7 +86,7 @@ export default function RolesCarousel() {
                   key={role.id}
                   onHoverStart={() => setHoveredIndex(index)}
                   onHoverEnd={() => setHoveredIndex(null)}
-                  className="relative w-full h-[120px] sm:h-[150px] lg:h-[200px] rounded-[10px] overflow-hidden cursor-pointer"
+                  className="relative w-full h-[180px] sm:h-[220px] lg:h-[300px] rounded-[10px] overflow-hidden cursor-pointer"
                   style={{
                     boxShadow: hoveredIndex === index 
                       ? '0 0 30px rgba(124, 58, 237, 0.8), 0 0 60px rgba(124, 58, 237, 0.5)' 

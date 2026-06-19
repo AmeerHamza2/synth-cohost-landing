@@ -160,21 +160,22 @@ export default function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
+            className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
             onClick={() => setIsPopupOpen(false)}
           >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              className="relative rounded-2xl p-8 max-w-4xl w-full mx-4"
-              onClick={(e) => e.stopPropagation()}
-            >
+            <div className="flex items-center justify-center min-h-screen px-4">
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                className="relative rounded-2xl p-8 w-[95vw] max-w-[1800px]"
+                onClick={(e) => e.stopPropagation()}
+              >
               <button
                 onClick={() => setIsPopupOpen(false)}
                 className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
               >
-           
+                <X className="w-6 h-6" />
               </button>
              
               <div 
@@ -186,9 +187,9 @@ export default function Navbar() {
                 <Image
                   src="/cdc.png"
                   alt="What Are Syns"
-                  width={800}
+                  width={1800}
                   height={900}
-                  className="w-full h-auto border-0"
+                  className="w-full max-h-[550px] object-contain border-0"
                   unoptimized
                 />
                 {/* Focused spotlight on character area */}
@@ -202,7 +203,8 @@ export default function Navbar() {
                   />
                 )}
               </div>
-            </motion.div>
+              </motion.div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

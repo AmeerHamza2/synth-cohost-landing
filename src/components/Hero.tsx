@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 export default function Hero() {
   return (
-    <section data-section="01" className="relative min-h-screen overflow-hidden">
+    <section data-section="01" className="relative min-h-[70vh] overflow-hidden">
       {/* Full Width Character Image */}
       <motion.div
         initial={{ opacity: 0, scale: 1.02 }}

@@ -86,7 +86,7 @@ export default function StreamingDemands() {
 
 
 
-        <div ref={ref} className="py-20 lg:py-24 px-6 lg:px-20 max-w-7xl mx-auto">
+        <div ref={ref} className="py-8 lg:py-12 px-6 lg:px-20 max-w-7xl mx-auto">
 
           <motion.div
 
@@ -220,9 +220,9 @@ export default function StreamingDemands() {
 
           {/* Text Overlay */}
 
-          <div className="absolute inset-0 flex items-center justify-end px-6 lg:px-20">
+          <div className="absolute inset-0 flex items-center px-6 lg:px-20">
 
-            <div className="w-1/2 lg:w-2/5">
+            <div className="w-1/2 lg:w-2/5 ml-20 lg:ml-90">
 
               {/* Label */}
 
@@ -298,7 +298,7 @@ export default function StreamingDemands() {
 
                 transition={{ duration: 0.6, delay: 0.7 }}
 
-                className="grid grid-cols-3 gap-6"
+                className="flex gap-8"
 
               >
 
@@ -308,7 +308,7 @@ export default function StreamingDemands() {
 
                   whileHover={{ y: -4, transition: { duration: 0.3 } }}
 
-                  className="group"
+                  className="group flex-1"
 
                 >
 
@@ -330,9 +330,9 @@ export default function StreamingDemands() {
 
                     <div className="flex-1">
 
-                      <p className="text-[12px] font-semibold text-white mb-1">Responds to chat</p>
+                      <p className="text-[12px] font-semibold text-white mb-1 whitespace-nowrap">Responds to chat</p>
 
-                      <p className="text-[11px] text-[#d1d5db] leading-[1.4]">Engages your audience in real time.</p>
+                      <p className="text-[11px] text-[#d1d5db] leading-[1.4] whitespace-nowrap">Engages your audience in real time.</p>
 
                     </div>
 
@@ -348,7 +348,7 @@ export default function StreamingDemands() {
 
                   whileHover={{ y: -4, transition: { duration: 0.3 } }}
 
-                  className="group"
+                  className="group flex-1"
 
                 >
 
@@ -370,9 +370,9 @@ export default function StreamingDemands() {
 
                     <div className="flex-1">
 
-                      <p className="text-[12px] font-semibold text-white mb-1">Understands context</p>
+                      <p className="text-[12px] font-semibold text-white mb-1 whitespace-nowrap">Understands context</p>
 
-                      <p className="text-[11px] text-[#d1d5db] leading-[1.4]">Follows the flow and remembers key details.</p>
+                      <p className="text-[11px] text-[#d1d5db] leading-[1.4] whitespace-nowrap">Follows the flow and remembers key details.</p>
 
                     </div>
 
@@ -388,7 +388,7 @@ export default function StreamingDemands() {
 
                   whileHover={{ y: -4, transition: { duration: 0.3 } }}
 
-                  className="group"
+                  className="group flex-1"
 
                 >
 
@@ -410,9 +410,9 @@ export default function StreamingDemands() {
 
                     <div className="flex-1">
 
-                      <p className="text-[12px] font-semibold text-white mb-1">Supports your workflow</p>
+                      <p className="text-[12px] font-semibold text-white mb-1 whitespace-nowrap">Supports your workflow</p>
 
-                      <p className="text-[11px] text-[#d1d5db] leading-[1.4]">Helps keep your stream on track.</p>
+                      <p className="text-[11px] text-[#d1d5db] leading-[1.4] whitespace-nowrap">Helps keep your stream on track.</p>
 
                     </div>
 
