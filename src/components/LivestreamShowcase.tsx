@@ -29,7 +29,7 @@ export default function LivestreamShowcase() {
         <span className="w-4 h-[2px] bg-white" />
       </div>
 
-      <div ref={ref} className="py-6 lg:py-12 px-4 sm:px-6 lg:px-20 max-w-7xl mx-auto">
+      <div ref={ref} className="py-4 lg:py-8 px-4 sm:px-6 lg:px-20 max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-[280px_1fr] gap-8 lg:gap-12 items-center">
           {/* Left Content */}
           <motion.div

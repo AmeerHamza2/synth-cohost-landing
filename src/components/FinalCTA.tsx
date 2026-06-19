@@ -14,7 +14,7 @@ export default function FinalCTA() {
         <span className="w-4 h-[2px] bg-white" />
       </div>
 
-      <div className="py-8 lg:py-12 px-0">
+      <div className="py-4 lg:py-6 px-0">
         <div className="relative w-full">
           <Image
             src="/background_lossless.webp"

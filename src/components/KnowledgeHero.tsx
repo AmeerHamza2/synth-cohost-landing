@@ -11,7 +11,7 @@ export default function KnowledgeHero() {
   return (
     <section
       data-section="06"
-      className="relative bg-black overflow-hidden py-1 lg:py-2"
+      className="relative bg-black overflow-hidden py-0 lg:py-1"
       ref={ref}
     >
       {/* Section Number - Left Side - Hidden on mobile */}

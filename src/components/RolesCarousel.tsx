@@ -49,7 +49,7 @@ export default function RolesCarousel() {
         <span className="w-4 h-[2px] bg-white" />
       </div>
 
-      <div ref={ref} className="py-4 px-6 lg:px-12">
+      <div ref={ref} className="py-2 px-6 lg:px-12">
         <motion.div
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}

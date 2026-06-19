@@ -86,7 +86,7 @@ export default function StreamingDemands() {
 
 
 
-        <div ref={ref} className="py-8 lg:py-12 px-6 lg:px-20 max-w-7xl mx-auto">
+        <div ref={ref} className="py-4 lg:py-8 px-6 lg:px-20 max-w-7xl mx-auto">
 
           <motion.div
 
