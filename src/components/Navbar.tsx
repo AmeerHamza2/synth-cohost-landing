@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
+import SignInModal from './SignInModal';
 
 const navLinks = [
   { name: 'What Are Syns', href: '#', isPopup: true },
@@ -15,6 +16,7 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isSignInOpen, setIsSignInOpen] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
 
@@ -177,12 +179,16 @@ export default function Navbar() {
               >
                 <X className="w-6 h-6" />
               </button>
-             
-              <div 
-                className="flex items-center justify-center relative cursor-crosshair"
+
+              <div
+                className="flex items-center justify-center relative cursor-pointer"
                 onMouseMove={handleMouseMove}
                 onMouseEnter={() => setIsHovering(true)}
                 onMouseLeave={() => setIsHovering(false)}
+                onClick={() => {
+                  console.log('Image clicked, opening sign in modal');
+                  setIsSignInOpen(true);
+                }}
               >
                 <Image
                   src="/cdc.png"
@@ -206,6 +212,13 @@ export default function Navbar() {
               </motion.div>
             </div>
           </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Sign In Modal */}
+      <AnimatePresence>
+        {isSignInOpen && (
+          <SignInModal onClose={() => setIsSignInOpen(false)} />
         )}
       </AnimatePresence>
     </>
