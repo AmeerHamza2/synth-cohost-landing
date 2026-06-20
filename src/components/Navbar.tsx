@@ -80,7 +80,7 @@ export default function Navbar() {
               {link.isPopup ? (
                 <button
                   onClick={() => {
-                    setPopupType(link.popupType);
+                    setPopupType(link.popupType || null);
                     setIsPopupOpen(true);
                   }}
                   className="text-[13.5px] font-medium text-[#3d3654] hover:text-[#7c3aed] transition-colors cursor-pointer"
@@ -138,7 +138,7 @@ export default function Navbar() {
                   <button
                     key={link.name}
                     onClick={() => {
-                      setPopupType(link.popupType);
+                      setPopupType(link.popupType || null);
                       setIsPopupOpen(true);
                       setIsMobileMenuOpen(false);
                     }}
