@@ -15,8 +15,8 @@ interface Props {
 
 const SignInModal: React.FC<Props> = ({ onClose }) => {
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 p-4">
-      <div className="relative w-full max-w-[500px] rounded-2xl border border-purple-500/40 bg-[#050016] p-6 shadow-2xl">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 p-4" onClick={onClose}>
+      <div className="relative w-full max-w-[500px] rounded-2xl border border-purple-500/40 bg-[#050016] p-6 shadow-2xl" onClick={(e) => e.stopPropagation()}>
 
         {/* Close */}
         <button

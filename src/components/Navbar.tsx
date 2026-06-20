@@ -8,7 +8,8 @@ import Image from 'next/image';
 import SignInModal from './SignInModal';
 
 const navLinks = [
-  { name: 'What Are Syns', href: '#', isPopup: true },
+  { name: 'What Are Syns', href: '#', isPopup: true, popupType: 'what-are-syns' },
+  { name: 'Our Products', href: '#', isPopup: true, popupType: 'our-products' },
   { name: 'For Streamers', href: '#streamers' },
 ];
 
@@ -16,6 +17,7 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [popupType, setPopupType] = useState<'what-are-syns' | 'our-products' | null>(null);
   const [isSignInOpen, setIsSignInOpen] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
@@ -70,7 +72,10 @@ export default function Navbar() {
             <li key={link.name}>
               {link.isPopup ? (
                 <button
-                  onClick={() => setIsPopupOpen(true)}
+                  onClick={() => {
+                    setPopupType(link.popupType);
+                    setIsPopupOpen(true);
+                  }}
                   className="text-[13.5px] font-medium text-[#3d3654] hover:text-[#7c3aed] transition-colors cursor-pointer"
                 >
                   {link.name}
@@ -126,6 +131,7 @@ export default function Navbar() {
                   <button
                     key={link.name}
                     onClick={() => {
+                      setPopupType(link.popupType);
                       setIsPopupOpen(true);
                       setIsMobileMenuOpen(false);
                     }}
@@ -171,35 +177,41 @@ export default function Navbar() {
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.9, opacity: 0 }}
                 className="relative rounded-2xl p-8 w-[95vw] max-w-[1800px]"
-                onClick={(e) => e.stopPropagation()}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsPopupOpen(false);
+                }}
               >
               <button
-                onClick={() => setIsPopupOpen(false)}
-                className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsPopupOpen(false);
+                }}
+                className={`absolute top-4 text-gray-400 hover:text-gray-600 transition-colors z-10 ${popupType === 'our-products' ? 'right-36' : 'right-8'}`}
               >
                 <X className="w-6 h-6" />
               </button>
 
               <div
-                className="flex items-center justify-center relative cursor-pointer"
+                className="flex items-center justify-center relative"
                 onMouseMove={handleMouseMove}
                 onMouseEnter={() => setIsHovering(true)}
                 onMouseLeave={() => setIsHovering(false)}
-                onClick={() => {
-                  console.log('Image clicked, opening sign in modal');
-                  setIsSignInOpen(true);
-                }}
               >
                 <Image
-                  src="/cdc.png"
-                  alt="What Are Syns"
+                  src={popupType === 'our-products' ? '/Our Products Tab. (1).png' : '/cdc.png'}
+                  alt={popupType === 'our-products' ? 'Our Products' : 'What Are Syns'}
                   width={1800}
                   height={900}
-                  className="w-full max-h-[550px] object-contain border-0"
+                  className="w-full max-h-[550px] object-contain border-0 cursor-pointer"
                   unoptimized
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setIsSignInOpen(true);
+                  }}
                 />
                 {/* Focused spotlight on character area */}
-                {isHovering && (
+                {isHovering && popupType === 'what-are-syns' && (
                   <div
                     className="absolute inset-0 pointer-events-none"
                     style={{
@@ -218,7 +230,10 @@ export default function Navbar() {
       {/* Sign In Modal */}
       <AnimatePresence>
         {isSignInOpen && (
-          <SignInModal onClose={() => setIsSignInOpen(false)} />
+          <SignInModal onClose={() => {
+            setIsSignInOpen(false);
+            setIsPopupOpen(false);
+          }} />
         )}
       </AnimatePresence>
     </>
