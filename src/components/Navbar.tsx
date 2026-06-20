@@ -7,7 +7,14 @@ import Link from 'next/link';
 import Image from 'next/image';
 import SignInModal from './SignInModal';
 
-const navLinks = [
+type NavLink = {
+  name: string;
+  href: string;
+  isPopup?: boolean;
+  popupType?: 'what-are-syns' | 'our-products';
+};
+
+const navLinks: NavLink[] = [
   { name: 'What Are Syns', href: '#', isPopup: true, popupType: 'what-are-syns' },
   { name: 'Our Products', href: '#', isPopup: true, popupType: 'our-products' },
   { name: 'For Streamers', href: '#streamers' },
