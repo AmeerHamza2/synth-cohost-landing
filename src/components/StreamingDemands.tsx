@@ -238,7 +238,7 @@ export default function StreamingDemands() {
 
               >
 
-                MEET SYNTH
+                MEET YOUR SYN
 
               </motion.span>
 

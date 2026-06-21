@@ -67,10 +67,17 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-[15px] text-[#5c5575] leading-[1.7] max-w-[380px] mb-9"
+            className="text-[15px] text-[#5c5575] leading-[1.7] max-w-[380px] mb-3"
           >
             Build intelligent Syns that engage audiences, drive product promotion, and unlock new revenue streams across livestreams and digital experiences.
+          </motion.p>
 
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.45 }}
+            className="text-[15px] text-[#5c5575] leading-[1.7] max-w-[380px] mb-9"
+          >
             Extend their presence beyond the broadcast with lightweight desktop companions that keep your Syns active and engaging long after the stream ends.
           </motion.p>
 

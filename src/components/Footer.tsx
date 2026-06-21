@@ -92,7 +92,7 @@ export default function Footer() {
               </span>
             </Link>
             <p className="text-[#a09bbf] text-[11px] lg:text-[12.5px] leading-relaxed max-w-xs">
-              The AI cohost that makes streaming better.
+           Digital companions for streams and desktops.
             </p>
           </div>
 
