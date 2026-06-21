@@ -69,8 +69,9 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="text-[15px] text-[#5c5575] leading-[1.7] max-w-[380px] mb-9"
           >
-            Synth Cohost is an AI cohost that talks with you, engages your audience, 
-            and helps your stream run smoother — so you can focus on what you love.
+            Build intelligent Syns that engage audiences, drive product promotion, and unlock new revenue streams across livestreams and digital experiences.
+
+            Extend their presence beyond the broadcast with lightweight desktop companions that keep your Syns active and engaging long after the stream ends.
           </motion.p>
 
           {/* Actions */}
@@ -85,22 +86,13 @@ export default function Hero() {
               whileTap={{ scale: 0.98 }}
               className="inline-flex items-center gap-2 bg-[#1a1628] text-white text-[13.5px] font-semibold px-6 py-3 rounded-lg transition-colors"
             >
-              See It In Action
+             Download Free Desktop Companion Demo
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                 <path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </motion.button>
             
-            <motion.button
-              whileHover={{ scale: 1.02, color: '#7c3aed' }}
-              whileTap={{ scale: 0.98 }}
-              className="inline-flex items-center gap-2 text-[#3d3654] text-[13.5px] font-medium px-1 py-3 transition-colors"
-            >
-              <span className="w-7 h-7 rounded-full border-[1.5px] border-[#3d3654] flex items-center justify-center">
-                <Play className="w-2.5 h-2.5 fill-[#3d3654]" />
-              </span>
-              Watch Demo
-            </motion.button>
+         
           </motion.div>
         </motion.div>
       </div>

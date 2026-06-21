@@ -38,13 +38,13 @@ export default function LivestreamShowcase() {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-[clamp(24px,3vw,42px)] font-extrabold leading-[1.1] tracking-[-1px] mb-4 lg:mb-6">
-              <span className="text-[#f5f3ff]">See Synth in action</span>
+              <span className="text-[#f5f3ff]">See Syns in action</span>
               <br />
               <span className="text-[#b58af7]">where it matters.</span>
             </h2>
 
             <p className="text-[14.5px] text-[#a09bbf] leading-[1.7] mb-8 max-w-md">
-          From chat to conversation to content—Synth is part of every moment.
+       From chat to conversation to content, Syns are part of every moment.
             </p>
 
              <a 
@@ -215,7 +215,7 @@ export default function LivestreamShowcase() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="w-fit p-6 bg-[#13111e] rounded-xl border border-[rgba(255,255,255,0.05)]"
             >
-              <h3 className="text-[13px] font-semibold text-[#f5f3ff] mb-4 tracking-[0.13em] uppercase">Synth Activity</h3>
+              <h3 className="text-[13px] font-semibold text-[#f5f3ff] mb-4 tracking-[0.13em] uppercase">Syn Activity</h3>
               <ul className="space-y-3 mb-6">
                 <li className="flex items-start gap-3">
                   <span className="font-mono text-[11px] text-[#7c3aed] mt-0.5">01:23</span>

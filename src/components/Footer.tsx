@@ -28,9 +28,9 @@ const footerLinks = {
 };
 
 const socialLinks = [
-  { 
-    name: 'X', 
-    href: '#', 
+  {
+    name: 'X',
+    href: 'https://X.com/synthcohost',
     color: '#ffffff',
     bgColor: 'rgba(255, 255, 255, 0.1)',
     icon: (
@@ -39,9 +39,9 @@ const socialLinks = [
       </svg>
     )
   },
-  { 
-    name: 'Instagram', 
-    href: '#', 
+  {
+    name: 'Instagram',
+    href: 'https://instagram.com/synthcohost',
     color: '#E1306C',
     bgColor: 'rgba(225, 48, 108, 0.1)',
     icon: (
@@ -50,9 +50,9 @@ const socialLinks = [
       </svg>
     )
   },
-  { 
-    name: 'Discord', 
-    href: '#', 
+  {
+    name: 'Discord',
+    href: 'https://discord.com/synthcohost',
     color: '#5865F2',
     bgColor: 'rgba(88, 101, 242, 0.1)',
     icon: (
@@ -61,9 +61,9 @@ const socialLinks = [
       </svg>
     )
   },
-  { 
-    name: 'YouTube', 
-    href: '#', 
+  {
+    name: 'YouTube',
+    href: 'https://www.youtube.com/@SynthCohost',
     color: '#FF0000',
     bgColor: 'rgba(255, 0, 0, 0.1)',
     icon: (

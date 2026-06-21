@@ -282,7 +282,7 @@ export default function StreamingDemands() {
 
               >
 
-                Synth listens, understands context, and participates naturally across your entire stream.
+                Syns listens, understands context, and participates naturally across your entire stream.
 
               </motion.p>
 

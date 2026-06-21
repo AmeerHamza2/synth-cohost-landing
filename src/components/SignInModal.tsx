@@ -35,9 +35,7 @@ const SignInModal: React.FC<Props> = ({ onClose }) => {
           />
         </div>
 
-        <p className="mt-3 text-center text-xl text-gray-300">
-          Let's get you into your Control Studio.
-        </p>
+   
 
         <div className="mt-6">
           <label className="mb-3 block text-lg font-semibold text-white">

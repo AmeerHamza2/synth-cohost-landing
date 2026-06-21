@@ -3,6 +3,7 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
 import Image from 'next/image';
+import { usePopup } from '../contexts/PopupContext';
 
 const roles = [
   {
@@ -33,6 +34,7 @@ const roles = [
 ];
 
 export default function RolesCarousel() {
+  const { openPopup } = usePopup();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -62,19 +64,20 @@ export default function RolesCarousel() {
               One personality. Many roles.
             </div>
             <h2 className="text-[26px] lg:text-[32px] font-extrabold text-[#f5f3ff] leading-[1.2] mb-4 tracking-[-0.5px]">
-              Synth adapts to your stream.
+              Syns adapts to your stream.
             </h2>
             <p className="text-[14px] text-[#a09bbf] leading-[1.6] mb-6 hidden lg:block">
-              Watch how Synth transforms across different roles—educator, moderator, interviewer—seamlessly adapting to match your stream's needs.
+   
+Watch how Syns transforms across different roles, from educator and moderator to interviewer, seamlessly adapting to your stream's needs.
             </p>
             <div className="flex flex-col gap-3">
-              <a 
-                href="#" 
+              <button
+                onClick={() => openPopup('what-are-syns')}
                 className="inline-flex items-center gap-2.5 text-[13px] font-semibold text-[#a09bbf] border-b border-[rgba(255,255,255,0.2)] pb-0.5 hover:text-white transition-colors w-fit"
               >
                 Learn more <span>▷</span>
-              </a>
-            
+              </button>
+
             </div>
           </div>
 

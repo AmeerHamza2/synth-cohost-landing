@@ -6,6 +6,7 @@ import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import SignInModal from './SignInModal';
+import { usePopup } from '../contexts/PopupContext';
 
 type NavLink = {
   name: string;
@@ -21,10 +22,9 @@ const navLinks: NavLink[] = [
 ];
 
 export default function Navbar() {
+  const { isPopupOpen, popupType, openPopup, closePopup } = usePopup();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [popupType, setPopupType] = useState<'what-are-syns' | 'our-products' | null>(null);
   const [isSignInOpen, setIsSignInOpen] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
@@ -80,8 +80,7 @@ export default function Navbar() {
               {link.isPopup ? (
                 <button
                   onClick={() => {
-                    setPopupType(link.popupType || null);
-                    setIsPopupOpen(true);
+                    openPopup(link.popupType || null);
                   }}
                   className="text-[13.5px] font-medium text-[#3d3654] hover:text-[#7c3aed] transition-colors cursor-pointer"
                 >
@@ -138,8 +137,7 @@ export default function Navbar() {
                   <button
                     key={link.name}
                     onClick={() => {
-                      setPopupType(link.popupType || null);
-                      setIsPopupOpen(true);
+                      openPopup(link.popupType || null);
                       setIsMobileMenuOpen(false);
                     }}
                     className="block text-lg font-medium text-[#3d3654] hover:text-[#7c3aed] transition-colors w-full text-left cursor-pointer"
@@ -176,7 +174,7 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
-            onClick={() => setIsPopupOpen(false)}
+            onClick={() => closePopup()}
           >
             <div className="flex items-center justify-center min-h-screen px-4">
               <motion.div
@@ -186,15 +184,15 @@ export default function Navbar() {
                 className="relative rounded-2xl p-8 w-[95vw] max-w-[1800px]"
                 onClick={(e) => {
                   e.stopPropagation();
-                  setIsPopupOpen(false);
+                  closePopup();
                 }}
               >
               <button
                 onClick={(e) => {
                   e.stopPropagation();
-                  setIsPopupOpen(false);
+                  closePopup();
                 }}
-                className={`absolute top-4 text-gray-400 hover:text-gray-600 transition-colors z-10 ${popupType === 'our-products' ? 'right-36' : 'right-8'}`}
+                className={`absolute top-8 text-gray-400 hover:text-gray-600 transition-colors z-10 ${popupType === 'our-products' ? 'right-26' : 'right-8'}`}
               >
                 <X className="w-6 h-6" />
               </button>
@@ -239,7 +237,7 @@ export default function Navbar() {
         {isSignInOpen && (
           <SignInModal onClose={() => {
             setIsSignInOpen(false);
-            setIsPopupOpen(false);
+            closePopup();
           }} />
         )}
       </AnimatePresence>

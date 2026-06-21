@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { PopupProvider } from "../contexts/PopupContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,7 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Synth Cohost | AI Cohost for Live Streamers",
-  description: "Synth Cohost is an AI cohost that talks with you, engages your audience, and helps your stream run smoother—so you can focus on what you love.",
+  description: "Build intelligent Syns that engage audiences, drive product promotion, and unlock new revenue streams across livestreams and digital experiences. Extend their presence beyond the broadcast with lightweight desktop companions that keep your Syns active and engaging long after the stream ends.",
   keywords: ["AI", "streaming", "cohost", "live stream", "Twitch", "YouTube", "content creator"],
   authors: [{ name: "Synth Cohost" }],
   openGraph: {
@@ -34,7 +35,9 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <PopupProvider>{children}</PopupProvider>
+      </body>
     </html>
   );
 }

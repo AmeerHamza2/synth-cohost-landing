@@ -33,17 +33,12 @@ export default function KnowledgeHero() {
               Your knowledge. Her knowledge.
             </div>
             <h2 className="text-[22px] lg:text-[26px] font-medium text-[#f5f3ff] leading-[1.3] mb-4 lg:mb-6">
-              Teach Synth what matters.
+          Teach your Syn what matters.
             </h2>
             <p className="text-[13px] text-[#a09bbf] leading-[1.5] mb-6 hidden lg:block">
-              Upload your docs, notes, and resources. Synth turns them into real-time intel.
+            Upload your docs, notes, and resources. Your Syn turns them into real-time intelligence.
             </p>
-         <a 
-                href="#" 
-                className="inline-flex items-center gap-2.5 text-[13px] font-semibold text-[#a09bbf] border-b border-[rgba(255,255,255,0.2)] pb-0.5 hover:text-white transition-colors w-fit"
-              >
-                Learn more <span>▷</span>
-              </a>
+   
           </div>
 
           {/* Right Image */}
