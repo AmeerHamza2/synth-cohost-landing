@@ -2,26 +2,17 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const footerLinks = {
-  Product: [
-    { name: 'Features', href: '#features' },
-    { name: 'Pricing', href: '#pricing' },
-    { name: 'Integrations', href: '#' },
-    { name: 'Roadmap', href: '#' },
-  ],
-  'For Streamers': [
-    { name: 'Use Cases', href: '#' },
-    { name: 'Resources', href: '#' },
-    { name: 'Help Center', href: '#' },
-  ],
-  Company: [
+  main: [
+    { name: 'What are Syns?', href: '#' },
+    { name: 'Products', href: '#' },
+    { name: 'Download', href: '#' },
     { name: 'About', href: '#about' },
-    { name: 'Careers', href: '#' },
-    { name: 'Contact', href: '#' },
-    { name: 'Press Kit', href: '#' },
+    { name: 'Contact', href: 'mailto:creator@synthcohost.com' },
   ],
-  Legal: [
+  legal: [
     { name: 'Privacy Policy', href: '#' },
     { name: 'Terms of Service', href: '#' },
   ],
@@ -78,42 +69,71 @@ export default function Footer() {
   return (
     <footer className="relative bg-[#0d0b14] pt-12 lg:pt-16 pb-8 overflow-hidden border-t border-[rgba(255,255,255,0.05)]">
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-20">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 lg:gap-10 mb-10 lg:mb-14">
-          {/* Logo Column */}
-          <div className="col-span-2 md:col-span-1">
-            <Link href="/" className="flex items-center gap-2 mb-4 lg:mb-5">
-              <svg className="w-6 h-6 lg:w-7 lg:h-7" viewBox="0 0 28 28" fill="none">
-                <path d="M14 2L26 8.5V19.5L14 26L2 19.5V8.5L14 2Z" fill="#7c3aed" opacity="0.15"/>
-                <path d="M14 6l8 4.5v9L14 24l-8-4.5v-9L14 6z" fill="#7c3aed" opacity="0.35"/>
-                <path d="M14 10l4 2.25v4.5L14 19l-4-2.25v-4.5L14 10z" fill="#7c3aed"/>
-              </svg>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-10">
+          {/* Logo Column - Left */}
+          <div>
+            <Link href="/" className="flex items-center gap-2 mb-3">
+              <Image
+                src="/Cohost Synth logo.png"
+                alt="Synth Cohost"
+                width={120}
+                height={40}
+                className="w-auto h-7 lg:h-8"
+              />
               <span className="text-[12px] lg:text-[13px] font-extrabold tracking-[-0.3px] text-[#f5f3ff] leading-[1.1]">
                 SYNTH<span className="block font-normal">COHOST</span>
               </span>
             </Link>
             <p className="text-[#a09bbf] text-[11px] lg:text-[12.5px] leading-relaxed max-w-xs">
-           Digital companions for streams and desktops.
+              Digital companions for streams and desktops.
             </p>
           </div>
 
-          {/* Link Columns */}
-          {Object.entries(footerLinks).map(([category, links]) => (
-            <div key={category}>
-              <h4 className="text-[#f5f3ff] font-semibold mb-3 lg:mb-4 text-[11px] lg:text-[12px]">{category}</h4>
-              <ul className="space-y-2 lg:space-y-2.5">
-                {links.map((link) => (
-                  <li key={link.name}>
-                    <Link
-                      href={link.href}
-                      className="text-[#a09bbf] text-[11px] lg:text-[12px] hover:text-[#7c3aed] transition-colors"
-                    >
-                      {link.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+          {/* Links Column - Right */}
+          <div className="flex flex-col justify-center">
+            {/* Tagline */}
+            <div className="mb-6">
+              <p className="text-[#f5f3ff] font-semibold text-sm lg:text-base tracking-wide">
+                FOR CREATORS. FOR BRANDS. FOR EVERY COMMUNITY.
+              </p>
             </div>
-          ))}
+
+            {/* Main Links */}
+            <div className="flex flex-wrap gap-4 lg:gap-6 mb-6">
+              {footerLinks.main.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className="text-[#a09bbf] text-sm lg:text-base hover:text-[#7c3aed] transition-colors"
+                >
+                  {link.name}
+                </Link>
+              ))}
+            </div>
+
+            {/* Legal Links */}
+            <div className="flex flex-wrap gap-4 lg:gap-6 mb-6">
+              {footerLinks.legal.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className="text-[#a09bbf] text-sm lg:text-base hover:text-[#7c3aed] transition-colors"
+                >
+                  {link.name}
+                </Link>
+              ))}
+            </div>
+
+            {/* Email */}
+            <div>
+              <a
+                href="mailto:creator@synthcohost.com"
+                className="text-[#7c3aed] text-sm lg:text-base hover:text-[#a09bbf] transition-colors"
+              >
+                creator@synthcohost.com
+              </a>
+            </div>
+          </div>
         </div>
 
         {/* Divider */}

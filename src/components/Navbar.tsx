@@ -63,11 +63,13 @@ export default function Navbar() {
       >
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
-          <svg className="w-7 h-7" viewBox="0 0 28 28" fill="none">
-            <path d="M14 2L26 8.5V19.5L14 26L2 19.5V8.5L14 2Z" fill="#7c3aed" opacity="0.15"/>
-            <path d="M14 6l8 4.5v9L14 24l-8-4.5v-9L14 6z" fill="#7c3aed" opacity="0.35"/>
-            <path d="M14 10l4 2.25v4.5L14 19l-4-2.25v-4.5L14 10z" fill="#7c3aed"/>
-          </svg>
+          <Image
+            src="/Cohost Synth logo.png"
+            alt="Synth Cohost"
+            width={120}
+            height={40}
+            className="w-auto h-8"
+          />
           <span className="text-[13px] font-extrabold tracking-[-0.3px] text-[#1a1628] leading-[1.1]">
             SYNTH<span className="block font-normal">COHOST</span>
           </span>

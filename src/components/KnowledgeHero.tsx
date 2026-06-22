@@ -1,12 +1,14 @@
 'use client';
 
-import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { useRef, useState } from 'react';
 import Image from 'next/image';
+import SignInModal from './SignInModal';
 
 export default function KnowledgeHero() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const [isSignInOpen, setIsSignInOpen] = useState(false);
 
   return (
     <section
@@ -30,7 +32,7 @@ export default function KnowledgeHero() {
           {/* Left Content */}
           <div className="w-full lg:w-auto flex-shrink-0 text-center lg:text-left">
             <div className="text-[10px] tracking-[0.13em] text-[#a09bbf] uppercase mb-2.5">
-              Your knowledge. Her knowledge.
+        YOUR KNOWLEDGE. SYN KNOWLEDGE.
             </div>
             <h2 className="text-[22px] lg:text-[26px] font-medium text-[#f5f3ff] leading-[1.3] mb-4 lg:mb-6">
           Teach your Syn what matters.
@@ -42,7 +44,7 @@ export default function KnowledgeHero() {
           </div>
 
           {/* Right Image */}
-          <div className="w-full lg:flex-1 min-w-0 bg-[#1a0b2e] relative">
+          <button onClick={() => setIsSignInOpen(true)} className="w-full lg:flex-1 min-w-0 bg-[#1a0b2e] relative group cursor-pointer hover:shadow-[0_0_25px_rgba(168,85,247,0.5)] transition-shadow duration-300 border-0 p-0">
             <Image
               src="/BK3.png"
               alt="Documents and files"
@@ -59,9 +61,16 @@ export default function KnowledgeHero() {
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[96%] h-auto object-contain"
               priority
             />
-          </div>
+          </button>
         </motion.div>
       </div>
+
+      {/* Sign In Modal */}
+      <AnimatePresence>
+        {isSignInOpen && (
+          <SignInModal onClose={() => setIsSignInOpen(false)} />
+        )}
+      </AnimatePresence>
     </section>
   );
 }
