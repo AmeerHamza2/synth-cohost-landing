@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 const chatMessages = [
   { user: 'StreamFan42', message: "Let's gooo! Great stream!", isAI: false },
@@ -15,7 +15,33 @@ const chatMessages = [
 
 export default function LivestreamShowcase() {
   const ref = useRef(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const [isPlaying, setIsPlaying] = useState(true);
+
+  const toggleVideo = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
+  const ensureVideoPlays = () => {
+    if (videoRef.current && videoRef.current.paused) {
+      videoRef.current.play().catch(err => console.log('Autoplay blocked:', err));
+      setIsPlaying(true);
+    }
+  };
+
+  useEffect(() => {
+    if (isInView) {
+      setTimeout(ensureVideoPlays, 100);
+    }
+  }, [isInView]);
 
   return (
     <section 
@@ -47,12 +73,12 @@ export default function LivestreamShowcase() {
        From chat to conversation to content, Syns are part of every moment.
             </p>
 
-             <a 
-                href="#" 
-                className="inline-flex items-center gap-2.5 text-[13px] font-semibold text-[#a09bbf] border-b border-[rgba(255,255,255,0.2)] pb-0.5 hover:text-white transition-colors w-fit"
+             <button 
+                onClick={toggleVideo}
+                className="inline-flex items-center gap-2.5 text-[13px] font-semibold text-[#a09bbf] border-b border-[rgba(255,255,255,0.2)] pb-0.5 hover:text-white transition-colors w-fit border-0 bg-transparent cursor-pointer p-0"
               >
-                Watch  Demo <span>▷</span>
-              </a>
+                {isPlaying ? 'Pause Demo' : 'Watch Demo'} <span>{isPlaying ? '⏸' : '▷'}</span>
+              </button>
           </motion.div>
 
           {/* Right Content - Livestream Dashboard Preview */}
@@ -69,6 +95,7 @@ export default function LivestreamShowcase() {
                 {/* Stream image content */}
                 <div className="absolute inset-0 overflow-hidden">
                   <video
+                    ref={videoRef}
                     src="/WhatsApp3.mp4"
                     autoPlay
                     loop

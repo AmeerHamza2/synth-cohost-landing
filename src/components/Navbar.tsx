@@ -102,17 +102,17 @@ export default function Navbar() {
 
         {/* CTA Button */}
         <div className="hidden md:block">
-          <motion.a
-            href="#"
+          <motion.button
+            onClick={() => setIsSignInOpen(true)}
             whileHover={{ scale: 1.02, backgroundColor: '#7c3aed' }}
             whileTap={{ scale: 0.98 }}
-            className="inline-flex items-center gap-2 bg-[#1a1628] text-white text-[13.5px] font-semibold px-5 py-2.5 rounded-lg transition-colors"
+            className="inline-flex items-center gap-2 bg-[#1a1628] text-white text-[13.5px] font-semibold px-5 py-2.5 rounded-lg transition-colors border-0 cursor-pointer"
           >
             Get Started
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
               <path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
-          </motion.a>
+          </motion.button>
         </div>
 
         {/* Mobile Menu Button */}
@@ -157,12 +157,15 @@ export default function Navbar() {
                   </Link>
                 )
               ))}
-              <a
-                href="#"
-                className="block w-full mt-4 px-6 py-3 bg-[#1a1628] text-white text-sm font-semibold rounded-lg text-center hover:bg-[#7c3aed] transition-colors"
+              <button
+                onClick={() => {
+                  setIsSignInOpen(true);
+                  setIsMobileMenuOpen(false);
+                }}
+                className="block w-full mt-4 px-6 py-3 bg-[#1a1628] text-white text-sm font-semibold rounded-lg text-center hover:bg-[#7c3aed] transition-colors border-0 cursor-pointer"
               >
                 Get Started
-              </a>
+              </button>
             </div>
           </motion.div>
         )}

@@ -1,14 +1,17 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePopup } from '../contexts/PopupContext';
+import { useState } from 'react';
+import SignInModal from './SignInModal';
 
 const footerLinks = {
   main: [
-    { name: 'What are Syns?', href: '#' },
-    { name: 'Products', href: '#' },
-    { name: 'Download', href: '#' },
+    { name: 'What are Syns?', href: '#', isPopup: true, popupType: 'what-are-syns' },
+    { name: 'Products', href: '#', isPopup: true, popupType: 'our-products' },
+    { name: 'Download', href: '#', isSignIn: true },
     { name: 'About', href: '#about' },
     { name: 'Contact', href: 'mailto:creator@synthcohost.com' },
   ],
@@ -66,6 +69,9 @@ const socialLinks = [
 ];
 
 export default function Footer() {
+  const { openPopup } = usePopup();
+  const [isSignInOpen, setIsSignInOpen] = useState(false);
+
   return (
     <footer className="relative bg-[#0d0b14] pt-12 lg:pt-16 pb-8 overflow-hidden border-t border-[rgba(255,255,255,0.05)]">
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-20">
@@ -101,13 +107,31 @@ export default function Footer() {
             {/* Main Links */}
             <div className="flex flex-wrap gap-4 lg:gap-6 mb-6">
               {footerLinks.main.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className="text-[#a09bbf] text-sm lg:text-base hover:text-[#7c3aed] transition-colors"
-                >
-                  {link.name}
-                </Link>
+                (link as any).isPopup ? (
+                  <button
+                    key={link.name}
+                    onClick={() => openPopup((link as any).popupType || null)}
+                    className="text-[#a09bbf] text-sm lg:text-base hover:text-[#7c3aed] transition-colors cursor-pointer border-0 bg-transparent p-0"
+                  >
+                    {link.name}
+                  </button>
+                ) : (link as any).isSignIn ? (
+                  <button
+                    key={link.name}
+                    onClick={() => setIsSignInOpen(true)}
+                    className="text-[#a09bbf] text-sm lg:text-base hover:text-[#7c3aed] transition-colors cursor-pointer border-0 bg-transparent p-0"
+                  >
+                    {link.name}
+                  </button>
+                ) : (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    className="text-[#a09bbf] text-sm lg:text-base hover:text-[#7c3aed] transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                )
               ))}
             </div>
 
@@ -176,6 +200,13 @@ export default function Footer() {
           </div>
         </div>
       </div>
+
+      {/* Sign In Modal */}
+      <AnimatePresence>
+        {isSignInOpen && (
+          <SignInModal onClose={() => setIsSignInOpen(false)} />
+        )}
+      </AnimatePresence>
     </footer>
   );
 }

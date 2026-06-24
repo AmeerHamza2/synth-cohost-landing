@@ -68,7 +68,7 @@ export default function RolesCarousel() {
             </h2>
             <p className="text-[14px] text-[#a09bbf] leading-[1.6] mb-6 hidden lg:block">
    
-Watch how Syns transforms across different roles, from educator and moderator to interviewer, seamlessly adapting to your stream's needs.
+ Learn how… Syns transforms across different roles, from educator and moderator to interviewer, seamlessly adapting to your stream's needs.
             </p>
             <div className="flex flex-col gap-3">
               <button

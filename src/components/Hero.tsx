@@ -1,10 +1,14 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Play } from 'lucide-react';
 import Image from 'next/image';
+import { useState } from 'react';
+import SignInModal from './SignInModal';
 
 export default function Hero() {
+  const [isSignInOpen, setIsSignInOpen] = useState(false);
+
   return (
     <section data-section="01" className="relative min-h-[60vh] overflow-hidden">
       {/* Full Width Character Image */}
@@ -89,9 +93,10 @@ export default function Hero() {
             className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4"
           >
             <motion.button
+              onClick={() => setIsSignInOpen(true)}
               whileHover={{ scale: 1.02, backgroundColor: '#7c3aed' }}
               whileTap={{ scale: 0.98 }}
-              className="inline-flex items-center gap-2 bg-[#1a1628] text-white text-[13.5px] font-semibold px-6 py-3 rounded-lg transition-colors"
+              className="inline-flex items-center gap-2 bg-[#1a1628] text-white text-[13.5px] font-semibold px-6 py-3 rounded-lg transition-colors border-0 cursor-pointer"
             >
              Download Free Desktop Companion Demo
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -137,6 +142,13 @@ export default function Hero() {
 
       {/* Bottom line separator */}
       <div className="absolute bottom-0 left-0 right-0 h-px bg-[#0d0b14]" />
+
+      {/* Sign In Modal */}
+      <AnimatePresence>
+        {isSignInOpen && (
+          <SignInModal onClose={() => setIsSignInOpen(false)} />
+        )}
+      </AnimatePresence>
     </section>
   );
 }
