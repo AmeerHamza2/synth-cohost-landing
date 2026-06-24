@@ -208,27 +208,40 @@ export default function Navbar() {
                 onMouseEnter={() => setIsHovering(true)}
                 onMouseLeave={() => setIsHovering(false)}
               >
-                <Image
-                  src={popupType === 'our-products' ? '/Our Products Tab. (1).png' : '/cdc.png'}
-                  alt={popupType === 'our-products' ? 'Our Products' : 'What Are Syns'}
-                  width={1800}
-                  height={900}
-                  className="w-full max-h-[550px] object-contain border-0 cursor-pointer"
-                  unoptimized
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setIsSignInOpen(true);
-                  }}
-                />
-                {/* Focused spotlight on character area */}
-                {isHovering && popupType === 'what-are-syns' && (
-                  <div
-                    className="absolute inset-0 pointer-events-none"
-                    style={{
-                      background: `radial-gradient(circle 60px at ${mousePosition.x}% ${mousePosition.y}%, rgba(255, 255, 255, 0.8) 0%, rgba(124, 58, 237, 0.6) 30%, transparent 60%)`,
-                      mixBlendMode: 'screen',
-                    }}
-                  />
+                {popupType === 'video-demo' ? (
+                  <div className="w-full max-w-4xl">
+                    <video
+                      src="/Synth Cohost's AI Avatars That Stream With You.mp4"
+                      autoPlay
+                      controls
+                      className="w-full rounded-2xl shadow-2xl bg-black"
+                    />
+                  </div>
+                ) : (
+                  <>
+                    <Image
+                      src={popupType === 'our-products' ? '/Our Products Tab. (1).png' : '/cdc.png'}
+                      alt={popupType === 'our-products' ? 'Our Products' : 'What Are Syns'}
+                      width={1800}
+                      height={900}
+                      className="w-full max-h-[550px] object-contain border-0 cursor-pointer"
+                      unoptimized
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setIsSignInOpen(true);
+                      }}
+                    />
+                    {/* Focused spotlight on character area */}
+                    {isHovering && popupType === 'what-are-syns' && (
+                      <div
+                        className="absolute inset-0 pointer-events-none"
+                        style={{
+                          background: `radial-gradient(circle 60px at ${mousePosition.x}% ${mousePosition.y}%, rgba(255, 255, 255, 0.8) 0%, rgba(124, 58, 237, 0.6) 30%, transparent 60%)`,
+                          mixBlendMode: 'screen',
+                        }}
+                      />
+                    )}
+                  </>
                 )}
               </div>
               </motion.div>

@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, ReactNode } from 'react';
 
-type PopupType = 'what-are-syns' | 'our-products' | null;
+type PopupType = 'what-are-syns' | 'our-products' | 'video-demo' | null;
 
 interface PopupContextType {
   isPopupOpen: boolean;
