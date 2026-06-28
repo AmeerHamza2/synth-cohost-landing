@@ -125,7 +125,7 @@ export default function Hero() {
       </div>
 
       {/* Desktop Layout */}
-      <div className="hidden md:block relative z-10 max-w-7xl mx-auto px-6 lg:px-20 pt-32 pb-16 min-h-screen flex items-center">
+      <div className="hidden md:block relative z-10 w-full px-6 lg:px-12 pt-32 pb-16 min-h-screen flex items-center">
         {/* Full Width Character Image - Desktop */}
         <motion.div
           initial={{ opacity: 0, scale: 1.02 }}
@@ -143,7 +143,7 @@ export default function Hero() {
           />
         </motion.div>
         {/* Section Number - Left Side - Hidden on mobile */}
-        <div className="hidden md:flex absolute left-6 lg:left-10 top-1/2 -translate-y-1/2 flex-col items-center gap-2 z-20">
+        <div className="hidden md:flex absolute left-6 lg:left-12 top-1/2 -translate-y-1/2 flex-col items-center gap-2 z-20">
           <span className="text-[11px] font-bold text-[#7c3aed]">01</span>
           <span className="w-4 h-[2px] bg-[#7c3aed]" />
         </div>
@@ -152,7 +152,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="max-w-lg ml-8 lg:ml-0 relative z-20"
+          className="max-w-lg relative z-20"
         >
           {/* Eyebrow */}
           <motion.div
