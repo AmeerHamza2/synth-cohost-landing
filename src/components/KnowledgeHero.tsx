@@ -46,11 +46,19 @@ export default function KnowledgeHero() {
           {/* Right Image */}
           <button onClick={() => setIsSignInOpen(true)} className="w-full lg:flex-1 min-w-0 bg-[#1a0b2e] relative group cursor-pointer hover:shadow-[0_0_25px_rgba(168,85,247,0.5)] transition-shadow duration-300 border-0 p-0">
             <Image
+              src="/fvv.png"
+              alt="Documents and files"
+              width={1200}
+              height={500}
+              className="w-full h-auto md:hidden"
+              priority
+            />
+            <Image
               src="/BK3.png"
               alt="Documents and files"
               width={1200}
               height={500}
-              className="w-full h-auto"
+              className="w-full h-auto hidden md:block"
               priority
             />
             <Image
@@ -58,7 +66,7 @@ export default function KnowledgeHero() {
               alt="Overlay"
               width={1200}
               height={500}
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[96%] h-auto object-contain"
+              className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[96%] h-auto object-contain"
               priority
             />
           </button>

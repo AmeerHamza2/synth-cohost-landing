@@ -6,6 +6,7 @@ import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import SignInModal from './SignInModal';
+import LoginModal from './LoginModal';
 import { usePopup } from '../contexts/PopupContext';
 
 type NavLink = {
@@ -26,6 +27,7 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSignInOpen, setIsSignInOpen] = useState(false);
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
 
@@ -100,8 +102,16 @@ export default function Navbar() {
           ))}
         </ul>
 
-        {/* CTA Button */}
-        <div className="hidden md:block">
+        {/* CTA Buttons */}
+        <div className="hidden md:flex items-center gap-3">
+          <motion.button
+            onClick={() => setIsLoginOpen(true)}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="inline-flex items-center gap-2 bg-transparent border border-[#1a1628] text-[#1a1628] text-[13.5px] font-semibold px-5 py-2.5 rounded-lg transition-colors cursor-pointer hover:bg-[#1a1628]/5"
+          >
+            Log In
+          </motion.button>
           <motion.button
             onClick={() => setIsSignInOpen(true)}
             whileHover={{ scale: 1.02, backgroundColor: '#7c3aed' }}
@@ -159,10 +169,19 @@ export default function Navbar() {
               ))}
               <button
                 onClick={() => {
+                  setIsLoginOpen(true);
+                  setIsMobileMenuOpen(false);
+                }}
+                className="block w-full mt-4 px-6 py-3 bg-transparent border border-[#1a1628] text-[#1a1628] text-sm font-semibold rounded-lg text-center hover:bg-[#1a1628]/5 transition-colors cursor-pointer"
+              >
+                Log In
+              </button>
+              <button
+                onClick={() => {
                   setIsSignInOpen(true);
                   setIsMobileMenuOpen(false);
                 }}
-                className="block w-full mt-4 px-6 py-3 bg-[#1a1628] text-white text-sm font-semibold rounded-lg text-center hover:bg-[#7c3aed] transition-colors border-0 cursor-pointer"
+                className="block w-full mt-2 px-6 py-3 bg-[#1a1628] text-white text-sm font-semibold rounded-lg text-center hover:bg-[#7c3aed] transition-colors border-0 cursor-pointer"
               >
                 Get Started
               </button>
@@ -257,6 +276,13 @@ export default function Navbar() {
             setIsSignInOpen(false);
             closePopup();
           }} />
+        )}
+      </AnimatePresence>
+
+      {/* Login Modal */}
+      <AnimatePresence>
+        {isLoginOpen && (
+          <LoginModal onClose={() => setIsLoginOpen(false)} />
         )}
       </AnimatePresence>
     </>

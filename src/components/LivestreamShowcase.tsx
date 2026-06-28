@@ -216,7 +216,7 @@ Syn Is Live
               initial={{ opacity: 0, x: 40 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 40 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="w-fit p-6 bg-[#13111e] rounded-xl border border-[rgba(255,255,255,0.05)]"
+              className="hidden lg:block w-fit p-6 bg-[#13111e] rounded-xl border border-[rgba(255,255,255,0.05)]"
             >
               <h3 className="text-[13px] font-semibold text-[#f5f3ff] mb-4 tracking-[0.13em] uppercase">Syn Activity</h3>
               <ul className="space-y-3 mb-6">

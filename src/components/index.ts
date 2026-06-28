@@ -9,3 +9,5 @@ export { default as KnowledgeHero } from './KnowledgeHero';
 export { default as KnowledgeUpload } from './KnowledgeUpload';
 export { default as FinalCTA } from './FinalCTA';
 export { default as Footer } from './Footer';
+export { default as LoginModal } from './LoginModal';
+export { default as SignInModal } from './SignInModal';

@@ -15,7 +15,48 @@ export default function FinalCTA() {
       </div>
 
       <div className="py-4 lg:py-6 px-0">
-        <div className="relative w-full">
+        {/* Mobile Layout - Text first, then image */}
+        <div className="md:hidden flex flex-col">
+          {/* Text Content */}
+          <div className="p-6 flex flex-col gap-6">
+            <h2 className="text-[clamp(24px,3.5vw,52px)] font-extrabold leading-[1.1] tracking-[-1px] text-[#f5f3ff]">
+              <span>The next generation</span>
+              <br />
+              <span>of creators won&apos;t</span>
+              <br />
+              <span>stream </span>
+              <span className="text-[#b58af7]">alone.</span>
+            </h2>
+
+            <div className="flex flex-col items-start gap-4">
+              <p className="text-[16px] font-medium text-[#f5f3ff]">
+                They will stream<br />
+                alongside intelligence.
+              </p>
+              <a 
+                href="#" 
+                className="inline-flex items-center gap-2.5 text-[13px] font-semibold text-white bg-[#7c3aed] px-5 py-2.5 rounded-full hover:bg-[#6d28d9] transition-colors w-fit"
+              >
+                Meet Your Cohost <span>→</span>
+              </a>
+            </div>
+          </div>
+
+          {/* Image */}
+          <div className="relative w-full">
+            <Image
+              src="/background_lossless.webp"
+              alt="Meet Your Cohost"
+              width={1200}
+              height={600}
+              className="w-full h-auto"
+              unoptimized
+            />
+          </div>
+        </div>
+
+        {/* Desktop Layout - Image with text overlay */}
+        <div className="hidden md:block relative w-full">
           <Image
             src="/background_lossless.webp"
             alt="Meet Your Cohost"

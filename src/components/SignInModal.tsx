@@ -15,13 +15,13 @@ interface Props {
 
 const SignInModal: React.FC<Props> = ({ onClose }) => {
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 p-4" onClick={onClose}>
-      <div className="relative w-full max-w-[500px] rounded-2xl border border-purple-500/40 bg-[#050016] p-6 shadow-2xl" onClick={(e) => e.stopPropagation()}>
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 p-3 sm:p-4" onClick={onClose}>
+      <div className="relative w-full max-w-[500px] rounded-2xl border border-purple-500/40 bg-[#050016] p-4 sm:p-6 shadow-2xl max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
 
         {/* Close */}
         <button
           onClick={onClose}
-          className="absolute right-4 top-4 text-purple-400 hover:text-purple-300"
+          className="absolute right-3 sm:right-4 top-3 sm:top-4 text-purple-400 hover:text-purple-300 text-lg sm:text-base"
         >
           ✕
         </button>
@@ -31,28 +31,31 @@ const SignInModal: React.FC<Props> = ({ onClose }) => {
           <img
             src="/cohost_synth_logo_extracted.png"
             alt="cohost synth"
-            className="h-20 object-contain"
+            className="h-14 sm:h-20 object-contain"
           />
         </div>
 
    
 
-        <div className="mt-6">
-          <label className="mb-3 block text-lg font-semibold text-white">
+        <div className="mt-4 sm:mt-6">
+          <label className="mb-2 sm:mb-3 block text-base sm:text-lg font-semibold text-white">
             What shall we call you?
           </label>
 
           <input
             placeholder=""
             className="
-              h-12
+              h-11
+              sm:h-12
               w-full
               rounded-xl
               border
               border-purple-500
               bg-transparent
-              px-4
-              text-base
+              px-3
+              sm:px-4
+              text-sm
+              sm:text-base
               text-white
               outline-none
               focus:ring-2
@@ -60,16 +63,16 @@ const SignInModal: React.FC<Props> = ({ onClose }) => {
             "
           />
 
-          <p className="mt-2 text-sm text-purple-400">
+          <p className="mt-1.5 sm:mt-2 text-xs sm:text-sm text-purple-400">
             Nicknames are welcome.
           </p>
         </div>
 
-        <h3 className="mt-6 text-lg font-semibold text-white">
+        <h3 className="mt-4 sm:mt-6 text-base sm:text-lg font-semibold text-white">
           Continue with your email provider
         </h3>
 
-        <div className="mt-4 grid grid-cols-2 gap-3">
+        <div className="mt-3 sm:mt-4 grid grid-cols-2 gap-2 sm:gap-3">
           <ProviderButton
             icon={
               <svg viewBox="0 0 48 48" width="24" height="24">
@@ -109,7 +112,7 @@ const SignInModal: React.FC<Props> = ({ onClose }) => {
           />
         </div>
 
-        <p className="mt-6 text-center text-sm text-gray-400 leading-relaxed">
+        <p className="mt-4 sm:mt-6 text-center text-xs sm:text-sm text-gray-400 leading-relaxed">
           By continuing, you agree to our{" "}
           <span className="text-purple-400">
             Terms of Service
@@ -142,20 +145,23 @@ function ProviderButton({
       className="
         flex
         items-center
-        gap-3
+        gap-2
+        sm:gap-3
         rounded-xl
         border
         border-white/10
         bg-[#0b0822]
-        px-4
-        py-3
+        px-3
+        sm:px-4
+        py-2.5
+        sm:py-3
         text-white
         transition
         hover:border-purple-500
       "
     >
-      <span className="text-2xl" style={color ? { color } : undefined}>{icon}</span>
-      <span className="text-base font-medium">
+      <span className="text-xl sm:text-2xl" style={color ? { color } : undefined}>{icon}</span>
+      <span className="text-sm sm:text-base font-medium">
         {label}
       </span>
     </button>

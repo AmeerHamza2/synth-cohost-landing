@@ -5,33 +5,145 @@ import { Play } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
 import SignInModal from './SignInModal';
+import { usePopup } from '../contexts/PopupContext';
 
 export default function Hero() {
   const [isSignInOpen, setIsSignInOpen] = useState(false);
+  const { openPopup } = usePopup();
 
+ 
   return (
     <section data-section="01" className="relative min-h-[60vh] overflow-hidden">
-      {/* Full Width Character Image */}
-      <motion.div
-        initial={{ opacity: 0, scale: 1.02 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1, ease: 'easeOut' }}
-        className="absolute inset-0"
-      >
-        <Image
-          src="/synth_character_lossless.webp"
-          alt="Synth AI Cohost"
-          fill
-          className="object-cover object-top"
-          priority
-          unoptimized
-        />
-      </motion.div>
+      {/* Mobile Layout */}
+      <div className="md:hidden relative z-10 px-6 pt-24 pb-16 min-h-screen bg-[#0d0b14]">
+        <div className="grid grid-cols-2 gap-4 items-center">
+          {/* Text Content - Left */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
+            className="col-span-1"
+          >
+            {/* Eyebrow */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="flex items-center gap-2 mb-4"
+            >
+              <span className="text-[10px] font-semibold tracking-[1.8px] uppercase text-[#7c3aed]">
+                AI Cohost for Live Streamers
+              </span>
+            </motion.div>
 
-      {/* Left Content Overlay */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-20 pt-32 pb-16 min-h-screen flex items-center">
+            {/* Headline */}
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="text-[24px] font-medium text-white leading-[1.1] tracking-[-1px] mb-3"
+            >
+              Your stream.
+              <br />
+              Stronger <span className="text-[#7c3aed]">together</span><span className="text-[#7c3aed]">.</span>
+            </motion.h1>
+
+            {/* Body */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="text-[12px] text-[#5c5575] leading-[1.6] mb-2"
+            >
+              Build intelligent Syns that engage audiences, drive product promotion, and unlock new revenue streams across livestreams and digital experiences.
+            </motion.p>
+
+         
+            
+
+            {/* Actions */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="flex flex-col gap-2"
+            >
+            
+            </motion.div>
+          </motion.div>
+
+          {/* Image - Right */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
+            className="col-span-1 relative h-[280px] flex flex-col items-center justify-end"
+          >
+            <Image
+              src="/cdcdc.png"
+              alt="Synth AI Cohost"
+              fill
+              className="object-contain object-top"
+              priority
+              unoptimized
+            />
+            <motion.button
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              onClick={() => setIsSignInOpen(true)}
+              whileHover={{ scale: 1.02, backgroundColor: '#9d4edd' }}
+              whileTap={{ scale: 0.98 }}
+              className="absolute bottom-11 left-1/2 -translate-x-1/2 z-10 inline-flex items-center justify-center gap-2 bg-[#7c3aed] text-white text-[10px] font-semibold px-6 py-2 rounded-lg transition-colors border-0 cursor-pointer w-[90%]"
+            >
+             See it in Action
+              <svg width="10" height="10" viewBox="0 0 14 14" fill="none">
+                <path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              
+            </motion.button>
+              <button
+                onClick={() => openPopup('video-demo')}
+                className="inline-flex items-center gap-2.5 text-[13px] font-semibold text-[#a09bbf] border-b border-[rgba(255,255,255,0.2)] pb-0.5 hover:text-white transition-colors w-fit cursor-pointer bg-transparent"
+              >
+                Watch  Demo <span>▷</span>
+              </button>
+              {/* Mobile Scroll Hint */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 1 }}
+                className="text-[10px] tracking-[2.5px] uppercase text-[#9d99b5] mt-3 text-center"
+              >
+                Scroll to discover
+              </motion.div>
+          </motion.div>
+        </div>
+
+        {/* Scroll Hint */}
+       
+      </div>
+
+      {/* Desktop Layout */}
+      <div className="hidden md:block relative z-10 max-w-7xl mx-auto px-6 lg:px-20 pt-32 pb-16 min-h-screen flex items-center">
+        {/* Full Width Character Image - Desktop */}
+        <motion.div
+          initial={{ opacity: 0, scale: 1.02 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, ease: 'easeOut' }}
+          className="absolute inset-0"
+        >
+          <Image
+            src="/synth_character_lossless.webp"
+            alt="Synth AI Cohost"
+            fill
+            className="object-cover object-top"
+            priority
+            unoptimized
+          />
+        </motion.div>
         {/* Section Number - Left Side - Hidden on mobile */}
-        <div className="hidden md:flex absolute left-6 lg:left-10 top-1/2 -translate-y-1/2 flex-col items-center gap-2">
+        <div className="hidden md:flex absolute left-6 lg:left-10 top-1/2 -translate-y-1/2 flex-col items-center gap-2 z-20">
           <span className="text-[11px] font-bold text-[#7c3aed]">01</span>
           <span className="w-4 h-[2px] bg-[#7c3aed]" />
         </div>
@@ -40,7 +152,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="max-w-lg ml-8 lg:ml-0"
+          className="max-w-lg ml-8 lg:ml-0 relative z-20"
         >
           {/* Eyebrow */}
           <motion.div
@@ -63,7 +175,7 @@ export default function Hero() {
           >
             Your stream.
             <br />
-            Stronger together<span className="text-[#7c3aed]">.</span>
+            Stronger <span className="text-[#7c3aed]">together</span><span className="text-[#7c3aed]">.</span>
           </motion.h1>
 
           {/* Body */}
@@ -130,12 +242,12 @@ export default function Hero() {
         ))}
       </motion.div>
 
-      {/* Scroll Hint */}
+      {/* Scroll Hint - Desktop only */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 1 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-[10px] tracking-[2.5px] uppercase text-[#9d99b5] z-10"
+        className="hidden md:block absolute bottom-8 left-1/2 -translate-x-1/2 text-[10px] tracking-[2.5px] uppercase text-[#9d99b5] z-10"
       >
         Scroll to discover
       </motion.div>
@@ -149,6 +261,7 @@ export default function Hero() {
           <SignInModal onClose={() => setIsSignInOpen(false)} />
         )}
       </AnimatePresence>
-    </section>
+
+      </section>
   );
 }
