@@ -15,7 +15,7 @@ export default function Hero() {
   return (
     <section data-section="01" className="relative min-h-[60vh] overflow-hidden">
       {/* Mobile Layout */}
-      <div className="md:hidden relative z-10 px-6 pt-24 pb-16 min-h-screen bg-[#0d0b14]">
+      <div className="md:hidden relative z-10 px-6 pt-24 pb-16 bg-[#0d0b14]">
         <div className="grid grid-cols-2 gap-4 items-center">
           {/* Text Content - Left */}
           <motion.div

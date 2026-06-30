@@ -188,7 +188,29 @@ export default function RolesCarousel() {
 
                   transition={{ duration: 0.3 }}
 
-                  className="relative w-full h-full rounded-[10px] overflow-hidden cursor-pointer"
+                  drag="x"
+
+                  dragConstraints={{ left: 0, right: 0 }}
+
+                  dragElastic={0.2}
+
+                  onDragEnd={(e, { offset, velocity }) => {
+
+                    const swipe = offset.x * velocity.x;
+
+                    if (swipe < -1000 || offset.x < -50) {
+
+                      setCurrentIndex((prev) => (prev + 1) % roles.length);
+
+                    } else if (swipe > 1000 || offset.x > 50) {
+
+                      setCurrentIndex((prev) => prev === 0 ? roles.length - 1 : prev - 1);
+
+                    }
+
+                  }}
+
+                  className="relative w-full h-full rounded-[10px] overflow-hidden cursor-pointer touch-pan-y"
 
                   style={{
 
