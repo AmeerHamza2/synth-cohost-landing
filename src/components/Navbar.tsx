@@ -216,7 +216,7 @@ export default function Navbar() {
                   e.stopPropagation();
                   closePopup();
                 }}
-                className={`absolute top-8 text-gray-400 hover:text-gray-600 transition-colors z-10 ${popupType === 'our-products' ? 'right-26' : 'right-8'}`}
+                className={`absolute top-8 text-gray-400 hover:text-gray-600 transition-colors z-10 ${popupType === 'our-products' ? 'right-26 hidden md:block' : 'right-8'}`}
               >
                 <X className="w-6 h-6" />
               </button>
@@ -250,6 +250,17 @@ export default function Navbar() {
                         setIsSignInOpen(true);
                       }}
                     />
+                    {/* Mobile Gesture Hint - centered on image */}
+                    <div className="md:hidden absolute inset-0 flex items-center justify-center pointer-events-none">
+                      <Image
+                        src="/gesture_hint_png--preview.png"
+                        alt="Tap to expand"
+                        width={100}
+                        height={100}
+                        className="w-20 h-20 opacity-100"
+                        unoptimized
+                      />
+                    </div>
                     {/* Focused spotlight on character area */}
                     {isHovering && popupType === 'what-are-syns' && (
                       <div
