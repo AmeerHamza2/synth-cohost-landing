@@ -37,7 +37,7 @@ export default function KnowledgeHero() {
             <h2 className="text-[22px] lg:text-[26px] font-medium text-[#f5f3ff] leading-[1.3] mb-4 lg:mb-6">
           Teach your Syn what matters.
             </h2>
-            <p className="text-[13px] text-[#a09bbf] leading-[1.5] mb-6 hidden lg:block">
+            <p className="text-[13px] text-[#a09bbf] leading-[1.5] mb-6  lg:block">
             Upload your docs, notes, and resources. Your Syn turns them into real-time intelligence.
             </p>
    

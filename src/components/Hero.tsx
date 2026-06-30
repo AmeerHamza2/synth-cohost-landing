@@ -58,6 +58,18 @@ export default function Hero() {
               Build intelligent Syns that engage audiences, drive product promotion, and unlock new revenue streams across livestreams and digital experiences.
             </motion.p>
 
+              <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="text-[12px] text-[#5c5575] leading-[1.6] mb-2"
+            >
+               Extend their presence beyond the broadcast with lightweight desktop companions that keep your Syns active and engaging long after the stream ends.
+
+
+            </motion.p>
+
+         
          
             
 
@@ -87,6 +99,7 @@ export default function Hero() {
               priority
               unoptimized
             />
+            {/* See it in Action Button */}
             <motion.button
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -94,35 +107,47 @@ export default function Hero() {
               onClick={() => setIsSignInOpen(true)}
               whileHover={{ scale: 1.02, backgroundColor: '#9d4edd' }}
               whileTap={{ scale: 0.98 }}
-              className="absolute bottom-11 left-1/2 -translate-x-1/2 z-10 inline-flex items-center justify-center gap-2 bg-[#7c3aed] text-white text-[10px] font-semibold px-6 py-2 rounded-lg transition-colors border-0 cursor-pointer w-[90%]"
+              className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 inline-flex items-center justify-center gap-2 bg-[#7c3aed] text-white text-[10px] font-semibold px-6 py-2 rounded-lg transition-colors border-0 cursor-pointer w-[90%]"
             >
-             See it in Action
+              See it in Action
               <svg width="10" height="10" viewBox="0 0 14 14" fill="none">
                 <path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
-              
             </motion.button>
-              <button
-                onClick={() => openPopup('video-demo')}
-                className="inline-flex items-center gap-2.5 text-[13px] font-semibold text-[#a09bbf] border-b border-[rgba(255,255,255,0.2)] pb-0.5 hover:text-white transition-colors w-fit cursor-pointer bg-transparent"
-              >
-                Watch  Demo <span>▷</span>
-              </button>
+
+            {/* Watch Demo Button - Directly under See it in Action */}
+            <motion.button
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.7 }}
+              onClick={() => openPopup('video-demo')}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="absolute bottom-[-6px] left-1/2 -translate-x-1/2 z-10 inline-flex items-center justify-center gap-2 text-[10px] font-semibold text-[#a09bbf] border-b border-[rgba(255,255,255,0.2)] pb-0.5 hover:text-white transition-colors cursor-pointer bg-transparent"
+            >
+              Watch Demo <span className="text-[12px]">▷</span>
+            </motion.button>
+              
               {/* Mobile Scroll Hint */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 1 }}
-                className="text-[10px] tracking-[2.5px] uppercase text-[#9d99b5] mt-3 text-center"
+                className="absolute bottom-[-40px] left-1/2 -translate-x-1/2 text-[10px] tracking-[2.5px] uppercase text-[#9d99b5] text-center"
               >
                 Scroll to discover
               </motion.div>
+              
           </motion.div>
+
+          
         </div>
 
         {/* Scroll Hint */}
+        
        
       </div>
+      
 
       {/* Desktop Layout */}
       <div className="hidden md:block relative z-10 w-full px-6 lg:px-12 pt-32 pb-16 min-h-screen flex items-center">
@@ -143,7 +168,7 @@ export default function Hero() {
           />
         </motion.div>
         {/* Section Number - Left Side - Hidden on mobile */}
-        <div className="hidden md:flex absolute left-6 lg:left-12 top-1/2 -translate-y-1/2 flex-col items-center gap-2 z-20">
+        <div className="hidden md:flex absolute left-6 lg:left-12 top-20 flex-col items-center gap-2 z-20">
           <span className="text-[11px] font-bold text-[#7c3aed]">01</span>
           <span className="w-4 h-[2px] bg-[#7c3aed]" />
         </div>

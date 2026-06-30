@@ -86,7 +86,7 @@ export default function StreamingDemands() {
 
 
 
-        <div ref={ref} className="py-4 lg:py-8 px-6 lg:px-20 max-w-7xl mx-auto">
+        <div ref={ref} className="py-2 lg:py-8 px-6 lg:px-20 max-w-7xl mx-auto">
 
           <motion.div
 
@@ -96,7 +96,7 @@ export default function StreamingDemands() {
 
             animate={isInView ? 'visible' : 'hidden'}
 
-            className="grid lg:grid-cols-2 gap-20 items-start"
+            className="grid lg:grid-cols-2 gap-8 lg:gap-20 items-start"
 
           >
 
@@ -104,7 +104,7 @@ export default function StreamingDemands() {
 
             <motion.div variants={itemVariants}>
 
-              <h2 className="text-[clamp(24px,2.5vw,36px)] font-extrabold text-[#f5f3ff] leading-[1.2] mb-7">
+              <h2 className="text-[clamp(24px,2.5vw,36px)] font-extrabold text-[#f5f3ff] leading-[1.2] mb-4 lg:mb-7">
 
                 Streaming is
 
@@ -186,7 +186,7 @@ export default function StreamingDemands() {
 
 
 
-        {/* Full Width Character Image */}
+        {/* Full Width Character Image - Desktop only */}
 
         <motion.div
 
@@ -196,7 +196,7 @@ export default function StreamingDemands() {
 
           transition={{ duration: 0.8, delay: 0.3 }}
 
-          className="w-full relative"
+          className="hidden md:block w-full relative"
 
         >
 
@@ -282,7 +282,7 @@ export default function StreamingDemands() {
 
               >
 
-                Syns listens, understands context, and participates naturally across your entire stream.
+                Syns listen, understands context, and participates naturally across your entire stream.
 
               </motion.p>
 
@@ -429,80 +429,104 @@ export default function StreamingDemands() {
         </motion.div>
 
         
-        {/* Mobile Text Content - Below image */}
-        <div className="md:hidden px-4 py-8 bg-black">
-          <motion.span
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-[10px] font-bold uppercase tracking-[2px] text-[#c4b5fd] mb-3 block"
-          >
-            MEET YOUR SYN
-          </motion.span>
+        {/* Mobile Layout - Grid with image left, text right */}
+        <div className="md:hidden relative bg-black">
+          {/* Grid container */}
+          <div className="grid grid-cols-2 gap-2 px-4 py-3 items-center">
+            {/* Image - Left */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+              transition={{ duration: 0.8, ease: 'easeOut' }}
+              className="col-span-1 relative h-[380px] ml-2 -mt-10"
+            >
+              <Image
+                src="/ChatGPT Image Jun 30, 2026, 06_19_44 AM.png"
+                alt="Synth AI Character"
+                fill
+                className="object-contain object-center scale-150"
+                unoptimized
+              />
+            </motion.div>
 
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="text-[24px] font-bold text-white leading-[1.2] tracking-[-0.5px] mb-4"
-          >
-            Your AI cohost:
-            <br />
-            Designed for live.
-          </motion.h2>
+            {/* Text Content - Right (higher z-index to stay on top) */}
+            <div className="col-span-1 relative z-10">
+              <motion.span
+                initial={{ opacity: 0 }}
+                animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="text-[9px] font-bold uppercase tracking-[2px] text-[#c4b5fd] mb-2 block"
+              >
+                MEET YOUR SYN
+              </motion.span>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="text-[13px] text-[#d1d5db] leading-[1.6] mb-6"
-          >
-            Syns listens, understands context, and participates naturally across your entire stream.
-          </motion.p>
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                className="text-[18px] font-bold text-white leading-[1.2] tracking-[-0.5px] mb-3"
+              >
+                Your AI cohost:
+                <br />
+                Designed for live.
+              </motion.h2>
 
-          {/* Mobile Features */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6, delay: 0.7 }}
-            className="flex flex-col gap-4"
-          >
-            <div className="flex items-start gap-3">
-              <div className="flex items-center justify-center w-8 h-8 rounded bg-gradient-to-br from-purple-500/20 to-purple-600/20 border border-purple-500/30 flex-shrink-0">
-                <svg className="w-4 h-4 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5z" />
-                </svg>
-              </div>
-              <div>
-                <p className="text-[13px] font-semibold text-white mb-1">Responds to chat</p>
-                <p className="text-[12px] text-[#d1d5db] leading-[1.5]">Engages your audience in real time.</p>
-              </div>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+                className="text-[11px] text-[#d1d5db] leading-[1.5]"
+              >
+                Syns listen, understands context, and participates naturally across your entire stream.
+              </motion.p>
             </div>
+          </div>
 
-            <div className="flex items-start gap-3">
-              <div className="flex items-center justify-center w-8 h-8 rounded bg-gradient-to-br from-purple-500/20 to-purple-600/20 border border-purple-500/30 flex-shrink-0">
-                <svg className="w-4 h-4 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M10 3a1 1 0 011 1v6h6a1 1 0 110 2h-6v6a1 1 0 11-2 0v-6H3a1 1 0 110-2h6V4a1 1 0 011-1z" />
-                </svg>
+          {/* Mobile Features - BELOW the grid */}
+          <div className="px-4 pb-4">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.7 }}
+              className="flex flex-col gap-3"
+            >
+              <div className="flex items-start gap-3">
+                <div className="flex items-center justify-center w-8 h-8 rounded bg-gradient-to-br from-purple-500/20 to-purple-600/20 border border-purple-500/30 flex-shrink-0">
+                  <svg className="w-4 h-4 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5z" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="text-[13px] font-semibold text-white mb-1">Responds to chat</p>
+                  <p className="text-[12px] text-[#d1d5db] leading-[1.5]">Engages your audience in real time.</p>
+                </div>
               </div>
-              <div>
-                <p className="text-[13px] font-semibold text-white mb-1">Understands context</p>
-                <p className="text-[12px] text-[#d1d5db] leading-[1.5]">Follows the flow and remembers key details.</p>
-              </div>
-            </div>
 
-            <div className="flex items-start gap-3">
-              <div className="flex items-center justify-center w-8 h-8 rounded bg-gradient-to-br from-purple-500/20 to-purple-600/20 border border-purple-500/30 flex-shrink-0">
-                <svg className="w-4 h-4 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
-                </svg>
+              <div className="flex items-start gap-3">
+                <div className="flex items-center justify-center w-8 h-8 rounded bg-gradient-to-br from-purple-500/20 to-purple-600/20 border border-purple-500/30 flex-shrink-0">
+                  <svg className="w-4 h-4 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 3a1 1 0 011 1v6h6a1 1 0 110 2h-6v6a1 1 0 11-2 0v-6H3a1 1 0 110-2h6V4a1 1 0 011-1z" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="text-[13px] font-semibold text-white mb-1">Understands context</p>
+                  <p className="text-[12px] text-[#d1d5db] leading-[1.5]">Follows the flow and remembers key details.</p>
+                </div>
               </div>
-              <div>
-                <p className="text-[13px] font-semibold text-white mb-1">Supports your workflow</p>
-                <p className="text-[12px] text-[#d1d5db] leading-[1.5]">Helps keep your stream on track.</p>
+
+              <div className="flex items-start gap-3">
+                <div className="flex items-center justify-center w-8 h-8 rounded bg-gradient-to-br from-purple-500/20 to-purple-600/20 border border-purple-500/30 flex-shrink-0">
+                  <svg className="w-4 h-4 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="text-[13px] font-semibold text-white mb-1">Supports your workflow</p>
+                  <p className="text-[12px] text-[#d1d5db] leading-[1.5]">Helps keep your stream on track.</p>
+                </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
 
       </div>

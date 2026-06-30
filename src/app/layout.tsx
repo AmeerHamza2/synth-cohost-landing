@@ -22,6 +22,14 @@ export const metadata: Metadata = {
     title: "Synth Cohost | AI Cohost for Live Streamers",
     description: "Your stream. Stronger together. The AI cohost that makes streaming better.",
     type: "website",
+    images: [
+      {
+        url: "/Cohost Synth logo.png",
+        width: 120,
+        height: 40,
+        alt: "Synth Cohost Logo",
+      },
+    ],
   },
 };
 

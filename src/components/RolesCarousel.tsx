@@ -140,7 +140,7 @@ export default function RolesCarousel() {
 
    
 
- Learn how… Syns transforms across different roles, from educator and moderator to interviewer, seamlessly adapting to your stream's needs.
+ Learn how Syns transforms across different roles, from educator and moderator to interviewer, seamlessly adapting to your stream's needs.
 
             </p>
 
