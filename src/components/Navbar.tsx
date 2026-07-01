@@ -264,9 +264,9 @@ export default function Navbar() {
                           <Image
                             src="/gesture_hint_png--preview.png"
                             alt="Tap to expand"
-                            width={100}
-                            height={100}
-                            className="w-20 h-20"
+                            width={250}
+                            height={170}
+                            className="w-30 h-25"
                             unoptimized
                           />
                         </div>
