@@ -260,13 +260,13 @@ export default function Navbar() {
                       />
                       {/* Mobile Gesture Hint */}
                       {(popupType === 'our-products' || popupType === 'what-are-syns') && (
-                        <div className="md:hidden absolute left-0 right-0 flex justify-center z-10">
+                        <div className="md:hidden absolute left-0 right-0 mt-[-15] flex justify-center z-10">
                           <Image
                             src="/gesture_hint_png--preview.png"
                             alt="Tap to expand"
-                            width={250}
-                            height={170}
-                            className="w-30 h-25"
+                            width={400}
+                            height={250}
+                            className="w-64 h-44"
                             unoptimized
                           />
                         </div>
