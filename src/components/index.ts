@@ -11,3 +11,13 @@ export { default as FinalCTA } from './FinalCTA';
 export { default as Footer } from './Footer';
 export { default as LoginModal } from './LoginModal';
 export { default as SignInModal } from './SignInModal';
+
+// Pricing page components
+export { default as PricingNavbar } from './PricingNavbar';
+export { default as PricingHero } from './PricingHero';
+export { default as DesktopPricing } from './DesktopPricing';
+export { default as StreamingPricing } from './StreamingPricing';
+export { default as CreatorBundle } from './CreatorBundle';
+export { default as LicensedCharacters } from './LicensedCharacters';
+export { default as FooterCTA } from './FooterCTA';
+export { default as PricingFooter } from './PricingFooter';
