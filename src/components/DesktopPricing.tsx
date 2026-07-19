@@ -2,58 +2,70 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { Check } from 'lucide-react';
+import { Check, Monitor } from 'lucide-react';
 
 export default function DesktopPricing() {
   return (
-    <section className="py-20 px-6 lg:px-12 max-w-[1400px] mx-auto">
+    <section className="py-4 px-6 lg:px-12 max-w-[1400px] mx-auto">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="rounded-3xl bg-[#11111C]/50 backdrop-blur-xl border border-[rgba(139,61,255,.25)] p-8 lg:p-12"
+        className="rounded-[28px] bg-gradient-to-b from-[#0C0A16] to-[#090811] border border-[rgba(139,61,255,.18)] p-8 shadow-[0_20px_60px_rgba(0,0,0,.45)]"
       >
-        <div className="text-center mb-12">
-          <h2 className="text-[42px] font-bold text-white mb-2">1. Desktop Companion</h2>
-          <p className="text-[#8B3DFF] text-[18px] font-medium">Consumer Market</p>
+        <div className="flex items-center gap-4 mb-8">
+          <Monitor size={42} color="#8B3DFF" />
+          <div>
+            <h2 className="text-[40px] font-extrabold uppercase tracking-[0.5px] text-white leading-none">
+              1. DESKTOP COMPANION
+            </h2>
+            <p className="text-[14px] font-semibold tracking-[2px] uppercase text-[#9B5CFF] mt-1">
+              CONSUMER MARKET
+            </p>
+          </div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-[1fr_1fr_1.15fr] gap-6 mt-8">
           {/* Free Tier */}
           <motion.div
             whileHover={{ y: -6 }}
-            className="rounded-3xl bg-[rgba(18,18,30,.92)] backdrop-blur-xl border border-[rgba(139,61,255,.25)] p-6 transition-all duration-300 hover:shadow-[0_0_40px_rgba(138,61,255,.20)]"
+                        className="relative rounded-[22px] bg-[#11111C] border border-[rgba(139,61,255,.20)] px-8 pt-7 pb-6 h-[430px] flex flex-col shadow-[0_12px_40px_rgba(0,0,0,.35)] before:absolute before:inset-0 before:rounded-[22px] before:bg-[radial-gradient(circle_at_top_right,rgba(139,61,255,.15),transparent_70%)] before:pointer-events-none transition-all duration-300 hover:shadow-[0_0_50px_rgba(139,61,255,.25)]"
           >
-            <h3 className="text-[28px] font-bold text-white mb-2">FREE TIER</h3>
-            <div className="text-[56px] font-black text-white mb-6">$0</div>
+            <h3 className="text-[18px] font-bold uppercase text-white mb-2">FREE TIER</h3>
+            <div className="text-[44px] font-black text-[#8B3DFF] mb-2">$0</div>
             
-            <div className="relative h-[200px] mb-6">
+            <div className="absolute top-12 right-6">
               <Image
-                src="/synth_character_lossless.webp"
+                src="/UUU3.png"
                 alt="Robot"
-                fill
+                width={160}
+                height={160}
                 className="object-contain"
                 unoptimized
               />
             </div>
 
-            <ul className="space-y-3 mb-6">
-              <li className="flex items-center gap-3 text-[#A8A8B5] text-[16px]">
+            <ul className="space-y-2 mb-auto">
+              <li className="flex items-center gap-3 text-[#C9C9D4] text-[15px] leading-[18px]">
                 <Check className="w-5 h-5 text-[#8B3DFF]" />
-                Basic AI personality
+                Basic companion
               </li>
-              <li className="flex items-center gap-3 text-[#A8A8B5] text-[16px]">
+              <li className="flex items-center gap-3 text-[#C9C9D4] text-[15px] leading-[18px]">
                 <Check className="w-5 h-5 text-[#8B3DFF]" />
-                Desktop only
+                Limited personality
               </li>
-              <li className="flex items-center gap-3 text-[#A8A8B5] text-[16px]">
+              <li className="flex items-center gap-3 text-[#C9C9D4] text-[15px] leading-[18px]">
+                <Check className="w-5 h-5 text-[#8B3DFF]" />
+                Limited memory
+              </li>
+              <li className="flex items-center gap-3 text-[#C9C9D4] text-[15px] leading-[18px]">
                 <Check className="w-5 h-5 text-[#8B3DFF]" />
                 Limited interactions
               </li>
             </ul>
 
-            <button className="w-full py-3 rounded-full border border-[#8B3DFF] text-white font-semibold hover:bg-[#8B3DFF]/10 transition-colors cursor-pointer">
+            <button className="w-full h-12 rounded-xl border border-[#8B3DFF] text-white font-semibold hover:bg-[#8B3DFF] transition-colors cursor-pointer mt-1">
               Get Started
             </button>
           </motion.div>
@@ -61,62 +73,63 @@ export default function DesktopPricing() {
           {/* Paid Companion */}
           <motion.div
             whileHover={{ y: -6 }}
-            className="rounded-3xl bg-[rgba(18,18,30,.92)] backdrop-blur-xl border border-[rgba(139,61,255,.25)] p-6 transition-all duration-300 hover:shadow-[0_0_40px_rgba(138,61,255,.20)]"
+                        className="relative rounded-[22px] bg-[#11111C] border border-[rgba(139,61,255,.20)] px-8 pt-7 pb-6 h-[430px] flex flex-col shadow-[0_12px_40px_rgba(0,0,0,.35)] before:absolute before:inset-0 before:rounded-[22px] before:bg-[radial-gradient(circle_at_top_right,rgba(139,61,255,.15),transparent_70%)] before:pointer-events-none transition-all duration-300 hover:shadow-[0_0_50px_rgba(139,61,255,.25)]"
           >
-            <h3 className="text-[28px] font-bold text-white mb-2">PAID COMPANION</h3>
-            <div className="text-[56px] font-black text-white mb-2">$19.99</div>
-            <p className="text-[#A8A8B5] text-[14px] mb-6">One-time purchase</p>
+            <h3 className="text-[18px] font-bold uppercase text-white mb-4">PAID COMPANION</h3>
+            <div className="text-[44px] font-black text-[#8B3DFF] mb-2">$19.99</div>
+            <p className="text-[#A8A8B5] text-[14px] mb-4">One-time purchase</p>
             
-            <div className="relative h-[200px] mb-6">
+            <div className="absolute top-12 right-6">
               <Image
-                src="/cdcc.png"
+                src="/UUU4.png"
                 alt="Cat"
-                fill
+                width={160}
+                height={160}
                 className="object-contain"
                 unoptimized
               />
             </div>
 
-            <ul className="space-y-3 mb-6">
-              <li className="flex items-center gap-3 text-[#A8A8B5] text-[16px]">
+            <ul className="space-y-2 mb-auto">
+              <li className="flex items-center gap-3 text-[#C9C9D4] text-[15px] leading-[18px]">
                 <Check className="w-5 h-5 text-[#8B3DFF]" />
-                Advanced AI personality
+                Unlock character
               </li>
-              <li className="flex items-center gap-3 text-[#A8A8B5] text-[16px]">
+              <li className="flex items-center gap-3 text-[#C9C9D4] text-[15px] leading-[18px]">
                 <Check className="w-5 h-5 text-[#8B3DFF]" />
-                Desktop only
+                More animations
               </li>
-              <li className="flex items-center gap-3 text-[#A8A8B5] text-[16px]">
+              <li className="flex items-center gap-3 text-[#C9C9D4] text-[15px] leading-[18px]">
                 <Check className="w-5 h-5 text-[#8B3DFF]" />
-                Unlimited interactions
+                Customization
               </li>
-              <li className="flex items-center gap-3 text-[#A8A8B5] text-[16px]">
+              <li className="flex items-center gap-3 text-[#C9C9D4] text-[15px] leading-[18px]">
                 <Check className="w-5 h-5 text-[#8B3DFF]" />
-                Custom personalities
+                Better personality
               </li>
             </ul>
 
-            <button className="w-full py-3 rounded-full bg-gradient-to-r from-[#8B3DFF] to-[#6A1BFF] text-white font-semibold hover:shadow-[0_0_30px_rgba(139,61,255,.4)] transition-all cursor-pointer">
-              Purchase Now
+            <button className="w-full h-12 rounded-xl bg-gradient-to-r from-[#8B3DFF] to-[#6A1BFF] text-white font-semibold hover:shadow-[0_0_30px_rgba(139,61,255,.4)] transition-all cursor-pointer mt-4">
+              Unlock Now
             </button>
           </motion.div>
 
           {/* Premium - Best Value */}
           <motion.div
             whileHover={{ y: -6 }}
-            className="relative rounded-3xl bg-[rgba(18,18,30,.92)] backdrop-blur-xl border-2 border-[#8B3DFF] p-6 transition-all duration-300 hover:shadow-[0_0_60px_rgba(139,61,255,.35)]"
+                        className="relative rounded-[22px] bg-[#11111C] border-2 border-[#8B3DFF] px-8 pt-7 pb-6 h-[430px] flex flex-col shadow-[0_12px_40px_rgba(0,0,0,.35)] before:absolute before:inset-0 before:rounded-[22px] before:bg-[radial-gradient(circle_at_top_right,rgba(139,61,255,.15),transparent_70%)] before:pointer-events-none transition-all duration-300 hover:shadow-[0_0_60px_rgba(139,61,255,.35)] shadow-[0_0_35px_rgba(139,61,255,.35)] scale-[1.03]"
           >
-            <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#8B3DFF] text-white text-[12px] font-bold px-4 py-1 rounded-full">
+            <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#8B3DFF] text-white text-[12px] font-bold px-5 py-1.5 rounded-full">
               BEST VALUE
             </div>
 
-            <h3 className="text-[28px] font-bold text-white mb-2">PREMIUM AI COMPANION</h3>
-            <div className="text-[56px] font-black text-white mb-2">$9.99<span className="text-[24px] font-normal text-[#A8A8B5]">/month</span></div>
-            <p className="text-[#A8A8B5] text-[14px] mb-6">or $79/year</p>
+            <h3 className="text-[18px] font-bold uppercase text-white mb-4">PREMIUM AI COMPANION</h3>
+            <div className="text-[44px] font-black text-[#8B3DFF] mb-2">$9.99<span className="text-[20px] font-normal text-[#A8A8B5]">/month</span></div>
+            <p className="text-[#A8A8B5] text-[14px] mb-4">or <span className="text-[20px] font-normal">$79/year</span></p>
             
-            <div className="relative h-[200px] mb-6 flex justify-end">
+            <div className="absolute right-[-15px] bottom-16">
               <Image
-                src="/synth_character_lossless.webp"
+                src="/UUU5.png"
                 alt="Premium Robot"
                 width={200}
                 height={200}
@@ -125,27 +138,37 @@ export default function DesktopPricing() {
               />
             </div>
 
-            <ul className="space-y-3 mb-6">
-              <li className="flex items-center gap-3 text-[#A8A8B5] text-[16px]">
+            <p className="text-[#A8A8B5] text-[14px] mb-2 font-semibold">Includes:</p>
+            
+            <ul className="space-y-2 mb-auto">
+              <li className="flex items-center gap-3 text-[#C9C9D4] text-[15px] leading-[18px]">
                 <Check className="w-5 h-5 text-[#8B3DFF]" />
-                All Paid Companion features
+                Long-term memory
               </li>
-              <li className="flex items-center gap-3 text-[#A8A8B5] text-[16px]">
+              <li className="flex items-center gap-3 text-[#C9C9D4] text-[15px] leading-[18px]">
                 <Check className="w-5 h-5 text-[#8B3DFF]" />
-                Priority support
+                Advanced conversations
               </li>
-              <li className="flex items-center gap-3 text-[#A8A8B5] text-[16px]">
+              <li className="flex items-center gap-3 text-[#C9C9D4] text-[15px] leading-[18px]">
                 <Check className="w-5 h-5 text-[#8B3DFF]" />
-                Early access features
+                Personality tuning
               </li>
-              <li className="flex items-center gap-3 text-[#A8A8B5] text-[16px]">
+              <li className="flex items-center gap-3 text-[#C9C9D4] text-[15px] leading-[18px]">
                 <Check className="w-5 h-5 text-[#8B3DFF]" />
-                Cloud backup
+                More behaviors
+              </li>
+              <li className="flex items-center gap-3 text-[#C9C9D4] text-[15px] leading-[18px]">
+                <Check className="w-5 h-5 text-[#8B3DFF]" />
+                Voice features
+              </li>
+              <li className="flex items-center gap-3 text-[#C9C9D4] text-[15px] leading-[18px]">
+                <Check className="w-5 h-5 text-[#8B3DFF]" />
+                Cloud sync
               </li>
             </ul>
 
-            <button className="w-full py-3 rounded-full bg-gradient-to-r from-[#8B3DFF] to-[#6A1BFF] text-white font-semibold hover:shadow-[0_0_30px_rgba(139,61,255,.4)] transition-all cursor-pointer">
-              Subscribe Now
+            <button className="w-full h-12 rounded-xl bg-gradient-to-r from-[#8B3DFF] to-[#6A1BFF] text-white font-semibold hover:shadow-[0_0_30px_rgba(139,61,255,.4)] transition-all cursor-pointer mt-4">
+              Go Premium
             </button>
           </motion.div>
         </div>

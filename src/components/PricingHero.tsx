@@ -2,33 +2,28 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { Brain, Cloud, Database } from 'lucide-react';
 
 export default function PricingHero() {
   const features = [
     {
-      icon: Brain,
+      image: '/brain.png',
       title: 'Same AI Core',
       description: 'One intelligence that connects every experience.',
       color: '#8B3DFF',
+      useIcon: false,
     },
     {
-      icon: Cloud,
+      image: '/cloud.png',
       title: 'Cross-Device Continuity',
       description:
         'Your memories, personality, and settings follow you everywhere.',
       color: '#48C8FF',
-    },
-    {
-      icon: Database,
-      title: 'Shared Memory',
-      description: 'Shared experiences across every device.',
-      color: '#8B3DFF',
+      useIcon: false,
     },
   ];
 
   return (
-    <section className="relative overflow-hidden bg-black py-24">
+    <section className="relative overflow-hidden bg-black py-8">
       {/* Background Glow */}
       <div className="absolute left-[-120px] top-[120px] h-[420px] w-[420px] rounded-full bg-[#8B3DFF]/5 blur-[180px]" />
       <div className="absolute right-[-150px] top-[60px] h-[500px] w-[500px] rounded-full bg-[#7C3AED]/5 blur-[220px]" />
@@ -68,35 +63,39 @@ export default function PricingHero() {
 
           {/* FEATURES */}
 
-          <div className="mt-14 flex flex-wrap gap-10">
+          <div className="mt-14 flex gap-10">
 
             {features.map((feature) => {
-              const Icon = feature.icon;
-
               return (
                 <div
                   key={feature.title}
-                  className="max-w-[170px]"
+                  className="flex items-center gap-4 max-w-[280px]"
                 >
                   <div
-                    className="mb-4 flex h-[68px] w-[68px] items-center justify-center rounded-full border border-[#8B3DFF]/30 bg-[#12121E] shadow-[0_0_30px_rgba(139,61,255,.25)]"
+                    className="flex-shrink-0 flex h-[60px] w-[60px] items-center justify-center rounded-full border border-[#8B3DFF]/30 bg-[#12121E] shadow-[0_0_30px_rgba(139,61,255,.25)]"
                   >
-                    <Icon
-                      size={30}
-                      color={feature.color}
+                    <Image
+                      src={feature.image}
+                      alt={feature.title}
+                      width={40}
+                      height={40}
+                      className="w-10 h-10"
+                      unoptimized
                     />
                   </div>
 
-                  <h3
-                    className="mb-2 text-[14px] font-medium"
-                    style={{ color: feature.color }}
-                  >
-                    {feature.title}
-                  </h3>
+                  <div>
+                    <h3
+                      className="mb-2 text-[14px] font-medium"
+                      style={{ color: feature.color }}
+                    >
+                      {feature.title}
+                    </h3>
 
-                  <p className="text-[14px] leading-7 text-[#A8A8B5]">
-                    {feature.description}
-                  </p>
+                    <p className="text-[14px] leading-7 text-[#A8A8B5]">
+                      {feature.description}
+                    </p>
+                  </div>
                 </div>
               );
             })}
@@ -110,7 +109,7 @@ export default function PricingHero() {
           initial={{ opacity: 0, x: 60 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: .8 }}
-          className="relative flex items-center justify-center -mt-90"
+          className="relative flex items-center justify-center -mt-30"
         >
           {/* Purple glow behind image */}
 
