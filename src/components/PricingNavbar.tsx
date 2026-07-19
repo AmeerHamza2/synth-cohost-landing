@@ -13,7 +13,7 @@ export default function PricingNavbar() {
     { name: 'Products', href: '#' },
     { name: 'Features', href: '#' },
     { name: 'Personalities', href: '#' },
-    { name: 'Pricing', href: '/pricing', active: true },
+    { name: 'Pricing', href: '/pricing' },
     { name: 'Company', href: '#' },
   ];
 
@@ -34,16 +34,12 @@ export default function PricingNavbar() {
         </Link>
 
         {/* Desktop Navigation - Centered */}
-        <ul className="hidden md:flex items-center gap-8">
+        <ul className="hidden md:flex items-center gap-8 flex-1 justify-center">
           {navLinks.map((link) => (
             <li key={link.name}>
               <Link
                 href={link.href}
-                className={`text-[15px] font-medium transition-colors ${
-                  link.active
-                    ? 'bg-[#8B3DFF] text-white px-4 py-2 rounded-full'
-                    : 'text-[#A8A8B5] hover:text-white'
-                }`}
+                className="text-[15px] font-medium transition-colors text-[#A8A8B5] hover:text-white"
               >
                 {link.name}
               </Link>
@@ -86,11 +82,7 @@ export default function PricingNavbar() {
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`block text-lg font-medium transition-colors ${
-                    link.active
-                      ? 'bg-[#8B3DFF] text-white px-4 py-2 rounded-full w-fit'
-                      : 'text-[#A8A8B5] hover:text-white'
-                  }`}
+                  className="block text-lg font-medium transition-colors text-[#A8A8B5] hover:text-white"
                 >
                   {link.name}
                 </Link>

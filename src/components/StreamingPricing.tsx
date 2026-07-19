@@ -43,26 +43,30 @@ export default function StreamingPricing() {
             whileHover={{ y: -6 }}
             className="rounded-3xl bg-[rgba(18,18,30,.92)] backdrop-blur-xl border border-[rgba(139,61,255,.25)] p-6 transition-all duration-300 hover:shadow-[0_0_40px_rgba(138,61,255,.20)]"
           >
-            <h3 className="text-[28px] font-bold text-white mb-2">STARTER</h3>
-            <div className="text-[56px] font-black text-white mb-6">$14.99<span className="text-[24px] font-normal text-[#A8A8B5]">/mo</span></div>
+            <h3 className="text-[28px] font-bold text-white mb-2">CREATOR STARTER</h3>
+            <div className="text-[56px] font-black text-white mb-6">$29.99<span className="text-[24px] font-normal text-[#A8A8B5]">/month</span></div>
             
             <ul className="space-y-3 mb-6">
               <li className="flex items-center gap-3 text-[#A8A8B5] text-[16px]">
                 <Check className="w-5 h-5 text-[#8B3DFF]" />
-                Basic AI avatar
+                AI cohost
               </li>
               <li className="flex items-center gap-3 text-[#A8A8B5] text-[16px]">
                 <Check className="w-5 h-5 text-[#8B3DFF]" />
-                10 hours/month
+                Basic chat interaction
               </li>
               <li className="flex items-center gap-3 text-[#A8A8B5] text-[16px]">
                 <Check className="w-5 h-5 text-[#8B3DFF]" />
-                Standard voice
+                Stream overlay
+              </li>
+              <li className="flex items-center gap-3 text-[#A8A8B5] text-[16px]">
+                <Check className="w-5 h-5 text-[#8B3DFF]" />
+                Limited hours
               </li>
             </ul>
 
             <button className="w-full py-3 rounded-full border border-[#8B3DFF] text-white font-semibold hover:bg-[#8B3DFF]/10 transition-colors cursor-pointer">
-              Get Started
+              Start Now
             </button>
           </motion.div>
 
@@ -75,30 +79,42 @@ export default function StreamingPricing() {
               MOST POPULAR
             </div>
 
-            <h3 className="text-[28px] font-bold text-white mb-2">PRO</h3>
-            <div className="text-[56px] font-black text-white mb-6">$29.99<span className="text-[24px] font-normal text-[#A8A8B5]">/mo</span></div>
+            <h3 className="text-[28px] font-bold text-white mb-2">CREATOR PRO</h3>
+            <div className="text-[56px] font-black text-white mb-6">$99.99<span className="text-[24px] font-normal text-[#A8A8B5]">/month</span></div>
             
             <ul className="space-y-3 mb-6">
               <li className="flex items-center gap-3 text-[#A8A8B5] text-[16px]">
                 <Check className="w-5 h-5 text-[#8B3DFF]" />
-                Advanced AI avatar
+                Full AI cohost
               </li>
               <li className="flex items-center gap-3 text-[#A8A8B5] text-[16px]">
                 <Check className="w-5 h-5 text-[#8B3DFF]" />
-                50 hours/month
+                Memory
               </li>
               <li className="flex items-center gap-3 text-[#A8A8B5] text-[16px]">
                 <Check className="w-5 h-5 text-[#8B3DFF]" />
-                Premium voice
+                Multiple personalities
               </li>
               <li className="flex items-center gap-3 text-[#A8A8B5] text-[16px]">
                 <Check className="w-5 h-5 text-[#8B3DFF]" />
-                Custom personality
+                Chat interaction
+              </li>
+              <li className="flex items-center gap-3 text-[#A8A8B5] text-[16px]">
+                <Check className="w-5 h-5 text-[#8B3DFF]" />
+                Streaming integrations
+              </li>
+              <li className="flex items-center gap-3 text-[#A8A8B5] text-[16px]">
+                <Check className="w-5 h-5 text-[#8B3DFF]" />
+                Voice
+              </li>
+              <li className="flex items-center gap-3 text-[#A8A8B5] text-[16px]">
+                <Check className="w-5 h-5 text-[#8B3DFF]" />
+                Analytics
               </li>
             </ul>
 
             <button className="w-full py-3 rounded-full bg-gradient-to-r from-[#8B3DFF] to-[#6A1BFF] text-white font-semibold hover:shadow-[0_0_30px_rgba(139,61,255,.4)] transition-all cursor-pointer">
-              Subscribe Now
+              Go Pro
             </button>
           </motion.div>
 
@@ -108,29 +124,51 @@ export default function StreamingPricing() {
             className="relative rounded-3xl bg-[rgba(18,18,30,.92)] backdrop-blur-xl border border-[rgba(139,61,255,.25)] p-6 transition-all duration-300 hover:shadow-[0_0_40px_rgba(138,61,255,.20)] overflow-hidden"
           >
             <h3 className="text-[28px] font-bold text-white mb-2">POWER CREATOR</h3>
-            <div className="text-[56px] font-black text-white mb-6">$49.99<span className="text-[24px] font-normal text-[#A8A8B5]">/mo</span></div>
+            <div className="text-[56px] font-black text-white mb-6">$299.99<span className="text-[24px] font-normal text-[#A8A8B5]">/month</span></div>
+            
+            <p className="text-[#A8A8B5] text-[14px] mb-4 font-semibold">For</p>
             
             <ul className="space-y-3 mb-6 relative z-10">
               <li className="flex items-center gap-3 text-[#A8A8B5] text-[16px]">
                 <Check className="w-5 h-5 text-[#8B3DFF]" />
-                Unlimited hours
+                VTubers
               </li>
               <li className="flex items-center gap-3 text-[#A8A8B5] text-[16px]">
                 <Check className="w-5 h-5 text-[#8B3DFF]" />
-                Multiple avatars
+                Professional creators
               </li>
               <li className="flex items-center gap-3 text-[#A8A8B5] text-[16px]">
                 <Check className="w-5 h-5 text-[#8B3DFF]" />
-                Voice cloning
+                esports
               </li>
               <li className="flex items-center gap-3 text-[#A8A8B5] text-[16px]">
                 <Check className="w-5 h-5 text-[#8B3DFF]" />
-                Priority support
+                agencies
+              </li>
+              <li className="flex items-center gap-3 text-[#A8A8B5] text-[16px]">
+                <Check className="w-5 h-5 text-[#8B3DFF]" />
+                Custom personality
+              </li>
+              <li className="flex items-center gap-3 text-[#A8A8B5] text-[16px]">
+                <Check className="w-5 h-5 text-[#8B3DFF]" />
+                Brand integration
+              </li>
+              <li className="flex items-center gap-3 text-[#A8A8B5] text-[16px]">
+                <Check className="w-5 h-5 text-[#8B3DFF]" />
+                Sponsor behaviors
+              </li>
+              <li className="flex items-center gap-3 text-[#A8A8B5] text-[16px]">
+                <Check className="w-5 h-5 text-[#8B3DFF]" />
+                Multiple characters
+              </li>
+              <li className="flex items-center gap-3 text-[#A8A8B5] text-[16px]">
+                <Check className="w-5 h-5 text-[#8B3DFF]" />
+                Priority compute
               </li>
             </ul>
 
             <button className="w-full py-3 rounded-full bg-gradient-to-r from-[#8B3DFF] to-[#6A1BFF] text-white font-semibold hover:shadow-[0_0_30px_rgba(139,61,255,.4)] transition-all cursor-pointer relative z-10">
-              Subscribe Now
+              Go Power
             </button>
 
             {/* Fantasy Character Image Overflowing */}

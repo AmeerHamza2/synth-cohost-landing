@@ -17,9 +17,9 @@ export default function CreatorBundle() {
         <div className="grid lg:grid-cols-4 gap-8 items-center">
           {/* Left - Pricing */}
           <div className="text-center lg:text-left">
-            <div className="text-[56px] font-black text-white mb-2">$99.99</div>
-            <p className="text-[#A8A8B5] text-[16px]">Creator+ Bundle</p>
-            <p className="text-[#8B3DFF] text-[14px] font-medium mt-2">Save 40%</p>
+            <div className="text-[56px] font-black text-white mb-2">$89</div>
+            <p className="text-[#A8A8B5] text-[16px]">/mo</p>
+            <p className="text-[#A8A8B5] text-[16px]">or $899 /year</p>
           </div>
 
           {/* Center - Circular Diagram */}
@@ -52,46 +52,49 @@ export default function CreatorBundle() {
 
           {/* Right - Checklist */}
           <div className="lg:col-span-2">
+            <h3 className="text-[32px] font-bold text-white mb-4">One AI. Everywhere.</h3>
+            <p className="text-[#A8A8B5] text-[16px] mb-6">
+              The ultimate experience across all your surfaces with one shared Syn.
+            </p>
             <ul className="space-y-3 mb-6">
               <li className="flex items-center gap-3 text-[#A8A8B5] text-[16px]">
                 <Check className="w-5 h-5 text-[#8B3DFF]" />
-                Premium Desktop Companion
+                AI Cohost
               </li>
               <li className="flex items-center gap-3 text-[#A8A8B5] text-[16px]">
                 <Check className="w-5 h-5 text-[#8B3DFF]" />
-                Pro Streaming Avatar
+                Desktop Companion
               </li>
               <li className="flex items-center gap-3 text-[#A8A8B5] text-[16px]">
                 <Check className="w-5 h-5 text-[#8B3DFF]" />
-                Shared personality across platforms
+                Shared memories
               </li>
               <li className="flex items-center gap-3 text-[#A8A8B5] text-[16px]">
                 <Check className="w-5 h-5 text-[#8B3DFF]" />
-                Priority support
+                Shared personalities
+              </li>
+              <li className="flex items-center gap-3 text-[#A8A8B5] text-[16px]">
+                <Check className="w-5 h-5 text-[#8B3DFF]" />
+                Shared voice
+              </li>
+              <li className="flex items-center gap-3 text-[#A8A8B5] text-[16px]">
+                <Check className="w-5 h-5 text-[#8B3DFF]" />
+                Shared settings
+              </li>
+              <li className="flex items-center gap-3 text-[#A8A8B5] text-[16px]">
+                <Check className="w-5 h-5 text-[#8B3DFF]" />
+                Cross-device continuity
               </li>
             </ul>
 
-            <div className="flex items-center gap-6">
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="px-8 py-3 rounded-full bg-gradient-to-r from-[#8B3DFF] to-[#6A1BFF] text-white font-semibold hover:shadow-[0_0_30px_rgba(139,61,255,.4)] transition-all cursor-pointer flex items-center gap-2"
-              >
-                Get Bundle
-                <ArrowRight className="w-4 h-4" />
-              </motion.button>
-
-              {/* Character Artwork */}
-              <div className="relative w-24 h-24">
-                <Image
-                  src="/synth_character_lossless.webp"
-                  alt="Bundle Character"
-                  fill
-                  className="object-contain"
-                  unoptimized
-                />
-              </div>
-            </div>
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="px-8 py-3 rounded-full bg-gradient-to-r from-[#8B3DFF] to-[#6A1BFF] text-white font-semibold hover:shadow-[0_0_30px_rgba(139,61,255,.4)] transition-all cursor-pointer flex items-center gap-2"
+            >
+              Choose Synth Creator+
+              <ArrowRight className="w-4 h-4" />
+            </motion.button>
           </div>
         </div>
       </motion.div>

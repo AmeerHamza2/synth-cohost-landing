@@ -5,28 +5,25 @@ import Link from 'next/link';
 
 export default function PricingFooter() {
   const footerLinks = {
-    Product: [
+    PRODUCTS: [
       { name: 'Desktop Companion', href: '#' },
-      { name: 'Streaming Avatar', href: '#' },
-      { name: 'Licensed Characters', href: '#' },
-      { name: 'Pricing', href: '/pricing' },
+      { name: 'AI Cohost', href: '#' },
+      { name: 'Synth Creator+', href: '#' },
     ],
-    Company: [
-      { name: 'About', href: '#' },
-      { name: 'Blog', href: '#' },
+    COMPANY: [
+      { name: 'About Us', href: '#' },
       { name: 'Careers', href: '#' },
       { name: 'Press', href: '#' },
     ],
-    Resources: [
-      { name: 'Documentation', href: '#' },
+    RESOURCES: [
       { name: 'Help Center', href: '#' },
-      { name: 'Community', href: '#' },
-      { name: 'Status', href: '#' },
+      { name: 'Blog', href: '#' },
+      { name: 'Docs', href: '#' },
     ],
-    Legal: [
-      { name: 'Privacy Policy', href: '#' },
+    LEGAL: [
       { name: 'Terms of Service', href: '#' },
-      { name: 'Cookie Policy', href: '#' },
+      { name: 'Privacy Policy', href: '#' },
+      { name: 'Contact', href: '#' },
     ],
   };
 
@@ -133,19 +130,8 @@ export default function PricingFooter() {
         {/* Bottom Row */}
         <div className="pt-8 border-t border-[rgba(139,61,255,.25)] flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-[#A8A8B5] text-[14px]">
-            © 2024 Synth Cohost. All rights reserved.
+            © 2025 Synth Cohost. All rights reserved.
           </p>
-          <div className="flex gap-6">
-            <a href="#" className="text-[#A8A8B5] text-[14px] hover:text-white transition-colors">
-              Privacy
-            </a>
-            <a href="#" className="text-[#A8A8B5] text-[14px] hover:text-white transition-colors">
-              Terms
-            </a>
-            <a href="#" className="text-[#A8A8B5] text-[14px] hover:text-white transition-colors">
-              Cookies
-            </a>
-          </div>
         </div>
       </div>
     </footer>

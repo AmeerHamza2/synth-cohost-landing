@@ -25,9 +25,9 @@ export default function LicensedCharacters() {
         <div className="grid lg:grid-cols-3 gap-8 items-center">
           {/* Left - Text */}
           <div>
-            <h2 className="text-[42px] font-bold text-white mb-4">Premium Licensed Characters</h2>
+            <h2 className="text-[42px] font-bold text-white mb-4">PREMIUM LICENSED CHARACTERS</h2>
             <p className="text-[#A8A8B5] text-[18px] leading-relaxed">
-              Unlock exclusive licensed characters from your favorite franchises. Each character comes with unique personalities, voice profiles, and special interactions.
+              Expand your collection with officially licensed AI companions inspired by iconic characters from pop culture, video games, television, films, and more. Licensed characters will be available as individual purchases.
             </p>
           </div>
 
@@ -66,14 +66,15 @@ export default function LicensedCharacters() {
           <div className="text-center lg:text-right">
             <p className="text-[#A8A8B5] text-[16px] mb-2">Starting from</p>
             <div className="text-[56px] font-black text-white mb-2">$39.99</div>
-            <p className="text-[#A8A8B5] text-[14px] mb-6">per character</p>
+            <p className="text-[#A8A8B5] text-[14px] mb-2">One-time purchase</p>
+            <p className="text-[#A8A8B5] text-[14px] mb-6">Plus optional AI subscription</p>
             
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               className="px-8 py-3 rounded-full bg-gradient-to-r from-[#8B3DFF] to-[#6A1BFF] text-white font-semibold hover:shadow-[0_0_30px_rgba(139,61,255,.4)] transition-all cursor-pointer"
             >
-              Browse Characters
+              Explore Characters
             </motion.button>
           </div>
         </div>
