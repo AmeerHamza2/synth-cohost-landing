@@ -10,11 +10,9 @@ export default function PricingNavbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { name: 'Products', href: '#' },
-    { name: 'Features', href: '#' },
-    { name: 'Personalities', href: '#' },
-    { name: 'Pricing', href: '/pricing' },
-    { name: 'Company', href: '#' },
+    { name: 'What Are Syns', href: '#' },
+    { name: 'Our Products', href: '#' },
+    { name: 'For Streamers', href: '#' },
   ];
 
   return (
@@ -39,7 +37,7 @@ export default function PricingNavbar() {
             <li key={link.name}>
               <Link
                 href={link.href}
-                className="text-[15px] font-medium transition-colors text-[#A8A8B5] hover:text-white"
+                className="text-[15px] font-medium transition-colors text-[#A8A8B5] hover:text-[#8B3DFF]"
               >
                 {link.name}
               </Link>
@@ -82,7 +80,7 @@ export default function PricingNavbar() {
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="block text-lg font-medium transition-colors text-[#A8A8B5] hover:text-white"
+                  className="block text-lg font-medium transition-colors text-[#A8A8B5] hover:text-[#8B3DFF]"
                 >
                   {link.name}
                 </Link>
