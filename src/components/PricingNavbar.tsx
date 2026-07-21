@@ -13,6 +13,8 @@ export default function PricingNavbar() {
     { name: 'What Are Syns', href: '#' },
     { name: 'Our Products', href: '#' },
     { name: 'For Streamers', href: '#' },
+    { name: 'Log In', href: '#' },
+    { name: 'Get Started', href: '#', active: true },
   ];
 
   return (
@@ -32,29 +34,22 @@ export default function PricingNavbar() {
         </Link>
 
         {/* Desktop Navigation - Centered */}
-        <ul className="hidden md:flex items-center gap-8 flex-1 justify-center">
+        <ul className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <li key={link.name}>
               <Link
                 href={link.href}
-                className="text-[15px] font-medium transition-colors text-[#A8A8B5] hover:text-[#8B3DFF]"
+                className={`text-[15px] font-medium transition-colors ${
+                  link.active
+                    ? 'bg-[#8B3DFF] text-white px-4 py-2 rounded-full'
+                    : 'text-[#A8A8B5] hover:text-white'
+                }`}
               >
                 {link.name}
               </Link>
             </li>
           ))}
         </ul>
-
-        {/* CTA Button */}
-        <div className="hidden md:block">
-          <motion.button
-            whileHover={{ scale: 1.02, backgroundColor: '#8B3DFF' }}
-            whileTap={{ scale: 0.98 }}
-            className="inline-flex items-center gap-2 bg-transparent border border-[#8B3DFF] text-white text-[15px] font-semibold px-6 py-3 rounded-full transition-all cursor-pointer hover:bg-[#8B3DFF]/10"
-          >
-            Join Waitlist
-          </motion.button>
-        </div>
 
         {/* Mobile Menu Button */}
         <button
@@ -80,17 +75,15 @@ export default function PricingNavbar() {
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="block text-lg font-medium transition-colors text-[#A8A8B5] hover:text-[#8B3DFF]"
+                  className={`block text-lg font-medium transition-colors ${
+                    link.active
+                      ? 'bg-[#8B3DFF] text-white px-4 py-2 rounded-full w-fit'
+                      : 'text-[#A8A8B5] hover:text-white'
+                  }`}
                 >
                   {link.name}
                 </Link>
               ))}
-              <button
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="block w-full mt-4 px-6 py-3 bg-transparent border border-[#8B3DFF] text-white text-sm font-semibold rounded-full text-center hover:bg-[#8B3DFF]/10 transition-colors cursor-pointer"
-              >
-                Join Waitlist
-              </button>
             </div>
           </motion.div>
         )}
