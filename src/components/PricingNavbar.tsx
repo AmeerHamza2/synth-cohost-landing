@@ -13,8 +13,6 @@ export default function PricingNavbar() {
     { name: 'What Are Syns', href: '#' },
     { name: 'Our Products', href: '#' },
     { name: 'For Streamers', href: '#' },
-    { name: 'Log In', href: '#' },
-    { name: 'Get Started', href: '#', active: true },
   ];
 
   return (
@@ -35,16 +33,12 @@ export default function PricingNavbar() {
     </Link>
 
     {/* Navigation - pushed much closer to logo */}
-    <ul className="hidden md:flex ml-50 gap-8">
+    <ul className="hidden  ml-65 md:flex gap-8">
       {navLinks.map((link) => (
         <li key={link.name}>
           <Link
             href={link.href}
-            className={`text-[15px] font-medium transition-colors ${
-              link.active
-                ? 'bg-[#8B3DFF] text-white px-4 py-2 rounded-full'
-                : 'text-[#A8A8B5] hover:text-white'
-            }`}
+            className="text-[15px] font-medium text-[#A8A8B5] hover:text-white transition-colors"
           >
             {link.name}
           </Link>
@@ -54,6 +48,11 @@ export default function PricingNavbar() {
 
     {/* Pushes everything after this to the far right */}
     <div className="flex-1" />
+
+    {/* Join Waitlist Button */}
+    <button className="hidden md:block px-8 h-12 rounded-xl border border-[#8B3DFF] text-white font-medium hover:bg-[#8B3DFF]/10 transition-colors">
+      Join Waitlist
+    </button>
 
     {/* Mobile Menu */}
     <button
@@ -85,15 +84,15 @@ export default function PricingNavbar() {
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`block text-lg font-medium transition-colors ${
-                    link.active
-                      ? 'bg-[#8B3DFF] text-white px-4 py-2 rounded-full w-fit'
-                      : 'text-[#A8A8B5] hover:text-white'
-                  }`}
+                  className="block text-lg font-medium text-[#A8A8B5] hover:text-white transition-colors"
                 >
                   {link.name}
                 </Link>
               ))}
+              {/* Join Waitlist Button in Mobile */}
+              <button className="w-full mt-6 px-8 h-12 rounded-xl border border-[#8B3DFF] text-white font-medium hover:bg-[#8B3DFF]/10 transition-colors">
+                Join Waitlist
+              </button>
             </div>
           </motion.div>
         )}

@@ -2,9 +2,9 @@ import PricingNavbar from '../../components/PricingNavbar';
 import PricingHero from '../../components/PricingHero';
 import DesktopPricing from '../../components/DesktopPricing';
 import StreamingPricing from '../../components/StreamingPricing';
-import CreatorBundle from '../../components/CreatorBundle';
+import PricingBanner from '../../components/PricingBanner';
+import PricingBanner2 from '../../components/PricingBanner2';
 import LicensedCharacters from '../../components/LicensedCharacters';
-import FooterCTA from '../../components/FooterCTA';
 import PricingFooter from '../../components/PricingFooter';
 
 export default function PricingPage() {
@@ -14,9 +14,9 @@ export default function PricingPage() {
       <PricingHero />
       <DesktopPricing />
       <StreamingPricing />
-      <CreatorBundle />
+      <PricingBanner />
+      <PricingBanner2 />
       <LicensedCharacters />
-      <FooterCTA />
       <PricingFooter />
     </main>
   );

@@ -35,7 +35,7 @@ export default function DesktopPricing() {
             <h3 className="text-[18px] font-bold uppercase text-white mb-2">FREE TIER</h3>
             <div className="text-[44px] font-black text-[#8B3DFF] mb-2">$0</div>
             
-            <div className="absolute top-12 right-6">
+            <div className="absolute right-4 top-32">
               <Image
                 src="/UUU3.png"
                 alt="Robot"
@@ -47,19 +47,19 @@ export default function DesktopPricing() {
             </div>
 
             <ul className="space-y-2 mb-auto">
-              <li className="flex items-center gap-3 text-[#C9C9D4] text-[15px] leading-[18px]">
+              <li className="flex items-center gap-3 text-[#C9C9D4] text-[15px] font-medium leading-[22px]">
                 <Check className="w-5 h-5 text-[#8B3DFF]" />
                 Basic companion
               </li>
-              <li className="flex items-center gap-3 text-[#C9C9D4] text-[15px] leading-[18px]">
+              <li className="flex items-center gap-3 text-[#C9C9D4] text-[15px] font-medium leading-[22px]">
                 <Check className="w-5 h-5 text-[#8B3DFF]" />
                 Limited personality
               </li>
-              <li className="flex items-center gap-3 text-[#C9C9D4] text-[15px] leading-[18px]">
+              <li className="flex items-center gap-3 text-[#C9C9D4] text-[15px] font-medium leading-[22px]">
                 <Check className="w-5 h-5 text-[#8B3DFF]" />
                 Limited memory
               </li>
-              <li className="flex items-center gap-3 text-[#C9C9D4] text-[15px] leading-[18px]">
+              <li className="flex items-center gap-3 text-[#C9C9D4] text-[15px] font-medium leading-[22px]">
                 <Check className="w-5 h-5 text-[#8B3DFF]" />
                 Limited interactions
               </li>
@@ -79,7 +79,7 @@ export default function DesktopPricing() {
             <div className="text-[44px] font-black text-[#8B3DFF] mb-2">$19.99</div>
             <p className="text-[#A8A8B5] text-[14px] mb-4">One-time purchase</p>
             
-            <div className="absolute top-12 right-6">
+            <div className="absolute right-4 top-32">
               <Image
                 src="/UUU4.png"
                 alt="Cat"
@@ -91,19 +91,19 @@ export default function DesktopPricing() {
             </div>
 
             <ul className="space-y-2 mb-auto">
-              <li className="flex items-center gap-3 text-[#C9C9D4] text-[15px] leading-[18px]">
+              <li className="flex items-center gap-3 text-[#C9C9D4] text-[15px] font-medium leading-[22px]">
                 <Check className="w-5 h-5 text-[#8B3DFF]" />
                 Unlock character
               </li>
-              <li className="flex items-center gap-3 text-[#C9C9D4] text-[15px] leading-[18px]">
+              <li className="flex items-center gap-3 text-[#C9C9D4] text-[15px] font-medium leading-[22px]">
                 <Check className="w-5 h-5 text-[#8B3DFF]" />
                 More animations
               </li>
-              <li className="flex items-center gap-3 text-[#C9C9D4] text-[15px] leading-[18px]">
+              <li className="flex items-center gap-3 text-[#C9C9D4] text-[15px] font-medium leading-[22px]">
                 <Check className="w-5 h-5 text-[#8B3DFF]" />
                 Customization
               </li>
-              <li className="flex items-center gap-3 text-[#C9C9D4] text-[15px] leading-[18px]">
+              <li className="flex items-center gap-3 text-[#C9C9D4] text-[15px] font-medium leading-[22px]">
                 <Check className="w-5 h-5 text-[#8B3DFF]" />
                 Better personality
               </li>
@@ -117,51 +117,70 @@ export default function DesktopPricing() {
           {/* Premium - Best Value */}
           <motion.div
             whileHover={{ y: -6 }}
-                        className="relative rounded-[22px] bg-[#11111C] border-2 border-[#8B3DFF] px-8 pt-7 pb-6 h-[430px] flex flex-col shadow-[0_12px_40px_rgba(0,0,0,.35)] before:absolute before:inset-0 before:rounded-[22px] before:bg-[radial-gradient(circle_at_top_right,rgba(139,61,255,.15),transparent_70%)] before:pointer-events-none transition-all duration-300 hover:shadow-[0_0_60px_rgba(139,61,255,.35)] shadow-[0_0_35px_rgba(139,61,255,.35)] scale-[1.03]"
+                        className="relative rounded-[22px] bg-[#11111C] border-2 border-[#8B3DFF] px-8 pt-7 pb-6 h-[560px] flex flex-col shadow-[0_12px_40px_rgba(0,0,0,.35)] before:absolute before:inset-0 before:rounded-[22px] before:bg-[radial-gradient(circle_at_top_right,rgba(139,61,255,.15),transparent_70%)] before:pointer-events-none transition-all duration-300 hover:shadow-[0_0_60px_rgba(139,61,255,.28)] scale-[1.03]"
           >
             <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#8B3DFF] text-white text-[12px] font-bold px-5 py-1.5 rounded-full">
               BEST VALUE
             </div>
 
-            <h3 className="text-[18px] font-bold uppercase text-white mb-4">PREMIUM AI COMPANION</h3>
-            <div className="text-[44px] font-black text-[#8B3DFF] mb-2">$9.99<span className="text-[20px] font-normal text-[#A8A8B5]">/month</span></div>
-            <p className="text-[#A8A8B5] text-[14px] mb-4">or <span className="text-[20px] font-normal">$79/year</span></p>
+            <h3 className="text-[18px] font-bold uppercase text-white mb-4 tracking-[0.5px]">PREMIUM AI COMPANION</h3>
+            <div className="flex items-end gap-1 mb-2">
+              <span className="text-[56px] font-black text-[#8B3DFF] leading-none">
+                $9.99
+              </span>
+              <span className="text-[18px] text-[#A8A8B5] mb-1">
+                /month
+              </span>
+            </div>
+            <div className="mb-2">
+              <p className="text-[#A8A8B5]  text-sm">
+                or
+              </p>
+              <div className="flex items-end gap-1">
+                <span className="text-[38px] font-black text-[#8B3DFF]">
+                  $79
+                </span>
+                <span className="text-[18px] text-[#8B3DFF] mb-1">
+                  /year
+                </span>
+              </div>
+            </div>
             
-            <div className="absolute right-[-15px] bottom-16">
+            <div className="absolute right-6 top-[140px]">
               <Image
                 src="/UUU5.png"
                 alt="Premium Robot"
-                width={200}
-                height={200}
+                width={155}
+                height={155}
                 className="object-contain"
                 unoptimized
               />
             </div>
 
-            <p className="text-[#A8A8B5] text-[14px] mb-2 font-semibold">Includes:</p>
+            <p className="text-[#9B5CFF] text-[14px] mb-0.5 font-bold">Includes:</p>
             
-            <ul className="space-y-2 mb-auto">
-              <li className="flex items-center gap-3 text-[#C9C9D4] text-[15px] leading-[18px]">
+            <ul className="space-y-1.5 mb-auto">
+              <li className="flex items-center gap-3 text-[#C9C9D4] text-[15px] font-medium leading-[22px]">
                 <Check className="w-5 h-5 text-[#8B3DFF]" />
                 Long-term memory
               </li>
-              <li className="flex items-center gap-3 text-[#C9C9D4] text-[15px] leading-[18px]">
+              <li className="flex items-center gap-3 text-[#C9C9D4] text-[15px] font-medium leading-[22px]">
                 <Check className="w-5 h-5 text-[#8B3DFF]" />
                 Advanced conversations
               </li>
-              <li className="flex items-center gap-3 text-[#C9C9D4] text-[15px] leading-[18px]">
+              <li className="flex items-center gap-3 text-[#C9C9D4] text-[15px] font-medium leading-[22px]">
                 <Check className="w-5 h-5 text-[#8B3DFF]" />
                 Personality tuning
               </li>
-              <li className="flex items-center gap-3 text-[#C9C9D4] text-[15px] leading-[18px]">
+              <li className="flex items-center gap-3 text-[#C9C9D4] text-[15px] font-medium leading-[22px]">
                 <Check className="w-5 h-5 text-[#8B3DFF]" />
                 More behaviors
               </li>
-              <li className="flex items-center gap-3 text-[#C9C9D4] text-[15px] leading-[18px]">
+              <li className="flex items-center gap-3 text-[#C9C9D4] text-[15px] font-medium leading-[22px]">
                 <Check className="w-5 h-5 text-[#8B3DFF]" />
                 Voice features
               </li>
-              <li className="flex items-center gap-3 text-[#C9C9D4] text-[15px] leading-[18px]">
+              <li className="flex items-center gap-3 text-[#C9C9D4] text-[15px] font-medium leading-[22px]">
                 <Check className="w-5 h-5 text-[#8B3DFF]" />
                 Cloud sync
               </li>
