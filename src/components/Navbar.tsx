@@ -245,7 +245,7 @@ export default function Navbar() {
                           }}
                         />
                       )}
-                      {/* Desktop image */}
+                      {/* Desktop imae */}
                       <Image
                         src={popupType === 'our-products' ? '/Our Products Tab. (1).png' : '/cdc.png'}
                         alt={popupType === 'our-products' ? 'Our Products' : 'What Are Syns'}
