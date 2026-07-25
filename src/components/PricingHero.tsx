@@ -23,7 +23,7 @@ export default function PricingHero() {
   ];
 
   return (
-    <section className="relative overflow-hidden bg-black py-8">
+    <section className="relative overflow-hidden bg-black py-25 md:py-10">
       {/* Background Glow */}
       <div className="absolute left-[-120px] top-[120px] h-[420px] w-[420px] rounded-full bg-[#8B3DFF]/5 blur-[180px]" />
       <div className="absolute right-[-150px] top-[60px] h-[500px] w-[500px] rounded-full bg-[#7C3AED]/5 blur-[220px]" />
@@ -63,7 +63,7 @@ export default function PricingHero() {
 
           {/* FEATURES */}
 
-          <div className="mt-14 flex gap-10">
+          <div className="mt-32 md:mt-14 flex gap-10">
 
             {features.map((feature) => {
               return (
@@ -109,7 +109,7 @@ export default function PricingHero() {
           initial={{ opacity: 0, x: 60 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: .8 }}
-          className="relative flex items-center justify-center -mt-30"
+          className="relative flex items-center justify-center -mt-30 md:-mt-39"
         >
           {/* Purple glow behind image */}
 
