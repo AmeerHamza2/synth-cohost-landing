@@ -26,11 +26,11 @@ export default function LicensedCharacters() {
           className="relative"
         >
           <Image
-            src="/uuu3.png"
+            src="/download.gif"
             alt="Robot"
             width={120}
             height={120}
-            className="object-contain"
+            className="object-contain rounded-2xl"
             unoptimized
           />
         </motion.div>
@@ -54,7 +54,7 @@ export default function LicensedCharacters() {
           boxShadow: '0 4px 20px rgba(168, 85, 247, 0.4)',
         }}
         transition={{ duration: 0.25 }}
-        className="h-[52px] w-[170px] md:w-[170px] w-full rounded-[12px] border border-[#A855F7] text-white font-semibold text-[16px] relative z-10"
+        className="h-[52px] w-[170px] md:w-[170px] w-full rounded-[12px] border border-[#A855F7] text-white font-semibold text-[16px] relative z-10 cursor-pointer"
         style={{ backgroundColor: 'transparent' }}
       >
         Join Waitlist

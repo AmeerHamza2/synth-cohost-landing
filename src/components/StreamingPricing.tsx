@@ -1,8 +1,10 @@
 'use client';
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Check, Radio, Zap, TrendingUp, Clock3, DollarSign } from 'lucide-react';
+import WaitlistModal from './WaitlistModal';
 
 const benefits = [
   { icon: Zap, text: 'More engagement' },
@@ -43,7 +45,7 @@ const plans = [
   }
 ];
 
-function Card({plan}:{plan:any}){
+function Card({plan, onOpenModal}:{plan:any, onOpenModal:()=>void}){
  return (
  <motion.div 
    whileHover={{y:-4}}
@@ -91,7 +93,7 @@ function Card({plan}:{plan:any}){
  </div>
  
  <div className="mt-auto pt-6 relative z-20">
-   <button className={`w-full h-[50px] rounded-[10px] ${plan.featured?'bg-gradient-to-r from-[#8B3DFF] to-[#6A1BFF] text-white shadow-[0_0_20px_rgba(139,61,255,.3)]':'border border-[#8B3DFF] text-[#8B3DFF] bg-transparent hover:border-[#B26DFF]'} font-semibold text-[16px] transition-all z-10`}>
+   <button onClick={onOpenModal} className={`w-full h-[50px] rounded-[10px] ${plan.featured?'bg-gradient-to-r from-[#8B3DFF] to-[#6A1BFF] text-white shadow-[0_0_20px_rgba(139,61,255,.3)]':'border border-[#8B3DFF] text-[#8B3DFF] bg-transparent hover:border-[#B26DFF]'} font-semibold text-[16px] transition-all z-10 cursor-pointer`}>
      {plan.cta}
    </button>
  </div>
@@ -99,8 +101,11 @@ function Card({plan}:{plan:any}){
 }
 
 export default function StreamingPricing(){
+ const [isModalOpen, setIsModalOpen] = useState(false);
+
  return (
  <section className="py-4 px-6 lg:px-12 max-w-[1400px] mx-auto">
+ <WaitlistModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
  <motion.div
  initial={{ opacity: 0, y: 30 }}
  whileInView={{ opacity: 1, y: 0 }}
@@ -141,7 +146,7 @@ export default function StreamingPricing(){
      viewport={{ once: true }}
      transition={{ duration: 0.5, delay: index * 0.1 }}
    >
-     <Card plan={p}/>
+     <Card plan={p} onOpenModal={() => setIsModalOpen(true)}/>
    </motion.div>
  ))}
  </div>

@@ -38,7 +38,7 @@ export default function PricingNavbar() {
         <li key={link.name}>
           <Link
             href={link.href}
-            className="text-[15px] font-medium text-[#A8A8B5] hover:text-white transition-colors"
+            className="text-[15px] font-medium text-[#A8A8B5] hover:text-white transition-colors cursor-pointer"
           >
             {link.name}
           </Link>
@@ -50,14 +50,14 @@ export default function PricingNavbar() {
     <div className="flex-1" />
 
     {/* Join Waitlist Button */}
-    <button className="hidden md:block px-8 h-12 rounded-xl border border-[#8B3DFF] text-white font-medium hover:bg-[#8B3DFF]/10 transition-colors">
+    <button className="hidden md:block px-8 h-12 rounded-xl border border-[#8B3DFF] text-white font-medium hover:bg-[#8B3DFF]/10 transition-colors cursor-pointer">
       Join Waitlist
     </button>
 
     {/* Mobile Menu */}
     <button
       onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-      className="md:hidden p-2 text-white"
+      className="md:hidden p-2 text-white cursor-pointer"
     >
       {isMobileMenuOpen ? (
         <X className="w-6 h-6" />
@@ -84,13 +84,13 @@ export default function PricingNavbar() {
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="block text-lg font-medium text-[#A8A8B5] hover:text-white transition-colors"
+                  className="block text-lg font-medium text-[#A8A8B5] hover:text-white transition-colors cursor-pointer"
                 >
                   {link.name}
                 </Link>
               ))}
               {/* Join Waitlist Button in Mobile */}
-              <button className="w-full mt-6 px-8 h-12 rounded-xl border border-[#8B3DFF] text-white font-medium hover:bg-[#8B3DFF]/10 transition-colors">
+              <button className="w-full mt-6 px-8 h-12 rounded-xl border border-[#8B3DFF] text-white font-medium hover:bg-[#8B3DFF]/10 transition-colors cursor-pointer">
                 Join Waitlist
               </button>
             </div>

@@ -1,12 +1,17 @@
 'use client';
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Check, Monitor } from 'lucide-react';
+import WaitlistModal from './WaitlistModal';
 
 export default function DesktopPricing() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <section className="py-4 px-6 lg:px-12 max-w-[1400px] mx-auto">
+      <WaitlistModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -109,7 +114,7 @@ export default function DesktopPricing() {
               </li>
             </ul>
 
-            <button className="w-full h-12 rounded-xl bg-gradient-to-r from-[#8B3DFF] to-[#6A1BFF] text-white font-semibold hover:shadow-[0_0_30px_rgba(139,61,255,.4)] transition-all cursor-pointer mt-4">
+            <button onClick={() => setIsModalOpen(true)} className="w-full h-12 rounded-xl bg-gradient-to-r from-[#8B3DFF] to-[#6A1BFF] text-white font-semibold hover:shadow-[0_0_30px_rgba(139,61,255,.4)] transition-all cursor-pointer mt-4">
               Unlock Now
             </button>
           </motion.div>
@@ -186,7 +191,7 @@ export default function DesktopPricing() {
               </li>
             </ul>
 
-            <button className="w-full h-12 rounded-xl bg-gradient-to-r from-[#8B3DFF] to-[#6A1BFF] text-white font-semibold hover:shadow-[0_0_30px_rgba(139,61,255,.4)] transition-all cursor-pointer mt-4">
+            <button onClick={() => setIsModalOpen(true)} className="w-full h-12 rounded-xl bg-gradient-to-r from-[#8B3DFF] to-[#6A1BFF] text-white font-semibold hover:shadow-[0_0_30px_rgba(139,61,255,.4)] transition-all cursor-pointer mt-4">
               Go Premium
             </button>
           </motion.div>
