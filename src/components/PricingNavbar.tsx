@@ -6,15 +6,17 @@ import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePopup } from '../contexts/PopupContext';
+import SignInModal from './SignInModal';
 
 export default function PricingNavbar() {
   const { isPopupOpen, popupType, openPopup, closePopup } = usePopup();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isSignInOpen, setIsSignInOpen] = useState(false);
 
   const navLinks = [
     { name: 'What Are Syns', href: '#', isPopup: true, popupType: 'what-are-syns' },
     { name: 'Our Products', href: '#' },
-    { name: 'For Streamers', href: '#' },
+    { name: 'For Streamers', href: '/#streamers' },
   ];
 
   return (
@@ -141,6 +143,7 @@ export default function PricingNavbar() {
                 onClick={(e) => {
                   e.stopPropagation();
                   closePopup();
+                  setIsSignInOpen(true);
                 }}
               >
                 <div className="relative">
@@ -158,6 +161,9 @@ export default function PricingNavbar() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* SignIn Modal */}
+      <SignInModal isOpen={isSignInOpen} onClose={() => setIsSignInOpen(false)} />
     </>
   );
 }
