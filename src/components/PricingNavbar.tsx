@@ -7,11 +7,13 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePopup } from '../contexts/PopupContext';
 import SignInModal from './SignInModal';
+import WaitlistModal from './WaitlistModal';
 
 export default function PricingNavbar() {
   const { isPopupOpen, popupType, openPopup, closePopup } = usePopup();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSignInOpen, setIsSignInOpen] = useState(false);
+  const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
 
   const navLinks = [
     { name: 'What Are Syns', href: '#', isPopup: true, popupType: 'what-are-syns' },
@@ -63,7 +65,7 @@ export default function PricingNavbar() {
     </ul>
 
     {/* Join Waitlist Button */}
-    <button className="hidden md:block px-8 h-12 rounded-xl border border-[#8B3DFF] text-white font-medium hover:bg-[#8B3DFF]/10 transition-colors cursor-pointer">
+    <button onClick={() => setIsWaitlistOpen(true)} className="hidden md:block px-8 h-12 rounded-xl border border-[#8B3DFF] text-white font-medium hover:bg-[#8B3DFF]/10 transition-colors cursor-pointer">
       Join Waitlist
     </button>
 
@@ -116,7 +118,7 @@ export default function PricingNavbar() {
                 )
               ))}
               {/* Join Waitlist Button in Mobile */}
-              <button className="w-full mt-6 px-8 h-12 rounded-xl border border-[#8B3DFF] text-white font-medium hover:bg-[#8B3DFF]/10 transition-colors cursor-pointer">
+              <button onClick={() => setIsWaitlistOpen(true)} className="w-full mt-6 px-8 h-12 rounded-xl border border-[#8B3DFF] text-white font-medium hover:bg-[#8B3DFF]/10 transition-colors cursor-pointer">
                 Join Waitlist
               </button>
             </div>
@@ -164,6 +166,9 @@ export default function PricingNavbar() {
 
       {/* SignIn Modal */}
       <SignInModal isOpen={isSignInOpen} onClose={() => setIsSignInOpen(false)} />
+
+      {/* Waitlist Modal */}
+      <WaitlistModal isOpen={isWaitlistOpen} onClose={() => setIsWaitlistOpen(false)} />
     </>
   );
 }

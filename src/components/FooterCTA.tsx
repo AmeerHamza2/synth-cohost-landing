@@ -1,9 +1,12 @@
 'use client';
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import WaitlistModal from './WaitlistModal';
 
 export default function FooterCTA() {
+  const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
   return (
     <section className="py-20 px-6 lg:px-12 max-w-[1400px] mx-auto">
       <motion.div
@@ -40,6 +43,7 @@ export default function FooterCTA() {
           {/* Right - CTA Button */}
           <div className="flex justify-center lg:justify-end">
             <motion.button
+              onClick={() => setIsWaitlistOpen(true)}
               whileHover={{ scale: 1.02, backgroundColor: '#8B3DFF' }}
               whileTap={{ scale: 0.98 }}
               className="px-8 py-3 rounded-full border border-[#8B3DFF] text-white font-semibold hover:bg-[#8B3DFF]/10 transition-all cursor-pointer"
@@ -49,6 +53,7 @@ export default function FooterCTA() {
           </div>
         </div>
       </motion.div>
+      <WaitlistModal isOpen={isWaitlistOpen} onClose={() => setIsWaitlistOpen(false)} />
     </section>
   );
 }

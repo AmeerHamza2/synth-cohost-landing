@@ -12,7 +12,7 @@ const footerLinks = {
     { name: 'What are Syns?', href: '#', isPopup: true, popupType: 'what-are-syns' },
     { name: 'Products', href: '#', isPopup: true, popupType: 'our-products' },
     { name: 'Download', href: '#', isSignIn: true },
-    { name: 'About', href: '#about' },
+    { name: 'About', href: '#' },
     { name: 'Contact', href: 'mailto:creator@synthcohost.com' },
   ],
   legal: [
@@ -77,14 +77,14 @@ export default function Footer() {
     {
       title: 'For Streamers',
       items: [
-        { name: 'Features', href: '#product' },
-        { name: 'Use Cases', href: '#streamers' },
+        { name: 'Features', href: '/#product' },
+        { name: 'Use Cases', href: '/#streamers' },
       ]
     },
     {
       title: 'Company',
       items: [
-        { name: 'About', href: '#about' },
+        { name: 'About', href: '#' },
         { name: 'Contact', href: 'mailto:creator@synthcohost.com' },
       ]
     },

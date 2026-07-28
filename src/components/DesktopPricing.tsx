@@ -5,13 +5,16 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Check, Monitor } from 'lucide-react';
 import WaitlistModal from './WaitlistModal';
+import SignInModal from './SignInModal';
 
 export default function DesktopPricing() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSignInOpen, setIsSignInOpen] = useState(false);
 
   return (
     <section className="py-4 px-6 lg:px-12 max-w-[1400px] mx-auto">
       <WaitlistModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <SignInModal isOpen={isSignInOpen} onClose={() => setIsSignInOpen(false)} />
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -70,7 +73,7 @@ export default function DesktopPricing() {
               </li>
             </ul>
 
-            <button className="w-full h-12 rounded-xl border border-[#8B3DFF] text-white font-semibold hover:bg-[#8B3DFF] transition-colors cursor-pointer mt-1">
+            <button onClick={() => setIsSignInOpen(true)} className="w-full h-12 rounded-xl border border-[#8B3DFF] text-white font-semibold hover:bg-[#8B3DFF] transition-colors cursor-pointer mt-1">
               Get Started
             </button>
           </motion.div>
