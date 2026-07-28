@@ -5,7 +5,7 @@ import StreamingPricing from '../../components/StreamingPricing';
 import PricingBanner from '../../components/PricingBanner';
 import PricingBanner2 from '../../components/PricingBanner2';
 import LicensedCharacters from '../../components/LicensedCharacters';
-import PricingFooter from '../../components/PricingFooter';
+import Footer from '../../components/Footer';
 
 export default function PricingPage() {
   return (
@@ -17,7 +17,7 @@ export default function PricingPage() {
       <PricingBanner />
       <PricingBanner2 />
       <LicensedCharacters />
-      <PricingFooter />
+      <Footer />
     </main>
   );
 }

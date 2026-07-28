@@ -23,7 +23,7 @@ export default function PricingHero() {
   ];
 
   return (
-    <section className="relative overflow-hidden bg-black py-25 md:py-10">
+    <section className="relative overflow-hidden bg-black py-16 md:py-10  lg:py-2">
       {/* Background Glow */}
       <div className="absolute left-[-120px] top-[120px] h-[420px] w-[420px] rounded-full bg-[#8B3DFF]/5 blur-[180px]" />
       <div className="absolute right-[-150px] top-[60px] h-[500px] w-[500px] rounded-full bg-[#7C3AED]/5 blur-[220px]" />
@@ -109,20 +109,20 @@ export default function PricingHero() {
           initial={{ opacity: 0, x: 60 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: .8 }}
-          className="relative flex items-center justify-center -mt-30 md:-mt-39"
+          className="relative flex items-center justify-center mt-10"
         >
           {/* Purple glow behind image */}
 
-          <div className="absolute h-[720px] w-[720px] rounded-full bg-[#8B3DFF]/15 blur-[170px]" />
+          <div className="absolute h-[480px] w-[480px] md:h-[720px] md:w-[720px] rounded-full bg-[#8B3DFF]/15 blur-[170px]" />
 
-          <div className="relative h-[760px] w-full">
+          <div className="relative h-[900px] md:h-[760px] w-full">
             <Image
               src="/1 UUU.png"
               alt="Pricing Hero"
               fill
               priority
               unoptimized
-              className="object-contain object-center"
+              className=""
             />
           </div>
         </motion.div>

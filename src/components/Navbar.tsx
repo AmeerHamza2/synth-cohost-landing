@@ -18,7 +18,7 @@ type NavLink = {
 
 const navLinks: NavLink[] = [
   { name: 'What Are Syns', href: '#', isPopup: true, popupType: 'what-are-syns' },
-  { name: 'Our Products', href: '#', isPopup: true, popupType: 'our-products' },
+  { name: 'Our Products', href: '/pricing' },
   { name: 'For Streamers', href: '#streamers' },
 ];
 

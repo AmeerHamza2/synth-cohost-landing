@@ -5,12 +5,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePopup } from '../contexts/PopupContext';
 
 export default function PricingNavbar() {
+  const { isPopupOpen, popupType, openPopup, closePopup } = usePopup();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { name: 'What Are Syns', href: '#' },
+    { name: 'What Are Syns', href: '#', isPopup: true, popupType: 'what-are-syns' },
     { name: 'Our Products', href: '#' },
     { name: 'For Streamers', href: '#' },
   ];
@@ -21,33 +23,42 @@ export default function PricingNavbar() {
   <div className="max-w-[1600px] mx-auto h-full flex items-center px-6 lg:px-12">
 
     {/* Logo */}
-    <Link href="/" className="flex items-center shrink-0">
+    <Link href="/" className="flex items-center gap-2 shrink-0">
       <Image
-        src="/syn.png"
+        src="/Cohost Synth logo.png"
         alt="Synth Cohost"
         width={120}
         height={40}
-        className="w-auto h-10"
+        className="w-auto h-8"
         loading="eager"
       />
+      <span className="text-[13px] font-extrabold tracking-[-0.3px] text-white leading-[1.1]">
+        SYNTH<span className="block font-normal">COHOST</span>
+      </span>
     </Link>
 
-    {/* Navigation - pushed much closer to logo */}
-    <ul className="hidden  ml-65 md:flex gap-8">
+    {/* Navigation - centered */}
+    <ul className="flex gap-4 md:gap-8 flex-1 justify-center">
       {navLinks.map((link) => (
         <li key={link.name}>
-          <Link
-            href={link.href}
-            className="text-[15px] font-medium text-[#A8A8B5] hover:text-white transition-colors cursor-pointer"
-          >
-            {link.name}
-          </Link>
+          {(link as any).isPopup ? (
+            <button
+              onClick={() => openPopup((link as any).popupType || null)}
+              className="text-[12px] sm:text-[13px] md:text-[15px] font-medium text-[#A8A8B5] hover:text-white transition-colors cursor-pointer border-0 bg-transparent p-0"
+            >
+              {link.name}
+            </button>
+          ) : (
+            <Link
+              href={link.href}
+              className="text-[12px] sm:text-[13px] md:text-[15px] font-medium text-[#A8A8B5] hover:text-white transition-colors cursor-pointer"
+            >
+              {link.name}
+            </Link>
+          )}
         </li>
       ))}
     </ul>
-
-    {/* Pushes everything after this to the far right */}
-    <div className="flex-1" />
 
     {/* Join Waitlist Button */}
     <button className="hidden md:block px-8 h-12 rounded-xl border border-[#8B3DFF] text-white font-medium hover:bg-[#8B3DFF]/10 transition-colors cursor-pointer">
@@ -80,19 +91,69 @@ export default function PricingNavbar() {
           >
             <div className="px-6 py-8 space-y-4">
               {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="block text-lg font-medium text-[#A8A8B5] hover:text-white transition-colors cursor-pointer"
-                >
-                  {link.name}
-                </Link>
+                (link as any).isPopup ? (
+                  <button
+                    key={link.name}
+                    onClick={() => {
+                      openPopup((link as any).popupType || null);
+                      setIsMobileMenuOpen(false);
+                    }}
+                    className="block text-lg font-medium text-[#A8A8B5] hover:text-white transition-colors w-full text-left cursor-pointer border-0 bg-transparent p-0"
+                  >
+                    {link.name}
+                  </button>
+                ) : (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="block text-lg font-medium text-[#A8A8B5] hover:text-white transition-colors cursor-pointer"
+                  >
+                    {link.name}
+                  </Link>
+                )
               ))}
               {/* Join Waitlist Button in Mobile */}
               <button className="w-full mt-6 px-8 h-12 rounded-xl border border-[#8B3DFF] text-white font-medium hover:bg-[#8B3DFF]/10 transition-colors cursor-pointer">
                 Join Waitlist
               </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Popup Modal */}
+      <AnimatePresence>
+        {isPopupOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
+            onClick={() => closePopup()}
+          >
+            <div className="flex items-center justify-center min-h-screen px-4">
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                className="relative rounded-2xl p-8 w-[95vw] max-w-[1800px]"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  closePopup();
+                }}
+              >
+                <div className="relative">
+                  <Image
+                    src="/cdc.png"
+                    alt="What Are Syns"
+                    width={1800}
+                    height={900}
+                    className="w-full max-h-[550px] object-contain border-0 cursor-pointer"
+                    unoptimized
+                  />
+                </div>
+              </motion.div>
             </div>
           </motion.div>
         )}

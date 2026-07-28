@@ -20,7 +20,6 @@ const plans = [
     cta:'Start Now',
     featured:false,
     image:'/UUU6.png',
-    imageClass:'right-2 -bottom-8 w-[38%] h-[42%]',
     items:['AI cohost','Basic chat interaction','Stream overlay','Limited hours']
   },
   {
@@ -29,7 +28,6 @@ const plans = [
     cta:'Go Pro',
     featured:true,
     image:'/UUU7.png',
-    imageClass:'right-0 -bottom-8 w-[45%] h-[62%]',
     items:['Full AI cohost','Memory','Multiple personalities','Chat interaction','Streaming integrations','Voice','Analytics']
   },
   {
@@ -38,7 +36,6 @@ const plans = [
     cta:'Go Power',
     featured:false,
     image:'/UUU8.png',
-    imageClass:'right-[-5px] -bottom-8 w-[45%] h-[60%]',
     forItems:['VTubers','Professional creators','esports','agencies'],
     items:['Custom personality','Brand integrations','Sponsor behaviors','Multiple characters','Priority compute'],
     increasedHeight:true
@@ -82,12 +79,13 @@ function Card({plan, onOpenModal}:{plan:any, onOpenModal:()=>void}){
  </div>
  
  <div className="absolute right-6 bottom-10 w-44 h-44 rounded-full bg-[#8B3DFF] blur-[90px] opacity-20 z-0" />
- <div className={`absolute ${plan.imageClass} z-0`}>
+ <div className={`absolute right-0 ${plan.title === 'CREATOR STARTER' ? 'top-25 -mr-30' : plan.title === 'POWER CREATOR' ? 'top-20 -mr-20' : 'top-20 -mr-15'}`}>
    <Image 
      src={plan.image} 
      alt="" 
-     fill 
-     className="object-contain object-top" 
+     width={plan.title === 'CREATOR STARTER' ? 450 : 280}
+     height={plan.title === 'CREATOR STARTER' ? 450 : 280}
+     className="object-contain" 
      unoptimized
    />
  </div>

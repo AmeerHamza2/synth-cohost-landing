@@ -40,12 +40,12 @@ export default function DesktopPricing() {
             <h3 className="text-[18px] font-bold uppercase text-white mb-2">FREE TIER</h3>
             <div className="text-[44px] font-black text-[#8B3DFF] mb-2">$0</div>
             
-            <div className="absolute right-4 top-32">
+            <div className="absolute right-0 top-20 -mr-15">
               <Image
                 src="/UUU3.png"
                 alt="Robot"
-                width={160}
-                height={160}
+                width={280}
+                height={280}
                 className="object-contain"
                 unoptimized
               />
@@ -84,12 +84,12 @@ export default function DesktopPricing() {
             <div className="text-[44px] font-black text-[#8B3DFF] mb-2">$19.99</div>
             <p className="text-[#A8A8B5] text-[14px] mb-4">One-time purchase</p>
             
-            <div className="absolute right-4 top-32">
+            <div className="absolute right-0 top-20 -mr-15">
               <Image
                 src="/UUU4.png"
                 alt="Cat"
-                width={160}
-                height={160}
+                width={280}
+                height={280}
                 className="object-contain"
                 unoptimized
               />
@@ -151,12 +151,12 @@ export default function DesktopPricing() {
               </div>
             </div>
             
-            <div className="absolute right-6 top-[140px]">
+            <div className="absolute right-0 top-24 -mr-8">
               <Image
                 src="/UUU5.png"
                 alt="Premium Robot"
-                width={155}
-                height={155}
+                width={280}
+                height={280}
                 className="object-contain"
                 unoptimized
               />
