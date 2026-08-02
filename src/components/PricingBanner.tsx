@@ -14,11 +14,22 @@ export default function PricingBanner() {
           src="/hero101.png"
           alt="Hero"
           fill
-          className="object-cover"
+          className="object-cover hidden md:block"
+          unoptimized
+        />
+        <Image
+          src="/ona ai.png"
+          alt="Hero"
+          fill
+          className="object-cover block md:hidden object-top"
           unoptimized
         />
         <div 
-          className="absolute bottom-0 right-0 w-1/3 h-1/2 cursor-pointer"
+          className="absolute bottom-0 right-0 w-1/3 h-1/2 cursor-pointer md:block hidden"
+          onClick={() => setIsModalOpen(true)}
+        />
+        <div 
+          className="absolute bottom-4 right-4 w-1/2 h-1/3 cursor-pointer md:hidden z-10 bg-transparent"
           onClick={() => setIsModalOpen(true)}
         />
       </div>

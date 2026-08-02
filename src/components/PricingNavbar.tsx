@@ -42,7 +42,7 @@ export default function PricingNavbar() {
     </Link>
 
     {/* Navigation - centered */}
-    <ul className="flex gap-4 md:gap-8 flex-1 justify-center">
+    <ul className="hidden md:flex gap-4 md:gap-8 flex-1 justify-center">
       {navLinks.map((link) => (
         <li key={link.name}>
           {(link as any).isPopup ? (
@@ -72,7 +72,7 @@ export default function PricingNavbar() {
     {/* Mobile Menu */}
     <button
       onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-      className="md:hidden p-2 text-white cursor-pointer"
+      className="md:hidden p-2 text-white cursor-pointer ml-auto"
     >
       {isMobileMenuOpen ? (
         <X className="w-6 h-6" />

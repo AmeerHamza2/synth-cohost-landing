@@ -13,7 +13,7 @@ export default function LicensedCharacters() {
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="w-full max-w-[1400px] mx-auto min-h-[100px] rounded-[22px] border border-[rgba(147,51,234,0.25)] px-8 flex flex-col md:flex-row items-center justify-between gap-5 relative overflow-hidden py-5 md:py-0"
+        className="w-full max-w-[1400px] mx-auto min-h-[100px] rounded-[22px] border border-[rgba(147,51,234,0.25)] px-8 flex flex-col md:flex-row items-center justify-between gap-5 relative overflow-hidden py-5 md:py-0 mt-16 md:mt-0"
 
       >
         {/* Subtle noise texture overlay */}
