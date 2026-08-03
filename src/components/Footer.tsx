@@ -339,7 +339,7 @@ export default function Footer() {
       {/* Sign In Modal */}
       <AnimatePresence>
         {isSignInOpen && (
-          <SignInModal onClose={() => setIsSignInOpen(false)} />
+          <SignInModal isOpen={isSignInOpen} onClose={() => setIsSignInOpen(false)} />
         )}
       </AnimatePresence>
     </footer>

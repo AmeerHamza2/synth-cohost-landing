@@ -294,7 +294,7 @@ export default function Navbar() {
       {/* Sign In Modal */}
       <AnimatePresence>
         {isSignInOpen && (
-          <SignInModal onClose={() => {
+          <SignInModal isOpen={isSignInOpen} onClose={() => {
             setIsSignInOpen(false);
             closePopup();
           }} />

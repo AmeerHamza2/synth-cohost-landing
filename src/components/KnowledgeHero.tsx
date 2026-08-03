@@ -76,7 +76,7 @@ export default function KnowledgeHero() {
       {/* Sign In Modal */}
       <AnimatePresence>
         {isSignInOpen && (
-          <SignInModal onClose={() => setIsSignInOpen(false)} />
+          <SignInModal isOpen={isSignInOpen} onClose={() => setIsSignInOpen(false)} />
         )}
       </AnimatePresence>
     </section>
