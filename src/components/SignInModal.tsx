@@ -1,13 +1,19 @@
 'use client';
 
-import React from "react";
+import React, { useState } from "react";
 import {
-  FaGoogle,
   FaApple,
   FaYahoo,
+  FaLock,
+  FaEye,
+  FaEyeSlash,
 } from "react-icons/fa";
 
-import { BsMicrosoft } from "react-icons/bs";
+import {
+  apiRegister,
+  persistSession,
+  redirectToDashboard,
+} from "../lib/auth";
 
 interface Props {
   isOpen?: boolean;
@@ -15,7 +21,39 @@ interface Props {
 }
 
 const SignInModal: React.FC<Props> = ({ isOpen = false, onClose }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [termsAccepted, setTermsAccepted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
   if (!isOpen) return null;
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+
+    if (!email.trim() || !password) {
+      setError("Please enter your email and password.");
+      return;
+    }
+    if (!termsAccepted) {
+      setError("You must accept the Terms of Service to register.");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const result = await apiRegister(email.trim(), password, termsAccepted);
+      await persistSession(result.access_token, result.refresh_token);
+      redirectToDashboard();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/40 p-3 sm:p-4" onClick={onClose}>
@@ -38,38 +76,97 @@ const SignInModal: React.FC<Props> = ({ isOpen = false, onClose }) => {
           />
         </div>
 
-   
+        <form onSubmit={handleSubmit}>
+          <div className="mt-4 sm:mt-6">
+            <label className="mb-2 sm:mb-3 block text-base sm:text-lg font-semibold text-white">
+              What shall we call you?
+            </label>
 
-        <div className="mt-4 sm:mt-6">
-          <label className="mb-2 sm:mb-3 block text-base sm:text-lg font-semibold text-white">
-            What shall we call you?
+            <input
+              type="email"
+              placeholder="you@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              autoComplete="email"
+              className="
+                h-11
+                sm:h-12
+                w-full
+                rounded-xl
+                border
+                border-purple-500
+                bg-transparent
+                px-3
+                sm:px-4
+                text-sm
+                sm:text-base
+                text-white
+                outline-none
+                focus:ring-2
+                focus:ring-purple-500
+              "
+            />
+
+            <p className="mt-1.5 sm:mt-2 text-xs sm:text-sm text-purple-400">
+              Nicknames are welcome.
+            </p>
+          </div>
+
+          <div className="mt-3 sm:mt-4 relative">
+            <label className="mb-2 sm:mb-3 block text-base sm:text-lg font-semibold text-white">
+              Create a password
+            </label>
+            <div className="relative">
+              <div className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 text-[rgba(255,255,255,0.55)]">
+                <FaLock className="w-4 h-4" />
+              </div>
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                autoComplete="new-password"
+                className="h-11 sm:h-[58px] w-full rounded-xl border-2 border-purple-500 bg-[#0F0E19] pl-10 sm:pl-12 pr-10 sm:pr-12 text-sm sm:text-base text-white placeholder:text-[rgba(255,255,255,0.55)] outline-none focus:shadow-[0_0_15px_rgba(168,85,247,0.3)] transition-shadow"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 text-[rgba(255,255,255,0.55)] hover:text-white transition-colors"
+              >
+                {showPassword ? <FaEyeSlash className="w-4 h-4" /> : <FaEye className="w-4 h-4" />}
+              </button>
+            </div>
+          </div>
+
+          <label className="flex items-start gap-2 mt-3 sm:mt-4 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={termsAccepted}
+              onChange={(e) => setTermsAccepted(e.target.checked)}
+              className="w-4 h-4 mt-0.5 rounded border-purple-500 bg-transparent accent-purple-500"
+            />
+            <span className="text-xs sm:text-[15px] text-[rgba(255,255,255,0.75)]">
+              I agree to the{" "}
+              <span className="text-purple-400">Terms of Service</span> and{" "}
+              <span className="text-purple-400">Privacy Policy</span>.
+            </span>
           </label>
 
-          <input
-            placeholder=""
-            className="
-              h-11
-              sm:h-12
-              w-full
-              rounded-xl
-              border
-              border-purple-500
-              bg-transparent
-              px-3
-              sm:px-4
-              text-sm
-              sm:text-base
-              text-white
-              outline-none
-              focus:ring-2
-              focus:ring-purple-500
-            "
-          />
+          {error && (
+            <p className="mt-3 text-sm text-red-400">{error}</p>
+          )}
 
-          <p className="mt-1.5 sm:mt-2 text-xs sm:text-sm text-purple-400">
-            Nicknames are welcome.
-          </p>
-        </div>
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full h-11 sm:h-[58px] mt-4 sm:mt-5 rounded-xl text-white text-base sm:text-xl font-bold transition-all hover:brightness-110 disabled:opacity-60"
+            style={{
+              background: 'linear-gradient(90deg, #C26CFF, #8F3DFF)',
+            }}
+          >
+            {loading ? "Creating account..." : "Get Started"}
+          </button>
+        </form>
 
         <h3 className="mt-4 sm:mt-6 text-base sm:text-lg font-semibold text-white">
           Continue with your email provider

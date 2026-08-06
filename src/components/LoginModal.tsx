@@ -2,6 +2,11 @@
 
 import React, { useState } from "react";
 import { FaApple, FaYahoo, FaUser, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
+import {
+  apiLogin,
+  persistSession,
+  redirectToDashboard,
+} from "../lib/auth";
 
 interface Props {
   onClose?: () => void;
@@ -10,6 +15,79 @@ interface Props {
 const LoginModal: React.FC<Props> = ({ onClose }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [mfaToken, setMfaToken] = useState<string | null>(null);
+  const [mfaCode, setMfaCode] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+
+    if (!email.trim() || !password) {
+      setError("Please enter your email and password.");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const result = await apiLogin(email.trim(), password);
+      if (result && "mfa_required" in result && result.mfa_required) {
+        setMfaToken(result.mfa_token);
+        setMfaCode("");
+        setPassword("");
+      } else if (result && "access_token" in result) {
+        await persistSession(result.access_token, result.refresh_token);
+        redirectToDashboard();
+      } else {
+        setError("Unexpected response from the server.");
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleMfaVerify = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+
+    if (!mfaCode.trim()) {
+      setError("Please enter your authentication code.");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL || "https://api.synthcohost.com"}/auth/mfa/verify`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ mfa_token: mfaToken, code: mfaCode.trim() }),
+        }
+      );
+
+      const text = await res.text();
+      if (!res.ok) {
+        throw new Error(text || `MFA verification failed (${res.status})`);
+      }
+
+      const data = JSON.parse(text) as {
+        access_token: string;
+        refresh_token: string;
+      };
+      await persistSession(data.access_token, data.refresh_token);
+      redirectToDashboard();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "MFA verification failed.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 p-3 sm:p-4" onClick={onClose}>
@@ -32,70 +110,120 @@ const LoginModal: React.FC<Props> = ({ onClose }) => {
           />
         </div>
 
-        {/* Section Heading */}
-        <h3 className="mt-4 sm:mt-6 text-base sm:text-lg font-semibold text-white">
-          Log in with your credentials
-        </h3>
+        {mfaToken ? (
+          <form onSubmit={handleMfaVerify}>
+            <h3 className="mt-4 sm:mt-6 text-base sm:text-lg font-semibold text-white">
+              Two-factor authentication
+            </h3>
+            <p className="mt-2 text-sm text-[rgba(255,255,255,0.65)]">
+              Enter the code from your authenticator app.
+            </p>
 
-        {/* Input Fields */}
-        <div className="mt-3 sm:mt-4 space-y-3">
-          {/* Username/Email Input */}
-          <div className="relative">
-            <div className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 text-[rgba(255,255,255,0.55)]">
-              <FaUser className="w-4 h-4" />
+            <div className="relative mt-3 sm:mt-4">
+              <input
+                type="text"
+                inputMode="numeric"
+                autoFocus
+                placeholder="6-digit code"
+                value={mfaCode}
+                onChange={(e) => setMfaCode(e.target.value)}
+                className="h-11 sm:h-[58px] w-full rounded-xl border-2 border-purple-500 bg-[#0F0E19] px-4 text-sm sm:text-base text-white placeholder:text-[rgba(255,255,255,0.55)] outline-none focus:shadow-[0_0_15px_rgba(168,85,247,0.3)] transition-shadow"
+              />
             </div>
-            <input
-              type="text"
-              placeholder="Username or Email"
-              className="h-11 sm:h-[58px] w-full rounded-xl border-2 border-purple-500 bg-[#0F0E19] pl-10 sm:pl-12 pr-3 sm:pr-4 text-sm sm:text-base text-white placeholder:text-[rgba(255,255,255,0.55)] outline-none focus:shadow-[0_0_15px_rgba(168,85,247,0.3)] transition-shadow"
-            />
-          </div>
 
-          {/* Password Input */}
-          <div className="relative">
-            <div className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 text-[rgba(255,255,255,0.55)]">
-              <FaLock className="w-4 h-4" />
-            </div>
-            <input
-              type={showPassword ? "text" : "password"}
-              placeholder="Password"
-              className="h-11 sm:h-[58px] w-full rounded-xl border-2 border-purple-500 bg-[#0F0E19] pl-10 sm:pl-12 pr-10 sm:pr-12 text-sm sm:text-base text-white placeholder:text-[rgba(255,255,255,0.55)] outline-none focus:shadow-[0_0_15px_rgba(168,85,247,0.3)] transition-shadow"
-            />
+            {error && (
+              <p className="mt-3 text-sm text-red-400">{error}</p>
+            )}
+
             <button
-              type="button"
-              onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 text-[rgba(255,255,255,0.55)] hover:text-white transition-colors"
+              type="submit"
+              disabled={loading}
+              className="w-full h-11 sm:h-[58px] mt-4 sm:mt-5 rounded-xl text-white text-base sm:text-xl font-bold transition-all hover:brightness-110 disabled:opacity-60"
+              style={{ background: 'linear-gradient(90deg, #C26CFF, #8F3DFF)' }}
             >
-              {showPassword ? <FaEyeSlash className="w-4 h-4" /> : <FaEye className="w-4 h-4" />}
+              {loading ? "Verifying..." : "Verify"}
             </button>
-          </div>
-        </div>
+          </form>
+        ) : (
+          <form onSubmit={handleLogin}>
+            {/* Section Heading */}
+            <h3 className="mt-4 sm:mt-6 text-base sm:text-lg font-semibold text-white">
+              Log in with your credentials
+            </h3>
 
-        {/* Remember Me Row */}
-        <div className="flex items-center justify-between mt-3 sm:mt-4">
-          <label className="flex items-center gap-2 cursor-pointer">
-            <input
-              type="checkbox"
-              checked={rememberMe}
-              onChange={(e) => setRememberMe(e.target.checked)}
-              className="w-4 h-4 rounded border-purple-500 bg-transparent accent-purple-500"
-            />
-            <span className="text-xs sm:text-[15px] text-[rgba(255,255,255,0.75)]">Remember me</span>
-          </label>
-          <button className="text-xs sm:text-[15px] text-purple-400 hover:text-purple-300 transition-colors bg-transparent border-0 cursor-pointer">
-            Forgot password?
-          </button>
-        </div>
+            {/* Input Fields */}
+            <div className="mt-3 sm:mt-4 space-y-3">
+              {/* Email Input */}
+              <div className="relative">
+                <div className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 text-[rgba(255,255,255,0.55)]">
+                  <FaUser className="w-4 h-4" />
+                </div>
+                <input
+                  type="email"
+                  placeholder="Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  autoComplete="email"
+                  className="h-11 sm:h-[58px] w-full rounded-xl border-2 border-purple-500 bg-[#0F0E19] pl-10 sm:pl-12 pr-3 sm:pr-4 text-sm sm:text-base text-white placeholder:text-[rgba(255,255,255,0.55)] outline-none focus:shadow-[0_0_15px_rgba(168,85,247,0.3)] transition-shadow"
+                />
+              </div>
 
-        {/* Primary Login Button */}
-        <button
-          className="w-full h-11 sm:h-[58px] mt-4 sm:mt-5 rounded-xl text-white text-base sm:text-xl font-bold transition-all hover:brightness-110"
-          style={{
-            background: 'linear-gradient(90deg, #C26CFF, #8F3DFF)',
-          }}
-        >
-          Log In
-        </button>
+              {/* Password Input */}
+              <div className="relative">
+                <div className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 text-[rgba(255,255,255,0.55)]">
+                  <FaLock className="w-4 h-4" />
+                </div>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  autoComplete="current-password"
+                  className="h-11 sm:h-[58px] w-full rounded-xl border-2 border-purple-500 bg-[#0F0E19] pl-10 sm:pl-12 pr-10 sm:pr-12 text-sm sm:text-base text-white placeholder:text-[rgba(255,255,255,0.55)] outline-none focus:shadow-[0_0_15px_rgba(168,85,247,0.3)] transition-shadow"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 text-[rgba(255,255,255,0.55)] hover:text-white transition-colors"
+                >
+                  {showPassword ? <FaEyeSlash className="w-4 h-4" /> : <FaEye className="w-4 h-4" />}
+                </button>
+              </div>
+            </div>
+
+            {/* Remember Me Row */}
+            <div className="flex items-center justify-between mt-3 sm:mt-4">
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(e.target.checked)}
+                  className="w-4 h-4 rounded border-purple-500 bg-transparent accent-purple-500"
+                />
+                <span className="text-xs sm:text-[15px] text-[rgba(255,255,255,0.75)]">Remember me</span>
+              </label>
+              <button type="button" className="text-xs sm:text-[15px] text-purple-400 hover:text-purple-300 transition-colors bg-transparent border-0 cursor-pointer">
+                Forgot password?
+              </button>
+            </div>
+
+            {error && (
+              <p className="mt-3 text-sm text-red-400">{error}</p>
+            )}
+
+            {/* Primary Login Button */}
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full h-11 sm:h-[58px] mt-4 sm:mt-5 rounded-xl text-white text-base sm:text-xl font-bold transition-all hover:brightness-110 disabled:opacity-60"
+              style={{
+                background: 'linear-gradient(90deg, #C26CFF, #8F3DFF)',
+              }}
+            >
+              {loading ? "Logging in..." : "Log In"}
+            </button>
+          </form>
+        )}
 
         {/* Divider */}
         <div className="flex items-center gap-3 sm:gap-4 my-4 sm:my-5">
