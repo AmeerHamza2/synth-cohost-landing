@@ -8,6 +8,8 @@ import { useRef } from 'react';
 
 import Image from 'next/image';
 
+import { capabilityTrigger } from '../three/bindings';
+
 
 
 export default function StreamingDemands() {
@@ -64,15 +66,15 @@ export default function StreamingDemands() {
 
     <section 
 
-      data-section="02" 
+      data-section="02"
 
-      className="relative bg-black overflow-hidden "
+      className="relative bg-black overflow-hidden stage-transparent"
 
     >
 
       {/* Text Section with 02 */}
 
-      <div className="relative">
+      <div className="relative" data-stage="pressure">
 
         {/* Section Number - Left Side */}
 
@@ -172,7 +174,7 @@ export default function StreamingDemands() {
 
       {/* Image Section with 03 */}
 
-      <div className="relative" data-section="03">
+      <div className="relative" data-section="03" data-stage="capabilities">
 
         {/* Section Number - Left Side */}
 
@@ -210,7 +212,7 @@ export default function StreamingDemands() {
 
             height={800}
 
-            className="w-full h-auto object-cover"
+            className="w-full h-auto object-cover stage-replaced"
 
             unoptimized
 
@@ -310,6 +312,8 @@ export default function StreamingDemands() {
 
                   className="group flex-1"
 
+                  {...capabilityTrigger('chat')}
+
                 >
 
                   <div className="flex items-start gap-2">
@@ -349,6 +353,8 @@ export default function StreamingDemands() {
                   whileHover={{ y: -4, transition: { duration: 0.3 } }}
 
                   className="group flex-1"
+
+                  {...capabilityTrigger('context')}
 
                 >
 
@@ -390,6 +396,8 @@ export default function StreamingDemands() {
 
                   className="group flex-1"
 
+                  {...capabilityTrigger('workflow')}
+
                 >
 
                   <div className="flex items-start gap-2">
@@ -430,7 +438,7 @@ export default function StreamingDemands() {
 
         
         {/* Mobile Layout - Grid with image left, text right */}
-        <div className="md:hidden relative bg-black">
+        <div className="md:hidden relative bg-black stage-transparent">
           {/* Grid container */}
           <div className="grid grid-cols-2 gap-2 px-4 py-3 items-center">
             {/* Image - Left */}
@@ -444,7 +452,7 @@ export default function StreamingDemands() {
                 src="/ChatGPT Image Jun 30, 2026, 06_19_44 AM.png"
                 alt="Synth AI Character"
                 fill
-                className="object-contain object-center scale-150"
+                className="object-contain object-center scale-150 stage-replaced"
                 unoptimized
               />
             </motion.div>
@@ -490,7 +498,7 @@ export default function StreamingDemands() {
               transition={{ duration: 0.6, delay: 0.7 }}
               className="flex flex-col gap-3"
             >
-              <div className="flex items-start gap-3">
+              <div className="flex items-start gap-3" {...capabilityTrigger('chat')}>
                 <div className="flex items-center justify-center w-8 h-8 rounded bg-gradient-to-br from-purple-500/20 to-purple-600/20 border border-purple-500/30 flex-shrink-0">
                   <svg className="w-4 h-4 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5z" />
@@ -502,7 +510,7 @@ export default function StreamingDemands() {
                 </div>
               </div>
 
-              <div className="flex items-start gap-3">
+              <div className="flex items-start gap-3" {...capabilityTrigger('context')}>
                 <div className="flex items-center justify-center w-8 h-8 rounded bg-gradient-to-br from-purple-500/20 to-purple-600/20 border border-purple-500/30 flex-shrink-0">
                   <svg className="w-4 h-4 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M10 3a1 1 0 011 1v6h6a1 1 0 110 2h-6v6a1 1 0 11-2 0v-6H3a1 1 0 110-2h6V4a1 1 0 011-1z" />
@@ -514,7 +522,7 @@ export default function StreamingDemands() {
                 </div>
               </div>
 
-              <div className="flex items-start gap-3">
+              <div className="flex items-start gap-3" {...capabilityTrigger('workflow')}>
                 <div className="flex items-center justify-center w-8 h-8 rounded bg-gradient-to-br from-purple-500/20 to-purple-600/20 border border-purple-500/30 flex-shrink-0">
                   <svg className="w-4 h-4 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />

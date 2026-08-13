@@ -4,66 +4,63 @@
 
 import { motion, useInView } from 'framer-motion';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import Image from 'next/image';
 
 import { usePopup } from '../contexts/PopupContext';
 
+import { roleTrigger, setStageRole, useActiveRole } from '../three/bindings';
+
+import type { RoleId } from '../three/stage/types';
 
 
+
+/**
+ * The five roles.
+ *
+ * `title` and `description` used to exist only as pixels baked into the card
+ * PNGs — the markup carried the name in an `alt` attribute and nothing else.
+ * They are real text now, because the 3D layer replaces those images and the
+ * copy has to survive that (and it is selectable and screen-reader visible for
+ * the first time as a result).
+ *
+ * Note the image mapping: `tight_card_4.png` is the Companion card and
+ * `tight_card_5.png` is the Research Assistant card. The array previously
+ * paired them the other way round, which was invisible while the titles were
+ * never rendered.
+ */
 const roles = [
-
   {
-
     id: 'educator',
-
     title: 'Educator',
-
+    description: 'Explains complex ideas simply.',
     image: '/tight_card_1.png',
-
   },
-
   {
-
     id: 'moderator',
-
     title: 'Moderator',
-
+    description: 'Manages chat and keeps things focused.',
     image: '/tight_card_2.png',
-
   },
-
   {
-
     id: 'interviewer',
-
     title: 'Interviewer',
-
+    description: 'Asks better questions and drives conversations.',
     image: '/tight_card_3.png',
-
   },
-
   {
-
     id: 'researcher',
-
     title: 'Research Assistant',
-
-    image: '/tight_card_4.png',
-
-  },
-
-  {
-
-    id: 'companion',
-
-    title: 'Companion',
-
+    description: 'References your docs and surfaces insights.',
     image: '/tight_card_5.png',
-
   },
-
+  {
+    id: 'companion',
+    title: 'Companion',
+    description: 'Keeps the energy up and vibes with you.',
+    image: '/tight_card_4.png',
+  },
 ];
 
 
@@ -80,15 +77,37 @@ export default function RolesCarousel() {
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  // Which role the 3D layer is showing right now. Drives the card highlight so
+  // the grid stays in step while the section auto-advances.
+  const activeRole = useActiveRole();
+
+  // Paging the mobile carousel transforms the single 3D SYN to match.
+  useEffect(() => {
+    setStageRole(roles[currentIndex].id as RoleId);
+  }, [currentIndex]);
+
+
+
+  // Paging the mobile carousel transforms the 3D SYN into that role, so the
+  // swipe drives the same single model the desktop hover does.
+
+  useEffect(() => {
+
+    setStageRole(roles[currentIndex].id as RoleId);
+
+  }, [currentIndex]);
+
 
 
   return (
 
     <section 
 
-      data-section="04" 
+      data-section="04"
 
-      className="relative bg-black overflow-hidden"
+      data-stage="roles"
+
+      className="relative bg-black overflow-hidden stage-transparent"
 
       id="streamers"
 
@@ -236,11 +255,16 @@ export default function RolesCarousel() {
 
                     fill
 
-                    className="object-contain transition-all duration-300"
+                    className="object-contain transition-all duration-300 stage-replaced"
 
                     unoptimized
 
                   />
+
+                  <div className="stage-caption absolute inset-x-0 bottom-0 p-3 text-center">
+                    <p className="text-[17px] font-bold text-white leading-tight">{roles[currentIndex].title}</p>
+                    <p className="text-[12px] text-[#a09bbf] leading-snug mt-1">{roles[currentIndex].description}</p>
+                  </div>
 
                 </motion.div>
 
@@ -326,15 +350,19 @@ export default function RolesCarousel() {
 
                   onHoverEnd={() => setHoveredIndex(null)}
 
+                  {...roleTrigger(role.id as RoleId)}
+
                   className="relative w-full h-[220px] lg:h-[300px] rounded-[10px] overflow-hidden cursor-pointer"
 
                   style={{
 
-                    boxShadow: hoveredIndex === index 
+                    boxShadow:
 
-                      ? '0 0 30px rgba(124, 58, 237, 0.8), 0 0 60px rgba(124, 58, 237, 0.5)' 
+                      hoveredIndex === index || role.id === activeRole
 
-                      : 'none'
+                        ? '0 0 30px rgba(124, 58, 237, 0.8), 0 0 60px rgba(124, 58, 237, 0.5)'
+
+                        : 'none'
 
                   }}
 
@@ -350,11 +378,24 @@ export default function RolesCarousel() {
 
                     fill
 
-                    className="object-contain transition-all duration-300"
+                    className="object-contain transition-all duration-300 stage-replaced"
 
                     unoptimized
 
                   />
+
+                  {/* The card art carries this copy as baked-in pixels. When the
+                      3D stage replaces the art, this renders it as real text so
+                      nothing is lost; when the stage is off it stays hidden and
+                      the original card is untouched. */}
+                  <div
+                    className={`stage-caption absolute inset-x-0 bottom-0 p-3 text-center transition-opacity duration-300 ${
+                      role.id === activeRole ? 'opacity-100' : 'opacity-45'
+                    }`}
+                  >
+                    <p className="text-[15px] font-bold text-white leading-tight">{role.title}</p>
+                    <p className="text-[11px] text-[#a09bbf] leading-snug mt-1">{role.description}</p>
+                  </div>
 
                 </motion.div>
 

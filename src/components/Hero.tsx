@@ -13,9 +13,13 @@ export default function Hero() {
 
  
   return (
-    <section data-section="01" className="relative min-h-[60vh] overflow-hidden">
+    <section
+      data-section="01"
+      data-stage="hero"
+      className="relative min-h-[60vh] overflow-hidden"
+    >
       {/* Mobile Layout */}
-      <div className="md:hidden relative z-10 px-6 pt-24 pb-16 bg-[#0d0b14]">
+      <div className="md:hidden relative z-10 px-6 pt-24 pb-16 bg-[#0d0b14] stage-transparent">
         <div className="grid grid-cols-2 gap-4 items-center">
           {/* Text Content - Left */}
           <motion.div
@@ -91,11 +95,13 @@ export default function Hero() {
             transition={{ duration: 0.8, ease: 'easeOut' }}
             className="col-span-1 relative h-[280px] flex flex-col items-center justify-end"
           >
+            {/* Static plate. Stays as the LCP image and as the fallback; the
+                live rig fades in over it once the stage is running. */}
             <Image
               src="/cdcdc.png"
               alt="Synth AI Cohost"
               fill
-              className="object-contain object-top"
+              className="object-contain object-top stage-replaced"
               priority
               unoptimized
             />
@@ -156,8 +162,10 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 1.02 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, ease: 'easeOut' }}
-          className="absolute inset-0"
+          className="absolute inset-0 stage-replaced"
         >
+          {/* Static plate. Remains the LCP element and the no-WebGL fallback;
+              the live rig cross-fades over it once the canvas is ready. */}
           <Image
             src="/synth_character_lossless.webp"
             alt="Synth AI Cohost"
@@ -177,7 +185,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="max-w-lg relative z-20"
+          className="max-w-lg relative z-20 stage-hero-copy"
         >
           {/* Eyebrow */}
           <motion.div

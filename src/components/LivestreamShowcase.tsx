@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { usePopup } from '../contexts/PopupContext';
+import { pushChatCue } from '../three/bindings';
 
 const chatMessages = [
   { user: 'StreamFan42', message: "Let's gooo! Great stream!", isAI: false },
@@ -21,8 +22,9 @@ export default function LivestreamShowcase() {
 
   return (
     <section 
-      data-section="05" 
-      className="relative bg-black overflow-hidden"
+      data-section="05"
+      data-stage="studio"
+      className="relative bg-black overflow-hidden stage-transparent"
       id="product"
     >
       {/* Section Number - Left Side - Hidden on mobile */}
@@ -190,6 +192,10 @@ Syn Is Live
                       animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
                       transition={{ delay: 0.5 + index * 0.08 }}
                       whileHover={{ x: 2 }}
+                      // Each message is also an event for the 3D studio: SYN
+                      // turns toward the side it arrived from and answers.
+                      onAnimationComplete={() => pushChatCue(msg.isAI ? -1 : 1)}
+                      onHoverStart={() => pushChatCue(msg.isAI ? -1 : 1)}
                       className={`text-[11px] transition-all ${msg.isAI ? 'bg-[rgba(124,58,237,0.15)] rounded px-2 py-1.5 border border-[rgba(124,58,237,0.2)]' : 'py-0.5'}`}
                     >
                       <span className={`font-medium ${msg.isAI ? 'text-[#7c3aed]' : 'text-[#b58af7]'}`}>

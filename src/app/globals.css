@@ -37,7 +37,8 @@ html {
 }
 
 body {
-  background: var(--hero-bg);
+  position: relative;
+  background: var(--bg-dark);
   color: var(--text-primary);
   font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
@@ -207,4 +208,129 @@ div::-webkit-scrollbar-thumb:hover {
     transform: translateY(-100vh) translateX(20px);
     opacity: 0;
   }
+}
+
+/* ------------------------------------------------------------------ *
+ * 3D stage layer
+ *
+ * Three stacking levels, and they must stay in this order:
+ *   0  .stage-backdrop  environment plate (CSS, cross-fades per section)
+ *   1  .stage-canvas    the single WebGL context, never interactive
+ *   2  page content     all existing DOM, unchanged and fully selectable
+ *
+ * Sections opt in with `.stage-transparent`, which drops their own background
+ * so the stage shows through. Everything degrades to the original 2D page when
+ * the stage is absent.
+ * ------------------------------------------------------------------ */
+
+.stage-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* One plate per section, positioned in document space. Each bleeds past its
+   section and masks its own top and bottom edges, so neighbouring plates
+   cross-fade instead of meeting at a hard seam. */
+.stage-plate {
+  position: absolute;
+  left: 0;
+  right: 0;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0,
+    #000 120px,
+    #000 calc(100% - 120px),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0,
+    #000 120px,
+    #000 calc(100% - 120px),
+    transparent 100%
+  );
+}
+
+/* Only the hero needs a per-breakpoint plate (dark-on-light desktop copy vs.
+   light-on-dark mobile copy), but the swap is done here for every section so
+   the mechanism stays in one place. */
+.stage-plate__wide,
+.stage-plate__narrow {
+  position: absolute;
+  inset: 0;
+}
+
+.stage-plate__wide {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .stage-plate__wide {
+    display: block;
+  }
+  .stage-plate__narrow {
+    display: none;
+  }
+}
+
+.stage-backdrop__layer {
+  position: absolute;
+  inset: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.stage-canvas {
+  position: fixed !important;
+  inset: 0;
+  z-index: 1;
+  /* Interaction is driven from the DOM, so the canvas never eats a click. */
+  pointer-events: none !important;
+}
+
+/* Page content always sits above the stage. */
+.stage-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* Applied to a section that wants SYN visible behind its copy. */
+.stage-transparent {
+  background-color: transparent !important;
+}
+
+/* Hides an element only while the 3D stage is live, so the original 2D
+   artwork remains the fallback whenever the stage is off. */
+.stage-active .stage-replaced {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 600ms ease;
+}
+
+/* Keeps the hero's dark copy legible against the light plate. */
+.stage-active .stage-hero-copy {
+  text-shadow: 0 1px 24px rgba(244, 242, 251, 0.55);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stage-backdrop__layer {
+    transition: none;
+  }
+}
+
+/* Copy that lives inside a replaced image. Hidden by default so the original
+   2D artwork (which has the words baked in) is never doubled up; shown only
+   when the stage has taken that artwork's place. */
+.stage-caption {
+  display: none;
+}
+
+.stage-active .stage-caption {
+  display: block;
 }

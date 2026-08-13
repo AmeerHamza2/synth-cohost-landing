@@ -5,8 +5,9 @@ import Image from 'next/image';
 export default function FinalCTA() {
   return (
     <section 
-      data-section="07" 
-      className="relative bg-black overflow-hidden"
+      data-section="07"
+      data-stage="finale"
+      className="relative bg-black overflow-hidden stage-transparent"
     >
       {/* Section Number - Left Side - Hidden on mobile */}
       <div className="hidden md:flex absolute left-6 lg:left-10 top-1/3 -translate-y-1/2 flex-col items-center gap-2">
@@ -49,7 +50,7 @@ export default function FinalCTA() {
               alt="Meet Your Cohost"
               width={1200}
               height={600}
-              className="w-full h-auto"
+              className="w-full h-auto stage-replaced"
               unoptimized
             />
           </div>
@@ -62,7 +63,7 @@ export default function FinalCTA() {
             alt="Meet Your Cohost"
             width={1200}
             height={600}
-            className="w-full h-auto"
+            className="w-full h-auto stage-replaced"
             unoptimized
           />
           
