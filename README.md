@@ -1,36 +1,140 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Synth Cohost — Landing Site
 
-## Getting Started
+Marketing site for Synth Cohost, an AI co-host for live streamers. Next.js 16
+(App Router, Turbopack) with a WebGL layer rendered behind the page content.
 
-First, run the development server:
+- `/` — the seven-section narrative, with the 3D world behind it
+- `/products` — pricing and licensed characters
+- `/api/auth/session` — session handoff to `synth-cohost-core`
+
+---
+
+## Running it
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # production build
+npm start        # serve the production build
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Node 20+ . No environment variables are required to run or deploy — the site
+works fully without any of the ones below.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Environment variables
 
-## Learn More
+Both are optional and both are read at build time, so a change needs a redeploy.
 
-To learn more about Next.js, take a look at the following resources:
+| Variable | Default | What it does |
+| --- | --- | --- |
+| `NEXT_PUBLIC_SYN_MODEL_URL` | unset | URL of the rigged SYN character (`.glb`). Unset means the site renders the built-in placeholder rig. |
+| `NEXT_PUBLIC_SHOW_SYN_FIGURE` | unset | Legacy flag for the earlier per-section stage in `src/three/syn/SynStage.tsx`, which nothing mounts. Leave unset. |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Shipping the real SYN character
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The 3D figure in the world is currently an **articulated placeholder** — a real
+skeleton and real blendshapes, but untextured geometry. It is deliberately built
+against the same interface a production model would expose, so swapping in the
+finished character is a config change, not a code change:
 
-## Deploy on Vercel
+1. Drop the rigged GLB at `public/models/syn.glb` (Draco or Meshopt compressed,
+   5–8 MB target).
+2. Set `NEXT_PUBLIC_SYN_MODEL_URL=/models/syn.glb` and redeploy.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The model must expose the following for the existing animation driver to pick it
+up. Naming is flexible — Mixamo (`mixamorig*`), VRM (`J_Bip_*`) and ARKit
+conventions are all understood; see `src/three/syn/rig.ts` for the full alias
+table.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Bones** — `Hips`, `Spine`, `Chest`, `Neck`, `Head`, `LeftEye`, `RightEye`,
+  `Left/RightShoulder`, `Left/RightArm`, `Left/RightForeArm`
+- **Blendshapes** — `eyeBlinkLeft`, `eyeBlinkRight`, `jawOpen`, `mouthSmile`,
+  `browInnerUp` (ARKit or VRM `Fcl_*` naming)
+- **Optional** — outfit meshes tagged `userData.variant` with a role id, which
+  the roles section uses to change costume without loading a second model
+
+Anything missing degrades silently rather than throwing: a model with no eye
+bones simply moves its head.
+
+---
+
+## The 3D layer
+
+`src/three/` holds the whole WebGL layer. Two things are worth knowing before
+touching it.
+
+**It is an enhancement, never a requirement.** `src/three/stage/quality.ts`
+returns `off` when WebGL is unavailable or the reader has
+`prefers-reduced-motion: reduce`. In that case **zero canvases are created** and
+the page renders as the original 2D design. Every visual change the stage makes
+is gated behind a `stage-active` class on `<html>`, applied only once a canvas is
+live — so the fallback is the default, not a special case.
+
+**One canvas, one world.** There is a single persistent WebGL context mounted in
+the root layout, sitting behind all page content with `pointer-events: none`. The
+page's own DOM is untouched and fully selectable on top of it.
+
+| Path | What it is |
+| --- | --- |
+| `stage/StageRoot.tsx` | The single `<Canvas>`, quality tiering, post-processing |
+| `stage/frame.ts` | Per-frame mutable state, deliberately outside React so scroll and pointer updates never re-render |
+| `stage/useStageDriver.ts` | Turns scroll into `frame.journey` — a continuous position along the page measured in section units |
+| `world/World.tsx` | Floor, fog, dust, and the fly camera that follows `frame.journey` |
+| `world/Stations.tsx` | The seven sets, one per page section, mounted only while the camera is near |
+| `world/WorldSyn.tsx` | The rigged figure and the supplied avatar artwork |
+| `world/WorldCast.tsx` | The character sprites populating each station |
+| `syn/useSynRig.ts` | Breathing, blinking, gaze and mood posture |
+
+Sections declare themselves to the stage with `data-stage="<id>"`, and sections
+whose own background would cover the canvas opt out with `.stage-transparent`.
+
+### Not yet mounted
+
+`src/three/scenes/` and `src/three/syn/SynStage.tsx` are the earlier
+per-section architecture. They still typecheck but nothing renders them; the
+world in `src/three/world/` replaced them. They are kept because the rig
+contract documented above is shared.
+
+---
+
+## Asset pipeline
+
+Scripts in `scripts/` prepare artwork; each is run by hand and commits its
+output. Source files live in `assets/` (not served); output lands in `public/`.
+
+| Script | In | Out |
+| --- | --- | --- |
+| `extract-characters.mjs` | `assets/source-sheets/floating-avatars-sheet.png` | `public/characters/syn-01…21.png` — cuts 21 characters off the supplied sheet |
+| `prepare-avatars.mjs` | `assets/avatars-source/*.png` | `public/avatars/*.webp` — removes the baked-in transparency checkerboard and un-multiplies edges |
+| `build-parallax-layers.mjs` | `public/*.webp` | `public/parallax/*` — splits hero artwork into background and character layers |
+
+```bash
+node scripts/extract-characters.mjs
+node scripts/prepare-avatars.mjs
+node scripts/build-parallax-layers.mjs
+```
+
+---
+
+## Known issues
+
+Things a developer picking this up should know about rather than rediscover.
+
+- **`public/` is large (~100 MB)** and every `next/image` on the site passes
+  `unoptimized`, so nothing is resized or re-encoded at request time. Worth an
+  optimisation pass; it is the biggest lever on page weight.
+- **Filenames in `public/` must be URL-safe.** Files with apostrophes or
+  parentheses 404 in production while working fine in dev. Two were hit and
+  renamed (`our-products-tab.png`, `synth-cohost-demo.mp4`); the same trap
+  applies to anything added later.
+- **`/avatars/creators.webp` has a faint residual checkerboard.** The supplied
+  source is genuinely semi-transparent in places, so the background removal
+  cannot fully separate it. A clean source export would fix it.
+- **Links without destinations.** "About", "Privacy Policy" and "Terms of
+  Service" in the footer are `href="#"` — there are no pages behind them yet.
+- **`https://discord.com/synthcohost`** is used as the Discord link in three
+  places. Discord invites are `discord.gg/<code>`; this URL is unlikely to
+  resolve.

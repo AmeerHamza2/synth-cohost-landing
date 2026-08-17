@@ -45,7 +45,11 @@ export default function KnowledgeHero() {
           </div>
 
           {/* Righge */}
-          <button onClick={() => setIsSignInOpen(true)} className="w-full lg:flex-1 min-w-0 bg-[#1a0b2e] relative group cursor-pointer hover:shadow-[0_0_25px_rgba(168,85,247,0.5)] transition-shadow duration-300 border-0 p-0">
+          <button
+            onClick={() => setIsSignInOpen(true)}
+            data-anchor="knowledge-panel"
+            className="w-full lg:flex-1 min-w-0 bg-[#1a0b2e] relative group cursor-pointer hover:shadow-[0_0_25px_rgba(168,85,247,0.5)] transition-shadow duration-300 border-0 p-0"
+          >
             <Image
               src="/fvv.png"
               alt="Documents and files"

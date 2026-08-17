@@ -17,7 +17,7 @@ export default function PricingNavbar() {
 
   const navLinks = [
     { name: 'What Are Syns', href: '#', isPopup: true, popupType: 'what-are-syns' },
-    { name: 'Our Products', href: '#' },
+    { name: 'Our Products', href: '/products' },
     { name: 'For Streamers', href: '/#streamers' },
   ];
 

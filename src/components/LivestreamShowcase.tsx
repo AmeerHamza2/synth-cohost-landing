@@ -69,7 +69,10 @@ export default function LivestreamShowcase() {
             >
               <div className="relative rounded-xl overflow-hidden bg-[#13111e] border border-[rgba(255,255,255,0.05)] group/player">
                 {/* Video Player Area */}
-                <div className="relative aspect-video bg-gradient-to-br from-[#1a1628] to-[#0d0b14] cursor-pointer overflow-hidden max-h-[350px]">
+                <div
+                  data-anchor="stream-player"
+                  className="relative aspect-video bg-gradient-to-br from-[#1a1628] to-[#0d0b14] cursor-pointer overflow-hidden max-h-[350px]"
+                >
                 {/* Stream image content */}
                 <div className="absolute inset-0 overflow-hidden">
                   <video
@@ -172,7 +175,10 @@ Syn Is Live
                 </div>
 
               {/* Bottom Panel - Chat */}
-              <div className="p-4 border-t border-[rgba(255,255,255,0.05)] bg-[rgba(13,11,20,0.6)]">
+              <div
+                data-anchor="stream-chat"
+                className="p-4 border-t border-[rgba(255,255,255,0.05)] bg-[rgba(13,11,20,0.6)]"
+              >
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-2">
                     <svg className="w-4 h-4 text-[#7c3aed]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

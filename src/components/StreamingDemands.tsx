@@ -212,7 +212,9 @@ export default function StreamingDemands() {
 
             height={800}
 
-            className="w-full h-auto object-cover stage-replaced"
+            data-parallax="meet-desktop"
+
+            className="w-full h-auto object-cover stage-parallax"
 
             unoptimized
 
@@ -438,6 +440,9 @@ export default function StreamingDemands() {
 
         
         {/* Mobile Layout - Grid with image left, text right */}
+        {/* The section wrapper already opts out of its own background so the 3D
+            layer shows through; this inner mobile block was painting it back
+            in, which left section 03 as a flat black panel on a phone. */}
         <div className="md:hidden relative bg-black stage-transparent">
           {/* Grid container */}
           <div className="grid grid-cols-2 gap-2 px-4 py-3 items-center">
@@ -449,10 +454,14 @@ export default function StreamingDemands() {
               className="col-span-1 relative h-[380px] ml-2 -mt-10"
             >
               <Image
-                src="/ChatGPT Image Jun 30, 2026, 06_19_44 AM.png"
+                // Clean filename: the original has spaces and commas that Next's
+                // static handler will not serve in production (it 404s).
+                src="/parallax/meet-mobile.png"
                 alt="Synth AI Character"
                 fill
-                className="object-contain object-center scale-150 stage-replaced"
+                data-parallax="meet-mobile"
+
+                className="object-contain object-center scale-150 stage-parallax"
                 unoptimized
               />
             </motion.div>

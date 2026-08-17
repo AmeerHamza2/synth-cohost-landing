@@ -11,7 +11,6 @@
  */
 
 import { useEffect } from 'react';
-import StageBackdrop from './stage/StageBackdrop';
 import StageRoot from './stage/StageRoot';
 import { useStage } from './stage/store';
 import { useQuality } from './stage/useQuality';
@@ -34,7 +33,6 @@ export default function Stage() {
   return (
     <>
       <StageClassToggle />
-      <StageBackdrop />
       <StageRoot />
     </>
   );

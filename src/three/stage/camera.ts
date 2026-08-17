@@ -23,12 +23,27 @@ export interface CameraDirective {
   roll: number;
 }
 
+/**
+ * One camera for the whole page, and it barely moves.
+ *
+ * The artwork behind the canvas is fixed, so a travelling camera would slide
+ * the 3D elements across characters that are standing still. The origin is at
+ * the centre of the screen and sections position their content with
+ * screen-space anchors.
+ *
+ * `parallax` is 0 and must stay that way. Every plane on the page is tracked to
+ * a real DOM element, and camera parallax works by re-aiming `lookAt` — which
+ * rotates the view and skews those planes off the elements they are standing in
+ * for. The cursor response belongs on the elements themselves (the subject
+ * shift inside `ParallaxImage`, the drift in `FloatingCharacters`), where it
+ * cannot break that alignment.
+ */
 export const DEFAULT_CAMERA: CameraDirective = {
-  position: [0, 1.55, 3.1],
-  target: [0, 1.35, 0],
-  fov: 38,
+  position: [0, 0, 3.2],
+  target: [0, 0, 0],
+  fov: 40,
   lambda: 1.9,
-  parallax: 1,
+  parallax: 0,
   roll: 0,
 };
 

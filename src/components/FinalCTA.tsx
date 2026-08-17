@@ -1,8 +1,16 @@
 'use client';
 
 import Image from 'next/image';
+import { useState } from 'react';
+import SignInModal from './SignInModal';
 
 export default function FinalCTA() {
+  // The page's closing call to action. It was an <a href="#">, which scrolls
+  // back to the top and does nothing else — every other primary CTA on the page
+  // (the hero's two, and the knowledge section's) opens the sign-in modal, so
+  // this now does the same.
+  const [isSignInOpen, setIsSignInOpen] = useState(false);
+
   return (
     <section 
       data-section="07"
@@ -34,12 +42,13 @@ export default function FinalCTA() {
                 They will stream<br />
                 alongside intelligence.
               </p>
-              <a 
-                href="#" 
-                className="inline-flex items-center gap-2.5 text-[13px] font-semibold text-white bg-[#7c3aed] px-5 py-2.5 rounded-full hover:bg-[#6d28d9] transition-colors w-fit"
+              <button
+                type="button"
+                onClick={() => setIsSignInOpen(true)}
+                className="inline-flex items-center gap-2.5 text-[13px] font-semibold text-white bg-[#7c3aed] px-5 py-2.5 rounded-full hover:bg-[#6d28d9] transition-colors w-fit cursor-pointer"
               >
                 Meet Your Cohost <span>→</span>
-              </a>
+              </button>
             </div>
           </div>
 
@@ -50,7 +59,8 @@ export default function FinalCTA() {
               alt="Meet Your Cohost"
               width={1200}
               height={600}
-              className="w-full h-auto stage-replaced"
+              data-parallax="finale-mobile"
+              className="w-full h-auto stage-parallax"
               unoptimized
             />
           </div>
@@ -63,7 +73,8 @@ export default function FinalCTA() {
             alt="Meet Your Cohost"
             width={1200}
             height={600}
-            className="w-full h-auto stage-replaced"
+            data-parallax="finale-desktop"
+            className="w-full h-auto stage-parallax"
             unoptimized
           />
           
@@ -83,16 +94,21 @@ export default function FinalCTA() {
                 They will stream<br />
                 alongside intelligence.
               </p>
-              <a 
-                href="#" 
-                className="inline-flex items-center gap-2.5 text-[13px] font-semibold text-white bg-[#7c3aed] px-5 py-2.5 rounded-full hover:bg-[#6d28d9] transition-colors w-fit"
+              <button
+                type="button"
+                onClick={() => setIsSignInOpen(true)}
+                className="inline-flex items-center gap-2.5 text-[13px] font-semibold text-white bg-[#7c3aed] px-5 py-2.5 rounded-full hover:bg-[#6d28d9] transition-colors w-fit cursor-pointer"
               >
                 Meet Your Cohost <span>→</span>
-              </a>
+              </button>
             </div>
           </div>
         </div>
       </div>
+
+      {isSignInOpen && (
+        <SignInModal isOpen={isSignInOpen} onClose={() => setIsSignInOpen(false)} />
+      )}
     </section>
   );
 }

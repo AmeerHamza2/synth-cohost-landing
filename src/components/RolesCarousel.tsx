@@ -10,7 +10,7 @@ import Image from 'next/image';
 
 import { usePopup } from '../contexts/PopupContext';
 
-import { roleTrigger, setStageRole, useActiveRole } from '../three/bindings';
+import { roleTrigger, setStageRole } from '../three/bindings';
 
 import type { RoleId } from '../three/stage/types';
 
@@ -76,10 +76,6 @@ export default function RolesCarousel() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  // Which role the 3D layer is showing right now. Drives the card highlight so
-  // the grid stays in step while the section auto-advances.
-  const activeRole = useActiveRole();
 
   // Paging the mobile carousel transforms the single 3D SYN to match.
   useEffect(() => {
@@ -255,15 +251,15 @@ export default function RolesCarousel() {
 
                     fill
 
-                    className="object-contain transition-all duration-300 stage-replaced"
+                    className="object-contain transition-all duration-300"
 
                     unoptimized
 
                   />
 
-                  <div className="stage-caption absolute inset-x-0 bottom-0 p-3 text-center">
-                    <p className="text-[17px] font-bold text-white leading-tight">{roles[currentIndex].title}</p>
-                    <p className="text-[12px] text-[#a09bbf] leading-snug mt-1">{roles[currentIndex].description}</p>
+                  <div className="stage-caption">
+                    <p>{roles[currentIndex].title}</p>
+                    <p>{roles[currentIndex].description}</p>
                   </div>
 
                 </motion.div>
@@ -358,7 +354,7 @@ export default function RolesCarousel() {
 
                     boxShadow:
 
-                      hoveredIndex === index || role.id === activeRole
+                      hoveredIndex === index
 
                         ? '0 0 30px rgba(124, 58, 237, 0.8), 0 0 60px rgba(124, 58, 237, 0.5)'
 
@@ -378,7 +374,7 @@ export default function RolesCarousel() {
 
                     fill
 
-                    className="object-contain transition-all duration-300 stage-replaced"
+                    className="object-contain transition-all duration-300"
 
                     unoptimized
 
@@ -388,13 +384,9 @@ export default function RolesCarousel() {
                       3D stage replaces the art, this renders it as real text so
                       nothing is lost; when the stage is off it stays hidden and
                       the original card is untouched. */}
-                  <div
-                    className={`stage-caption absolute inset-x-0 bottom-0 p-3 text-center transition-opacity duration-300 ${
-                      role.id === activeRole ? 'opacity-100' : 'opacity-45'
-                    }`}
-                  >
-                    <p className="text-[15px] font-bold text-white leading-tight">{role.title}</p>
-                    <p className="text-[11px] text-[#a09bbf] leading-snug mt-1">{role.description}</p>
+                  <div className="stage-caption">
+                    <p>{role.title}</p>
+                    <p>{role.description}</p>
                   </div>
 
                 </motion.div>

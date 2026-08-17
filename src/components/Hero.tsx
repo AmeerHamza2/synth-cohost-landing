@@ -95,13 +95,14 @@ export default function Hero() {
             transition={{ duration: 0.8, ease: 'easeOut' }}
             className="col-span-1 relative h-[280px] flex flex-col items-center justify-end"
           >
-            {/* Static plate. Stays as the LCP image and as the fallback; the
-                live rig fades in over it once the stage is running. */}
+            {/* Redrawn by the 3D layer as a 2.5D plane in exactly this box;
+                stays put as the LCP image and as the no-WebGL fallback. */}
             <Image
               src="/cdcdc.png"
               alt="Synth AI Cohost"
               fill
-              className="object-contain object-top stage-replaced"
+              data-parallax="hero-mobile"
+              className="object-contain object-top stage-parallax"
               priority
               unoptimized
             />
@@ -162,15 +163,16 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 1.02 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, ease: 'easeOut' }}
-          className="absolute inset-0 stage-replaced"
+          className="absolute inset-0"
         >
-          {/* Static plate. Remains the LCP element and the no-WebGL fallback;
-              the live rig cross-fades over it once the canvas is ready. */}
+          {/* Redrawn by the 3D layer as a 2.5D plane in exactly this box;
+              remains the LCP element and the no-WebGL fallback. */}
           <Image
             src="/synth_character_lossless.webp"
             alt="Synth AI Cohost"
             fill
-            className="object-cover object-top"
+            data-parallax="hero-desktop"
+            className="object-cover object-top stage-parallax"
             priority
             unoptimized
           />
@@ -185,7 +187,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="max-w-lg relative z-20 stage-hero-copy"
+          className="max-w-lg relative z-20"
         >
           {/* Eyebrow */}
           <motion.div
@@ -204,7 +206,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-[clamp(42px,5vw,64px)] font-medium text-[#1a1628] leading-[1.05] tracking-[-2px] mb-5"
+            className="text-[clamp(42px,5vw,64px)] font-medium text-[#f5f3ff] leading-[1.05] tracking-[-2px] mb-5"
           >
             Your stream.
             <br />
@@ -216,7 +218,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-[15px] text-[#5c5575] leading-[1.7] max-w-[380px] mb-3"
+            className="text-[15px] text-[#a09bbf] leading-[1.7] max-w-[380px] mb-3"
           >
             Build intelligent Syns that engage audiences, drive product promotion, and unlock new revenue streams across livestreams and digital experiences.
           </motion.p>
@@ -225,7 +227,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.45 }}
-            className="text-[15px] text-[#5c5575] leading-[1.7] max-w-[380px] mb-9"
+            className="text-[15px] text-[#a09bbf] leading-[1.7] max-w-[380px] mb-9"
           >
             Extend their presence beyond the broadcast with lightweight desktop companions that keep your Syns active and engaging long after the stream ends.
           </motion.p>
@@ -241,7 +243,7 @@ export default function Hero() {
               onClick={() => setIsSignInOpen(true)}
               whileHover={{ scale: 1.02, backgroundColor: '#7c3aed' }}
               whileTap={{ scale: 0.98 }}
-              className="inline-flex items-center gap-2 bg-[#1a1628] text-white text-[13.5px] font-semibold px-6 py-3 rounded-lg transition-colors border-0 cursor-pointer"
+              className="inline-flex items-center gap-2 bg-[#7c3aed] text-white text-[13.5px] font-semibold px-6 py-3 rounded-lg transition-colors border-0 cursor-pointer"
             >
              Download Free Desktop Companion Demo
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -267,9 +269,15 @@ export default function Hero() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
-            className="text-[11px] font-bold tracking-[2px] uppercase text-[#1a1628] flex items-center gap-2"
+            whileHover={{ x: -4 }}
+            /* These sit over a moving 3D scene, so plain grey text disappeared
+               against it. A glass pill with a purple edge holds them at any
+               brightness the world happens to be behind them, and the size and
+               weight bump gives them the presence of a label rather than a
+               caption. */
+            className="group flex items-center gap-2.5 rounded-full border border-[rgba(167,139,250,0.35)] bg-[rgba(10,6,20,0.55)] px-4 py-2 text-[13px] font-extrabold uppercase tracking-[2.5px] text-[#f5f3ff] shadow-[0_0_24px_rgba(124,58,237,0.28)] backdrop-blur-md transition-colors hover:border-[rgba(167,139,250,0.7)]"
           >
-            <span className="text-sm text-[#7c3aed]">+</span>
+            <span className="text-[15px] leading-none text-[#a78bfa]">+</span>
             {label}
           </motion.span>
         ))}

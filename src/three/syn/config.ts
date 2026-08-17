@@ -27,6 +27,18 @@
  * its head, it does not throw.
  */
 
+/**
+ * Whether the per-section stage in `SynStage.tsx` renders a figure.
+ *
+ * Only that component reads this, and nothing on the page mounts it any more —
+ * the world in `world/` is what ships, and `world/WorldSyn.tsx` mounts the
+ * rigged figure unconditionally, alongside the supplied avatar artwork rather
+ * than instead of it. This flag and `SynStage` are the earlier per-section
+ * architecture, kept because the rig contract documented above still applies.
+ */
+export const SHOW_SYN_FIGURE =
+  process.env.NEXT_PUBLIC_SHOW_SYN_FIGURE === 'true';
+
 const url = process.env.NEXT_PUBLIC_SYN_MODEL_URL?.trim();
 
 export const SYN_MODEL_URL: string | null = url && url.length > 0 ? url : null;

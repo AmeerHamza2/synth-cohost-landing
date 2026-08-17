@@ -14,7 +14,7 @@ import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { damp } from '../stage/frame';
 import { useStage } from '../stage/store';
-import { SYN_MODEL_URL } from './config';
+import { SHOW_SYN_FIGURE, SYN_MODEL_URL } from './config';
 import { director } from './director';
 import { applyVariant, resolveRig, type SynRig } from './rig';
 import SynProxy from './SynProxy';
@@ -98,6 +98,10 @@ export default function SynStage() {
       });
     }
   });
+
+  // The avatar artwork on the page is the character; nothing is drawn here
+  // unless a real model has been supplied and explicitly switched on.
+  if (!SHOW_SYN_FIGURE) return null;
 
   return (
     <group ref={groupRef} name="SynStage">

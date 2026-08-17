@@ -32,6 +32,16 @@ export interface StageFrame {
    */
   section: Record<SectionId, number>;
 
+  /**
+   * Continuous position along the page's journey, in section units: 0 at the
+   * top of section one, 3.5 halfway through section four, 6 at the end.
+   *
+   * This is what drives the camera through the 3D world. Section progress alone
+   * cannot do it — it resets to 0 at every boundary, which would snap the
+   * camera back. The journey is monotonic across the whole page.
+   */
+  journey: number;
+
   /** Seconds since the stage mounted. Monotonic, pauses with the frameloop. */
   time: number;
 
@@ -59,6 +69,7 @@ export const frame: StageFrame = {
   scroll: 0,
   scrollVelocity: 0,
   section: emptySectionProgress(),
+  journey: 0,
   time: 0,
   viewport: { width: 0, height: 0 },
   reducedMotion: false,
@@ -74,6 +85,7 @@ export function resetFrame() {
   frame.scroll = 0;
   frame.scrollVelocity = 0;
   frame.section = emptySectionProgress();
+  frame.journey = 0;
   frame.time = 0;
 }
 

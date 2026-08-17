@@ -60,9 +60,11 @@ export function useStageDriver() {
       frame.viewport.height = vh;
       frame.time += dt;
 
-      // Pointer easing. The raw target is set by the listeners below; easing it
-      // here keeps SYN's gaze from snapping and costs nothing extra.
-      const lambda = frame.reducedMotion ? 20 : 6;
+      // Pointer easing. The raw target is set by the listeners below. Kept
+      // light: consumers damp again for their own purposes (slow for a body
+      // lean, fast for a gaze), and damping twice at the same rate is what made
+      // the eyes feel like they were dragging.
+      const lambda = frame.reducedMotion ? 20 : 14;
       frame.pointer.x = damp(frame.pointer.x, frame.pointerTarget.x, lambda, dt);
       frame.pointer.y = damp(frame.pointer.y, frame.pointerTarget.y, lambda, dt);
 
@@ -104,6 +106,21 @@ export function useStageDriver() {
           bestDistance = distance;
           bestId = id;
         }
+      }
+
+      // Continuous journey value: which station the camera is at, and how far
+      // between it and the next. Built from the active section plus its own
+      // progress, so it never resets at a boundary.
+      if (bestId) {
+        const index = SECTION_ORDER.indexOf(bestId);
+        const rect = markers.find((m) => m.id === bestId)!.el.getBoundingClientRect();
+        // How far the section has scrolled past the top of the viewport: 0 when
+        // its top edge is level with the top of the screen, 1 when its bottom
+        // edge is. `frame.section` cannot be used here — it counts the approach
+        // from below the fold too, which would put the camera half a station
+        // along before the reader has scrolled at all.
+        const travel = clamp01(-rect.top / Math.max(rect.height - vh, 1));
+        frame.journey = index + travel;
       }
 
       if (bestId !== readStage().active) setActive(bestId);

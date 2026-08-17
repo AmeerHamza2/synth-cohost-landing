@@ -221,7 +221,10 @@ export default function Navbar() {
                 {popupType === 'video-demo' ? (
                   <div className="w-full max-w-4xl">
                     <video
-                      src="/Synth Cohost's AI Avatars That Stream With You.mp4"
+                      // Clean filename: apostrophes and spaces in a `public/`
+                      // path are not served by the production static handler —
+                      // this 404'd on Vercel while working fine in dev.
+                      src="/synth-cohost-demo.mp4"
                       autoPlay
                       controls
                       className="w-full rounded-2xl shadow-2xl bg-black"
@@ -247,7 +250,7 @@ export default function Navbar() {
                       )}
                       {/* Desktop imae */}
                       <Image
-                        src={popupType === 'our-products' ? '/Our Products Tab. (1).png' : '/cdc.png'}
+                        src={popupType === 'our-products' ? '/our-products-tab.png' : '/cdc.png'}
                         alt={popupType === 'our-products' ? 'Our Products' : 'What Are Syns'}
                         width={1800}
                         height={900}
