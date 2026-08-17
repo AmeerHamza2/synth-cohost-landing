@@ -19,14 +19,28 @@ npm start        # serve the production build
 npm run lint
 ```
 
-Node 20+ . No environment variables are required to run or deploy — the site
-works fully without any of the ones below.
+Node 20+ . **No environment variables are required** — every one below has a
+working default, so the site builds and deploys as-is.
 
 ---
 
 ## Environment variables
 
-Both are optional and both are read at build time, so a change needs a redeploy.
+All optional. All are `NEXT_PUBLIC_*`, so they are inlined at build time and a
+change needs a redeploy, not just a restart.
+
+### Auth
+
+The sign-in and login modals talk to `synth-cohost-core`. The defaults point at
+production, so these only need setting to aim at a different backend.
+
+| Variable | Default | What it does |
+| --- | --- | --- |
+| `NEXT_PUBLIC_API_URL` | `https://api.synthcohost.com` | Auth API base. Used by `src/lib/auth.ts` and the MFA step in `LoginModal`. |
+| `NEXT_PUBLIC_DASHBOARD_URL` | `https://app.synthcohost.com` | Where a signed-in user is sent. |
+| `NEXT_PUBLIC_COOKIE_DOMAIN` | unset | Domain written on the `sc_access_token` / `sc_refresh_token` cookies by `/api/auth/session`. **Unset means the cookies are host-only** — they will not be readable on the dashboard subdomain. Set it to `.synthcohost.com` for the session to carry across. Ignored on localhost. |
+
+### 3D layer
 
 | Variable | Default | What it does |
 | --- | --- | --- |
