@@ -284,8 +284,34 @@ div::-webkit-scrollbar-thumb:hover {
    which is the opposite of the ask. Matching the two muted greys by the class
    they are written in leaves every other colour exactly as authored. */
 .stage-active [class*="#a09bbf"],
-.stage-active [class*="#5e5a72"] {
+.stage-active [class*="#5e5a72"],
+.stage-active [class*="#5c5575"] {
   color: #cfc9e8;
+}
+
+/* The mobile hero runs its copy across the busiest part of the scene — the lit
+   plinth, the light shaft and the avatar all sit directly behind it. Type
+   colour alone cannot carry that, because the backdrop is bright in places and
+   black in others, so this lays a gradient behind the copy column and lets it
+   fall away before it reaches the artwork.
+
+   `z-index: -1` keeps it behind the text but inside the hero's own stacking
+   context, so it still covers the canvas. */
+@media (max-width: 767px) {
+  .stage-active .stage-scrim::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: linear-gradient(
+      100deg,
+      rgba(10, 8, 18, 0.94) 0%,
+      rgba(10, 8, 18, 0.9) 40%,
+      rgba(10, 8, 18, 0.55) 62%,
+      rgba(10, 8, 18, 0) 80%
+    );
+  }
 }
 
 .stage-active h1,

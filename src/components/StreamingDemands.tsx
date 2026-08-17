@@ -120,7 +120,10 @@ export default function StreamingDemands() {
 
               {/* Tags */}
 
-              <div className="flex flex-col gap-3 md:flex-row md:flex-wrap">
+              {/* Wrapping row, not a column. Stacked one per line these four
+                  short tags ran down most of the mobile viewport for no reason;
+                  they read as a set, so they flow and wrap like one. */}
+              <div className="flex flex-wrap gap-2 md:gap-3">
 
                 {demands.map((text) => (
 
