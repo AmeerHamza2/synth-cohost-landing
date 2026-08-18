@@ -12,13 +12,19 @@
 
 import { useEffect } from 'react';
 import StageRoot from './stage/StageRoot';
-import { useStage } from './stage/store';
 import { useQuality } from './stage/useQuality';
 
 function StageClassToggle() {
   const quality = useQuality();
-  const canvasReady = useStage((s) => s.canvasReady);
-  const live = quality !== 'off' && canvasReady;
+  // Deliberately NOT gated on `canvasReady`.
+  //
+  // Waiting for the canvas meant the page's original 2D artwork stayed visible
+  // for as long as the three.js bundle took to arrive, then disappeared — which
+  // read as two versions of the page stacked on top of each other. The inline
+  // boot script in the root layout has already added this class before first
+  // paint; this only has to agree with it, or take it away when the device
+  // turns out not to qualify.
+  const live = quality !== 'off';
 
   useEffect(() => {
     const root = document.documentElement;
