@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { Play } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -11,7 +11,28 @@ export default function Hero() {
   const [isSignInOpen, setIsSignInOpen] = useState(false);
   const { openPopup } = usePopup();
 
- 
+  // The mobile hero's two paragraphs hand over to each other as you scroll
+  // rather than both standing there at once — eighteen lines of body copy is
+  // most of a phone screen, and it buries the headline and the avatar.
+  //
+  // Driven from the page's own scroll position rather than progress through the
+  // hero: the hero is shorter than a phone viewport, which makes a
+  // target-relative range degenerate, and it is the first thing on the page
+  // anyway, so scroll position and position within the hero are the same thing.
+  //
+  // The two windows do not overlap — the first reaches zero at 110 and the
+  // second only starts there — so the two are never on screen together.
+  //
+  // The whole handover is done inside 170px of scroll, because the hero is
+  // short: leave it any later and the second paragraph fades in just as it is
+  // leaving the top of the screen, which reads as having missed it.
+  const { scrollY } = useScroll();
+  const firstOpacity = useTransform(scrollY, [0, 50, 110], [1, 1, 0]);
+  const secondOpacity = useTransform(scrollY, [110, 170], [0, 1]);
+  // Whichever one is faded out must not take the tap or the text selection.
+  const firstEvents = useTransform(scrollY, (v) => (v < 110 ? 'auto' : 'none'));
+  const secondEvents = useTransform(scrollY, (v) => (v < 110 ? 'none' : 'auto'));
+
   return (
     <section
       data-section="01"
@@ -52,26 +73,29 @@ export default function Hero() {
               Stronger <span className="text-[#7c3aed]">together</span><span className="text-[#7c3aed]">.</span>
             </motion.h1>
 
-            {/* Body */}
-            <motion.p
+            {/* Body — one paragraph at a time.
+                Both sit in the same grid cell, so the block is as tall as the
+                longer of the two and nothing reflows as they swap. */}
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-[12px] text-[#5c5575] leading-[1.6] mb-2"
+              className="grid mb-2"
             >
-              Build intelligent Syns that engage audiences, drive product promotion, and unlock new revenue streams across livestreams and digital experiences.
-            </motion.p>
+              <motion.p
+                style={{ opacity: firstOpacity, pointerEvents: firstEvents }}
+                className="[grid-area:1/1] text-[12px] text-[#5c5575] leading-[1.6]"
+              >
+                Build intelligent Syns that engage audiences, drive product promotion, and unlock new revenue streams across livestreams and digital experiences.
+              </motion.p>
 
               <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-[12px] text-[#5c5575] leading-[1.6] mb-2"
-            >
-               Extend their presence beyond the broadcast with lightweight desktop companions that keep your Syns active and engaging long after the stream ends.
-
-
-            </motion.p>
+                style={{ opacity: secondOpacity, pointerEvents: secondEvents }}
+                className="[grid-area:1/1] text-[12px] text-[#5c5575] leading-[1.6]"
+              >
+                Extend their presence beyond the broadcast with lightweight desktop companions that keep your Syns active and engaging long after the stream ends.
+              </motion.p>
+            </motion.div>
 
          
          
