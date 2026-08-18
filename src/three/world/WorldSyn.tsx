@@ -115,20 +115,20 @@ const PLACEMENTS: Placement[] = [
  * float and cursor lean that keep it from reading as a sticker.
  */
 /**
- * Where a piece of artwork goes on a narrow frame.
- *
- * Contracting the wide-screen offset toward the middle is a reasonable default,
- * but the mobile layout is a different composition, not a squeezed copy of the
- * desktop one — it leaves a specific column open for a specific character. When
- * that is so, the placement is stated outright rather than derived.
+ * Scratch vectors for the narrow-frame anchoring below. Allocated once —
+ * `useFrame` runs sixty times a second and must not allocate.
  */
-interface NarrowArt {
-  x: number;
-  /** Centre of the plane. Omitted means standing on the floor, as on desktop. */
-  y?: number;
-  /** Replaces the default narrow shrink. */
-  scale?: number;
-}
+const CAM_RIGHT = new THREE.Vector3();
+const CAM_UP = new THREE.Vector3();
+const CAM_FWD = new THREE.Vector3();
+
+/**
+ * How far in front of the camera anchored artwork sits.
+ *
+ * Near enough to be in front of the station geometry, far enough that normal
+ * depth testing still lets closer things pass in front of it.
+ */
+const ANCHOR_DISTANCE = 6;
 
 function StaticAvatar({
   src,
@@ -138,7 +138,7 @@ function StaticAvatar({
   height,
   yaw = 0,
   fallbackAspect = 1,
-  narrowArt,
+  narrowAnchor,
 }: {
   src: string;
   station: number;
@@ -147,7 +147,13 @@ function StaticAvatar({
   height: number;
   yaw?: number;
   fallbackAspect?: number;
-  narrowArt?: NarrowArt;
+  /**
+   * Selector for the element this artwork stands in for on a narrow frame.
+   *
+   * See the anchoring block in the frame loop for why mobile needs this and
+   * desktop does not.
+   */
+  narrowAnchor?: string;
 }) {
   const texture = useTexture(src);
   const meshRef = useRef<THREE.Mesh>(null);
@@ -156,44 +162,102 @@ function StaticAvatar({
     return image?.width ? image.width / image.height : fallbackAspect;
   }, [texture, fallbackAspect]);
 
-  useFrame(() => {
+  const anchorEl = useRef<HTMLElement | null>(null);
+
+  useFrame((state) => {
     const mesh = meshRef.current;
     if (!mesh) return;
-    // Tight enough that a piece of artwork belongs to its own section: a wide
-    // window leaves the finale's creators hanging over the knowledge copy,
-    // because the world is fixed while the page scrolls past it.
-    const distance = Math.abs(frame.journey - station);
-    mesh.visible = distance < 0.95;
-    if (!mesh.visible) return;
 
     const calm = frame.reducedMotion;
     const narrow = frame.viewport.width < NARROW_BREAKPOINT;
     const breath = Math.sin(frame.time * 0.5 + station) * (calm ? 0.002 : 0.006);
-    // A phone frame is roughly a third the width, so the artwork comes in with
-    // it — otherwise a character composed against a desktop layout stands off
-    // the side of a narrow one.
-    // 0.64 rather than something closer to 1 because the narrow camera holds
-    // its subject well right of centre, to leave the left column for the copy —
-    // artwork any larger than this runs off the right edge from there.
-    const art = narrow ? narrowArt : undefined;
-    const h = height * (narrow ? (art?.scale ?? 0.64) : 1) * (1 + breath);
+    const material = mesh.material as THREE.MeshBasicMaterial;
+
+    // ---------------------------------------------------------------- mobile
+    //
+    // On a narrow frame the artwork is pinned to the element it stands in for,
+    // not to a place in the world.
+    //
+    // Everything else here is keyed to `frame.journey`, which tracks which
+    // station the camera is at. That works on a wide screen, where a section is
+    // about a viewport tall. On a phone the sections are several viewports
+    // tall, so the journey moves on to the next station while the section's own
+    // copy is still on screen — and the artwork slides out of place, then
+    // disappears entirely, while the layout is still holding a space for it.
+    //
+    // Anchoring to the element removes the coupling: the artwork is wherever
+    // the layout put it, appears when that space is on screen, and scrolls with
+    // it exactly. Which is what the original 2D image did.
+    if (narrow && narrowAnchor) {
+      if (!anchorEl.current || !anchorEl.current.isConnected) {
+        anchorEl.current = document.querySelector<HTMLElement>(narrowAnchor);
+      }
+      const el = anchorEl.current;
+      const rect = el?.getBoundingClientRect();
+      const vw = state.size.width;
+      const vh = state.size.height;
+
+      if (!rect || rect.width === 0 || rect.height === 0) {
+        mesh.visible = false;
+        return;
+      }
+      // Only while its space is actually on screen, with a margin so it is
+      // already in place by the time it scrolls into view.
+      mesh.visible = rect.bottom > -vh * 0.3 && rect.top < vh * 1.3;
+      if (!mesh.visible) return;
+
+      const camera = state.camera as THREE.PerspectiveCamera;
+      CAM_RIGHT.set(1, 0, 0).applyQuaternion(camera.quaternion);
+      CAM_UP.set(0, 1, 0).applyQuaternion(camera.quaternion);
+      CAM_FWD.set(0, 0, -1).applyQuaternion(camera.quaternion);
+
+      const viewH =
+        2 * ANCHOR_DISTANCE * Math.tan((camera.fov * Math.PI) / 360);
+      const viewW = viewH * (vw / vh);
+
+      // Centre of the element, in normalised device coordinates.
+      const ndcX = ((rect.left + rect.width / 2) / vw) * 2 - 1;
+      const ndcY = 1 - ((rect.top + rect.height / 2) / vh) * 2;
+
+      const drift = Math.sin(frame.time * 0.33 + station) * (calm ? 0.004 : 0.02);
+      mesh.position
+        .copy(camera.position)
+        .addScaledVector(CAM_FWD, ANCHOR_DISTANCE)
+        .addScaledVector(CAM_RIGHT, (ndcX * viewW) / 2)
+        .addScaledVector(CAM_UP, (ndcY * viewH) / 2 + drift);
+      // Square on to the camera, so it reads as the flat artwork it is.
+      mesh.quaternion.copy(camera.quaternion);
+
+      // Contained inside the element's box, preserving the artwork's aspect —
+      // the same rule `object-contain` gave the original image.
+      const boxW = (rect.width / vw) * viewW;
+      const boxH = (rect.height / vh) * viewH;
+      const fit = Math.min(boxH, boxW / aspect) * (1 + breath);
+      mesh.scale.set(fit * aspect, fit, 1);
+      material.opacity = 1;
+      return;
+    }
+
+    // --------------------------------------------------------------- desktop
+    //
+    // Wide frames keep the world placement: a section is about a viewport tall
+    // there, so the journey and the copy stay in step, and the artwork gets to
+    // stand in the scene at a real depth rather than being pinned to the glass.
+    const distance = Math.abs(frame.journey - station);
+    mesh.visible = distance < 0.95;
+    if (!mesh.visible) return;
+
+    const h = height * (1 + breath);
     mesh.scale.set(h * aspect, h, 1);
-    // Standing on the floor is the default. A stated `y` overrides it, which is
-    // how a head-and-shoulders crop gets to sit where the layout wants it
-    // rather than where a pair of feet would put it.
-    const floorY = h / 2 - 1.95;
     mesh.position.set(
-      art ? art.x : narrow ? x * NARROW_X : x,
-      (art?.y ?? floorY) +
-        Math.sin(frame.time * 0.33 + station) * (calm ? 0.01 : 0.05),
+      x,
+      h / 2 - 1.95 + Math.sin(frame.time * 0.33 + station) * (calm ? 0.01 : 0.05),
       stationZ(station) + z,
     );
+    mesh.quaternion.identity();
     mesh.rotation.y = yaw + (calm ? 0 : frame.pointer.x * 0.12);
     // Fade at the edges of its station rather than popping out.
-    (mesh.material as THREE.MeshBasicMaterial).opacity = Math.min(
-      1,
-      (0.95 - distance) / 0.3,
-    );
+    material.opacity = Math.min(1, (0.95 - distance) / 0.3);
   });
 
   return (
@@ -226,6 +290,7 @@ function SuppliedArtwork() {
         height={4.3}
         yaw={-0.3}
         fallbackAspect={0.94}
+        narrowAnchor='[data-parallax="hero-mobile"]'
       />
       <StaticAvatar
         src="/avatars/syn-second.webp"
@@ -235,10 +300,7 @@ function SuppliedArtwork() {
         height={4.2}
         yaw={0.35}
         fallbackAspect={1.62}
-        // The mobile layout opens the whole left column for her and runs the
-        // copy down the right. Left to the default she landed bottom-right,
-        // behind the feature list, with her own column empty.
-        narrowArt={{ x: -5.5, y: 4, scale: 0.53 }}
+        narrowAnchor='[data-parallax="meet-mobile"]'
       />
       <StaticAvatar
         src="/avatars/creators.webp"
@@ -247,10 +309,7 @@ function SuppliedArtwork() {
         z={-3}
         height={7}
         fallbackAspect={2}
-        // Twice as wide as it is tall, so on a phone it is wider than the frame.
-        // Held at the camera's own axis rather than offset to the right, which
-        // is what was cropping the second figure out of the shot.
-        narrowArt={{ x: -0.1 }}
+        narrowAnchor='[data-parallax="finale-mobile"]'
       />
     </>
   );

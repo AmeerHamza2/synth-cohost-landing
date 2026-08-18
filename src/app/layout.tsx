@@ -72,6 +72,11 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      // The boot script below adds `stage-active` here before React hydrates,
+      // which is the whole point of it — but it also means the class list no
+      // longer matches what the server rendered. This says so deliberately;
+      // without it React reports a hydration mismatch on every load.
+      suppressHydrationWarning
     >
       <head>
         {/* Blocking on purpose — it must decide before the first paint. */}

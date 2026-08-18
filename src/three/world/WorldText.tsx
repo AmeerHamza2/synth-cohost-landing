@@ -70,6 +70,12 @@ export interface WorldTextProps {
   bodyColor?: string;
   /** Which station this belongs to, so it only draws while nearby. */
   station: number;
+  /**
+   * Selector for the section this belongs to.
+   *
+   * Used on narrow frames only — see the visibility block in the frame loop.
+   */
+  narrowAnchor?: string;
 }
 
 export default function WorldText({
@@ -80,10 +86,12 @@ export default function WorldText({
   color = '#f5f3ff',
   bodyColor = '#5b21b6',
   station,
+  narrowAnchor,
 }: WorldTextProps) {
   const [built, setBuilt] = useState<Built | null>(null);
   const groupRef = useRef<THREE.Group>(null);
   const here = useRef(new THREE.Vector3());
+  const anchorEl = useRef<HTMLElement | null>(null);
 
   // Wait for the webfont, or the type falls back to a system face and stops
   // matching the rest of the page.
@@ -118,18 +126,43 @@ export default function WorldText({
   useFrame((state) => {
     const group = groupRef.current;
     if (!group || !built) return;
-    // Only while the reader is genuinely centred on this station.
+    // Only while the reader is genuinely on this station.
     //
     // The window has to be tight. The 3D layer is fixed to the world while the
     // copy scrolls past it, so a generous window leaves the statement hanging in
     // frame long after its own section has gone — landing on top of the heading
     // of the section before it, which is exactly what it was doing.
+    //
+    // On a narrow frame the journey is not a tight enough proxy on its own:
+    // sections there are several viewports tall, so the journey reaches this
+    // station while the previous section's copy still fills the screen, and the
+    // statement lands across it. Where a section is named, its own box decides.
     const distance = Math.abs(frame.journey - station);
+    let fade = Math.min(1, (0.42 - distance) / 0.16);
     group.visible = distance < 0.42;
+
+    if (frame.viewport.width < 900 && narrowAnchor) {
+      if (!anchorEl.current || !anchorEl.current.isConnected) {
+        anchorEl.current = document.querySelector<HTMLElement>(narrowAnchor);
+      }
+      const rect = anchorEl.current?.getBoundingClientRect();
+      const vh = window.innerHeight;
+      // How much of the section is in view, as a fraction of how much of it
+      // *could* be. Measuring against the viewport instead would never reach 1
+      // for a section shorter than the screen — which this one is on a phone,
+      // so the statement would be permanently faded out.
+      const overlap = rect
+        ? Math.max(0, Math.min(rect.bottom, vh) - Math.max(rect.top, 0))
+        : 0;
+      const room = rect ? Math.min(rect.height, vh) : 1;
+      const shown = overlap / Math.max(room, 1);
+      group.visible = shown > 0.55;
+      fade = Math.min(1, (shown - 0.55) / 0.25);
+    }
+
     if (!group.visible) return;
 
     // Fade at the edges of that window rather than popping in.
-    const fade = Math.min(1, (0.42 - distance) / 0.16);
     group.children.forEach((child) => {
       const mesh = child as THREE.Mesh;
       const material = mesh.material as THREE.MeshBasicMaterial;
