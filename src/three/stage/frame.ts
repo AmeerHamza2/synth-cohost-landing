@@ -106,3 +106,14 @@ export function range(v: number, a: number, b: number) {
 export function window4(v: number, a: number, b: number, c: number, d: number) {
   return Math.min(range(v, a, b), 1 - range(v, c, d));
 }
+
+/**
+ * Below this, the page is laid out for a phone and so is the 3D layer.
+ *
+ * It is Tailwind's `md` breakpoint, and it has to stay that: the sections carry
+ * two separate layouts, `md:hidden` and `hidden md:block`, and the 3D layer
+ * anchors artwork to whichever one is live. Any disagreement leaves a band of
+ * widths where the layer is looking for elements the layout has switched off,
+ * and nothing renders.
+ */
+export const NARROW_WIDTH = 768;

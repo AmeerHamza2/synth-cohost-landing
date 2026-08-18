@@ -18,7 +18,7 @@ import { useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { MeshReflectorMaterial } from '@react-three/drei';
-import { frame, damp } from '../stage/frame';
+import { frame, damp, NARROW_WIDTH } from '../stage/frame';
 import { hashRandom } from '../scenes/shared';
 import { focus } from './focus';
 
@@ -238,7 +238,7 @@ function FlyCamera() {
     // slice of each station and everything reads as a close-up. Widen the lens
     // and stand further back, and reduce the weave — lateral movement that
     // feels cinematic on a wide screen just throws the subject off a narrow one.
-    const narrow = frame.viewport.width < 900;
+    const narrow = frame.viewport.width < NARROW_WIDTH;
     const camera = state.camera as THREE.PerspectiveCamera;
     if (camera.isPerspectiveCamera) {
       const wantFov = narrow ? 68 : 52;

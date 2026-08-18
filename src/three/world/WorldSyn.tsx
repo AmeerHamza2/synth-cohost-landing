@@ -26,7 +26,7 @@ import SynProxy from '../syn/SynProxy';
 import { resolveRig, type SynRig } from '../syn/rig';
 import { useSynRig } from '../syn/useSynRig';
 import { director } from '../syn/director';
-import { damp, frame } from '../stage/frame';
+import { damp, frame, NARROW_WIDTH } from '../stage/frame';
 import { stationZ } from './World';
 import { focus } from './focus';
 import type { SynMood } from '../stage/types';
@@ -67,8 +67,7 @@ const NARROW_X = 0.5;
 // and covers a narrow frame corner to corner, so pushing the figure further
 // than this simply parks it behind a wall.
 const NARROW_Z = -2.5;
-/** Matches the fly camera's own narrow test in `World.tsx`. */
-const NARROW_BREAKPOINT = 900;
+
 
 /**
  * The rigged figure walks the entire journey — that continuity is the point.
@@ -169,7 +168,7 @@ function StaticAvatar({
     if (!mesh) return;
 
     const calm = frame.reducedMotion;
-    const narrow = frame.viewport.width < NARROW_BREAKPOINT;
+    const narrow = frame.viewport.width < NARROW_WIDTH;
     const breath = Math.sin(frame.time * 0.5 + station) * (calm ? 0.002 : 0.006);
     const material = mesh.material as THREE.MeshBasicMaterial;
 
@@ -350,7 +349,7 @@ export default function WorldSyn() {
     );
     const place = PLACEMENTS[index];
     const z = stationZ(index);
-    const narrow = frame.viewport.width < NARROW_BREAKPOINT;
+    const narrow = frame.viewport.width < NARROW_WIDTH;
 
     const x = narrow
       ? (place.narrowX ?? place.offset[0] * NARROW_X)

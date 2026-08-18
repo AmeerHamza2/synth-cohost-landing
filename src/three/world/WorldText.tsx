@@ -17,7 +17,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
-import { frame } from '../stage/frame';
+import { frame, NARROW_WIDTH } from '../stage/frame';
 
 /** Depth layers. More reads as a deeper extrusion, one draw call each. */
 const LAYERS = 16;
@@ -141,7 +141,7 @@ export default function WorldText({
     let fade = Math.min(1, (0.42 - distance) / 0.16);
     group.visible = distance < 0.42;
 
-    if (frame.viewport.width < 900 && narrowAnchor) {
+    if (frame.viewport.width < NARROW_WIDTH && narrowAnchor) {
       if (!anchorEl.current || !anchorEl.current.isConnected) {
         anchorEl.current = document.querySelector<HTMLElement>(narrowAnchor);
       }
@@ -182,7 +182,7 @@ export default function WorldText({
     // camera looks straight down -z there, so its own x is dead centre. Wide
     // frames keep the authored position and size untouched.
     const cam = state.camera as THREE.PerspectiveCamera;
-    const narrow = frame.viewport.width < 900;
+    const narrow = frame.viewport.width < NARROW_WIDTH;
     let centreX = position[0];
     if (narrow && cam.isPerspectiveCamera) {
       centreX = cam.position.x;
