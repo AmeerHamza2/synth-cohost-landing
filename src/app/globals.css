@@ -33,7 +33,32 @@
 
 html {
   scroll-behavior: smooth;
-  scrollbar-gutter: stable;
+  /* Several carousel tracks measure a little wider than a phone screen — the
+     roles slider and the stream player both reach past it. `overflow-x` on the
+     body already stops that scrolling, but a phone still sizes its initial
+     scale to the wider content, which shows as the page sitting slightly
+     zoomed out with a strip of background down one side. Clipping here bounds
+     it; `clip` rather than `hidden` so no scroll container is created and
+     smooth scrolling and sticky positioning are unaffected. */
+  overflow-x: clip;
+  /* Matches the body, so anywhere the fixed canvas does not reach — a
+     scrollbar gutter, or the area beyond the layout viewport while a phone is
+     pinch-zoomed out — carries the page's own colour instead of reading as a
+     black bar down the side of the 3D scene. */
+  background: var(--bg-dark);
+}
+
+/* Reserving the scrollbar gutter stops the layout shifting when a scrollbar
+   appears, which is worth having on a desktop mouse pointer.
+
+   It is actively harmful on a phone. The canvas is `position: fixed`, and a
+   fixed element is sized to the viewport *minus* the reserved gutter, so the
+   gutter becomes a strip down the right that the 3D scene never covers. There
+   is no scrollbar to reserve for on a touch device anyway. */
+@media (min-width: 768px) and (pointer: fine) {
+  html {
+    scrollbar-gutter: stable;
+  }
 }
 
 /* In-page anchors (`/#product`, `/#streamers`, and the nav's "For Streamers")
