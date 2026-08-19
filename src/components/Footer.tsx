@@ -13,7 +13,7 @@ const footerLinks = {
     { name: 'Products', href: '#', isPopup: true, popupType: 'our-products' },
     { name: 'Download', href: '#', isSignIn: true },
     { name: 'About', href: '#' },
-    { name: 'Articles', href: '#' },
+    { name: 'Articles', href: '/articles' },
     { name: 'Contact', href: 'mailto:creator@synthcohost.com' },
   ],
   legal: [
@@ -86,7 +86,7 @@ export default function Footer() {
       title: 'Company',
       items: [
         { name: 'About', href: '#' },
-        { name: 'Articles', href: '#' },
+        { name: 'Articles', href: '/articles' },
         { name: 'Contact', href: 'mailto:creator@synthcohost.com' },
       ]
     },
