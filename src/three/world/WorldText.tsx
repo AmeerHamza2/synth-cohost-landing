@@ -73,9 +73,10 @@ export interface WorldTextProps {
   /**
    * Selector for the section this belongs to.
    *
-   * Used on narrow frames only — see the visibility block in the frame loop.
+   * When given, it governs visibility instead of the journey — see the block
+   * in the frame loop.
    */
-  narrowAnchor?: string;
+  sectionAnchor?: string;
 }
 
 export default function WorldText({
@@ -86,7 +87,7 @@ export default function WorldText({
   color = '#f5f3ff',
   bodyColor = '#5b21b6',
   station,
-  narrowAnchor,
+  sectionAnchor,
 }: WorldTextProps) {
   const [built, setBuilt] = useState<Built | null>(null);
   const groupRef = useRef<THREE.Group>(null);
@@ -133,17 +134,17 @@ export default function WorldText({
     // frame long after its own section has gone — landing on top of the heading
     // of the section before it, which is exactly what it was doing.
     //
-    // On a narrow frame the journey is not a tight enough proxy on its own:
-    // sections there are several viewports tall, so the journey reaches this
-    // station while the previous section's copy still fills the screen, and the
-    // statement lands across it. Where a section is named, its own box decides.
+    // The journey is not a tight enough proxy on its own, and not at any
+    // width. It reaches this station while the previous section's copy is
+    // still filling the screen, so the statement lands straight across that
+    // section's heading. Where a section is named, its own box decides.
     const distance = Math.abs(frame.journey - station);
     let fade = Math.min(1, (0.42 - distance) / 0.16);
     group.visible = distance < 0.42;
 
-    if (frame.viewport.width < NARROW_WIDTH && narrowAnchor) {
+    if (sectionAnchor) {
       if (!anchorEl.current || !anchorEl.current.isConnected) {
-        anchorEl.current = document.querySelector<HTMLElement>(narrowAnchor);
+        anchorEl.current = document.querySelector<HTMLElement>(sectionAnchor);
       }
       const rect = anchorEl.current?.getBoundingClientRect();
       const vh = window.innerHeight;
@@ -151,13 +152,24 @@ export default function WorldText({
       // *could* be. Measuring against the viewport instead would never reach 1
       // for a section shorter than the screen — which this one is on a phone,
       // so the statement would be permanently faded out.
+      //
       const overlap = rect
         ? Math.max(0, Math.min(rect.bottom, vh) - Math.max(rect.top, 0))
         : 0;
       const room = rect ? Math.min(rect.height, vh) : 1;
       const shown = overlap / Math.max(room, 1);
-      group.visible = shown > 0.55;
-      fade = Math.min(1, (shown - 0.55) / 0.25);
+
+      // Coverage alone is not enough. A tall section covers most of a desktop
+      // screen while its own top edge is still halfway down it — and that top
+      // edge is exactly where the previous section ends, so the statement
+      // appears over the previous section's heading. Waiting for the top edge
+      // to rise into the upper third means the section before it has cleared.
+      const topFrac = rect ? rect.top / vh : 1;
+      const entering = Math.min(1, (0.35 - topFrac) / 0.15);
+      const leaving = Math.min(1, (shown - 0.3) / 0.2);
+
+      group.visible = entering > 0 && leaving > 0;
+      fade = Math.max(0, Math.min(entering, leaving));
     }
 
     if (!group.visible) return;

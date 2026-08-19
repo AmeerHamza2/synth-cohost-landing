@@ -247,7 +247,7 @@ function RolesStation() {
         size={0.72}
         depth={0.6}
         station={3}
-        narrowAnchor='[data-stage="roles"]'
+        sectionAnchor='[data-stage="roles"]'
       />
 
       {bays.map((i) => {
