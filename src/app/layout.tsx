@@ -39,7 +39,7 @@ var gl=c.getContext('webgl2')||c.getContext('webgl')||c.getContext('experimental
 if(!gl)return;
 var n=navigator,cores=n.hardwareConcurrency||4,mem=n.deviceMemory||4;
 var small=matchMedia('(pointer: coarse)').matches||window.innerWidth<768;
-if(small&&(cores<=4||mem<=2))return;
+if(small&&(cores<=2||mem<=1))return;
 document.documentElement.classList.add('stage-active');
 }catch(e){}})();`;
 

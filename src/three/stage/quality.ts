@@ -56,8 +56,19 @@ export function detectQuality(): QualityTier {
   const narrow = window.innerWidth < 768;
 
   // Phones and tablets: keep the stage, halve the cost.
+  //
+  // The floor here is deliberately very low. It used to be `cores <= 4`, which
+  // reads as cautious but is not: Safari does not implement `deviceMemory` at
+  // all, so that term never fires, and plenty of current iPhones report four
+  // cores or fewer. The effect was that the same phone model could get either
+  // the 3D site or the original 2D page depending on what it reported — two
+  // different websites, with no way to tell which you would get.
+  //
+  // A consistent site matters more than shielding the weakest device from a
+  // scene that already runs at the `low` tier: reduced pixel ratio, no
+  // shadows, no bloom and a third of the instanced props.
   if (coarsePointer || narrow) {
-    if (cores <= 4 || memory <= 2) return 'off';
+    if (cores <= 2 || memory <= 1) return 'off';
     return 'low';
   }
 
