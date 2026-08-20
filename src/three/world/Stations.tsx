@@ -87,10 +87,68 @@ const SURFACE = {
 /**
  * How far out the hero's pillars stand.
  *
- * Must exceed the greatest distance the camera ever sits from a station
- * centre, which is 11 on a narrow frame (`World.tsx`). At 11 they coincided.
+ * The ring and the camera share a plane, so whatever radius is chosen some
+ * pillar will pass close to the lens as the camera travels — which is the
+ * intended effect, near pillars sweeping past far ones. `Colonnade` below is
+ * what stops that becoming a wall.
  */
 const COLONNADE_RADIUS = 16;
+
+/**
+ * How close a pillar may come to the camera before it is dropped.
+ *
+ * A pillar is 9 units tall and unlit on its inward face. Within a few units of
+ * the lens it stops reading as a pillar and becomes an opaque black column
+ * filling one edge of the frame, top to bottom — which is exactly the "black
+ * bar" that was reported, and why it sat still until scrolling carried the
+ * camera past it. Hiding the offending pillar costs nothing: there are eight,
+ * and the one in your face is the one you cannot see anyway.
+ */
+const COLONNADE_MIN_DISTANCE = 9;
+
+/** The ring of pillars, minus whichever one is currently in the camera. */
+function Colonnade() {
+  const groupRef = useRef<THREE.Group>(null);
+
+  useFrame((state) => {
+    const group = groupRef.current;
+    if (!group) return;
+    const camera = state.camera;
+    for (const pillar of group.children) {
+      pillar.getWorldPosition(PILLAR_POS);
+      // Compare on the ground plane only: a pillar is tall, so its centre
+      // being above the camera should not make it count as distant.
+      const dx = PILLAR_POS.x - camera.position.x;
+      const dz = PILLAR_POS.z - camera.position.z;
+      pillar.visible = dx * dx + dz * dz > COLONNADE_MIN_DISTANCE ** 2;
+    }
+  });
+
+  return (
+    <group ref={groupRef}>
+      {Array.from({ length: 8 }, (_, i) => {
+        const a = (i / 8) * Math.PI * 2;
+        return (
+          <mesh
+            key={i}
+            position={[
+              Math.cos(a) * COLONNADE_RADIUS,
+              1.5,
+              Math.sin(a) * COLONNADE_RADIUS,
+            ]}
+            castShadow
+          >
+            <boxGeometry args={[1.1, 9, 1.1]} />
+            <meshStandardMaterial {...SURFACE} />
+          </mesh>
+        );
+      })}
+    </group>
+  );
+}
+
+/** Reused by the frame loop above; `useFrame` must not allocate. */
+const PILLAR_POS = new THREE.Vector3();
 
 /** 01 — a lit plinth in an open hall, with light falling from above. */
 function HeroStation() {
@@ -107,22 +165,7 @@ function HeroStation() {
         <meshStandardMaterial color="#1a1130" emissive="#a78bfa" emissiveIntensity={0.9} />
       </mesh>
 
-      {/* Colonnade: near pillars sweep past far ones as the camera moves.
-          The radius has to clear the camera. This ring was at 11, and a narrow
-          frame puts the camera at `stationZ + 11` — so the camera sat exactly
-          on the ring and one pillar straddled the lens, filling the edge of
-          the frame as an unlit black column for the whole height of the page.
-          That was the "black bar": not a bar at all, a pillar in the camera.
-          Anything here must stay outside the widest camera distance. */}
-      {Array.from({ length: 8 }, (_, i) => {
-        const a = (i / 8) * Math.PI * 2;
-        return (
-          <mesh key={i} position={[Math.cos(a) * COLONNADE_RADIUS, 1.5, Math.sin(a) * COLONNADE_RADIUS]} castShadow>
-            <boxGeometry args={[1.1, 9, 1.1]} />
-            <meshStandardMaterial {...SURFACE} />
-          </mesh>
-        );
-      })}
+      <Colonnade />
 
       <LightShaft position={[0, 4.5, 0]} radius={4.2} height={13} intensity={0.06} />
       <spotLight
