@@ -37,8 +37,13 @@ export default function LivestreamShowcase() {
         <div className="grid lg:grid-cols-[280px_1fr] gap-8 lg:gap-12 items-center">
           {/* Left Content */}
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -40 }}
+            // Rises rather than slides in. A horizontal entry leaves this
+            // sitting 40px outside the viewport until it scrolls into view, and
+            // a phone sizes its initial scale to the widest content — which
+            // rendered the whole page shrunk with a band of background beside
+            // it, until scrolling brought the element home.
+            initial={{ opacity: 0, y: 40 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-[clamp(24px,3vw,42px)] font-extrabold leading-[1.1] tracking-[-1px] mb-4 lg:mb-6">
@@ -62,8 +67,8 @@ export default function LivestreamShowcase() {
           {/* Right Content - Livestream Dashboard Preview */}
           <div className="flex flex-col lg:flex-row gap-6">
             <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 40 }}
+              initial={{ opacity: 0, y: 40 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               className="relative max-w-[500px]"
             >
@@ -225,8 +230,8 @@ Syn Is Live
             
             {/* Activity Panel */}
             <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 40 }}
+              initial={{ opacity: 0, y: 40 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
               transition={{ duration: 0.6, delay: 0.3 }}
               className="hidden lg:block w-fit p-6 bg-[#13111e] rounded-xl border border-[rgba(255,255,255,0.05)]"
             >

@@ -451,10 +451,10 @@ export default function StreamingDemands() {
           <div className="grid grid-cols-2 gap-2 px-4 py-3 items-center">
             {/* Image - Left */}
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.8, ease: 'easeOut' }}
-              className="col-span-1 relative h-[380px] ml-2 -mt-10"
+              className="col-span-1 relative h-[380px] ml-2 -mt-10 overflow-hidden"
             >
               <Image
                 // Clean filename: the original has spaces and commas that Next's
