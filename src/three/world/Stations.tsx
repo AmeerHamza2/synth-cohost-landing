@@ -84,6 +84,14 @@ const SURFACE = {
   metalness: 0.35,
 } as const;
 
+/**
+ * How far out the hero's pillars stand.
+ *
+ * Must exceed the greatest distance the camera ever sits from a station
+ * centre, which is 11 on a narrow frame (`World.tsx`). At 11 they coincided.
+ */
+const COLONNADE_RADIUS = 16;
+
 /** 01 — a lit plinth in an open hall, with light falling from above. */
 function HeroStation() {
   return (
@@ -99,11 +107,17 @@ function HeroStation() {
         <meshStandardMaterial color="#1a1130" emissive="#a78bfa" emissiveIntensity={0.9} />
       </mesh>
 
-      {/* Colonnade: near pillars sweep past far ones as the camera moves. */}
+      {/* Colonnade: near pillars sweep past far ones as the camera moves.
+          The radius has to clear the camera. This ring was at 11, and a narrow
+          frame puts the camera at `stationZ + 11` — so the camera sat exactly
+          on the ring and one pillar straddled the lens, filling the edge of
+          the frame as an unlit black column for the whole height of the page.
+          That was the "black bar": not a bar at all, a pillar in the camera.
+          Anything here must stay outside the widest camera distance. */}
       {Array.from({ length: 8 }, (_, i) => {
         const a = (i / 8) * Math.PI * 2;
         return (
-          <mesh key={i} position={[Math.cos(a) * 11, 1.5, Math.sin(a) * 11]} castShadow>
+          <mesh key={i} position={[Math.cos(a) * COLONNADE_RADIUS, 1.5, Math.sin(a) * COLONNADE_RADIUS]} castShadow>
             <boxGeometry args={[1.1, 9, 1.1]} />
             <meshStandardMaterial {...SURFACE} />
           </mesh>
